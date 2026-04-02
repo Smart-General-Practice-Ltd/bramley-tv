@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080">
+<title>Bramley Village Health & Wellbeing Centre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100vw; height: 100vh; overflow: hidden; font-family: 'Inter', sans-serif; background: #0a1628; }
+
+  /* Slide container */
+  .slideshow { position: relative; width: 100%; height: 100%; }
+  .slide {
+    position: absolute; top: 50px; left: 0; right: 0; bottom: 0;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 1.2s ease;
+    padding: 50px 80px 40px;
+  }
+  .slide.active { opacity: 1; z-index: 2; }
+
+  /* Progress bar */
+  .progress-bar {
+    position: fixed; bottom: 0; left: 0; height: 6px; z-index: 100;
+    background: linear-gradient(90deg, #0072CE, #00A499);
+    transition: width linear;
+  }
+
+  /* Slide dots */
+  .dots {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 12px; z-index: 100;
+  }
+  .dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: rgba(255,255,255,0.3); transition: all 0.4s;
+  }
+  .dot.active { background: #00A499; transform: scale(1.3); }
+
+  /* NHS ticker */
+  .ticker {
+    position: fixed; top: 0; left: 0; right: 0; height: 50px;
+    background: #005EB8; display: flex; align-items: center; z-index: 100;
+    overflow: hidden;
+  }
+  .ticker-content {
+    display: flex; white-space: nowrap; animation: scroll-left 60s linear infinite;
+    color: #fff; font-size: 18px; font-weight: 500; gap: 80px;
+  }
+  .ticker-content span { display: inline-flex; align-items: center; gap: 10px; }
+  .ticker-content span::before { content: '\2022'; color: #00A499; font-size: 24px; }
+  @keyframes scroll-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* Common elements */
+  h1 { font-size: 56px; font-weight: 800; line-height: 1.15; margin-bottom: 20px; }
+  h2 { font-size: 42px; font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
+  h3 { font-size: 28px; font-weight: 700; margin-bottom: 10px; }
+  p { font-size: 22px; line-height: 1.5; }
+  .text-nhs { color: #005EB8; }
+  .text-teal { color: #00A499; }
+  .text-white { color: #fff; }
+  .highlight { color: #00A499; }
+
+  /* ─── SLIDE 1: Welcome ─── */
+  .slide-welcome {
+    background: linear-gradient(135deg, #0a1628 0%, #0d2137 50%, #0a1628 100%);
+    flex-direction: column; text-align: center; color: #fff;
+  }
+  .slide-welcome h1 { font-size: 64px; }
+  .slide-welcome h1 span { color: #00A499; }
+  .slide-welcome .subtitle {
+    font-size: 26px; color: rgba(255,255,255,0.7); margin-top: 10px;
+    max-width: 900px;
+  }
+  .welcome-cards {
+    display: flex; gap: 30px; margin-top: 50px;
+  }
+  .welcome-card {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px; padding: 30px 36px; text-align: center;
+    min-width: 220px;
+  }
+  .welcome-card .num { font-size: 44px; font-weight: 800; color: #00A499; }
+  .welcome-card .label { font-size: 17px; color: rgba(255,255,255,0.7); margin-top: 6px; }
+
+  /* ─── SLIDE 2: Opening Hours ─── */
+  .slide-hours {
+    background: linear-gradient(135deg, #f0f6fc 0%, #e8f4f8 100%);
+    color: #1a2744;
+  }
+  .hours-layout { display: flex; gap: 60px; align-items: flex-start; width: 100%; }
+  .hours-left { flex: 1; }
+  .hours-right { flex: 1; }
+  .hours-table {
+    width: 100%; border-collapse: collapse; margin-top: 20px;
+    font-size: 22px;
+  }
+  .hours-table td {
+    padding: 14px 20px; border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .hours-table td:first-child { font-weight: 600; width: 200px; }
+  .hours-table td:last-child { color: #005EB8; font-weight: 600; }
+  .contact-box {
+    background: #005EB8; color: #fff; border-radius: 16px;
+    padding: 30px; margin-top: 20px;
+  }
+  .contact-box h3 { color: #fff; margin-bottom: 14px; }
+  .contact-box p { font-size: 20px; line-height: 1.8; }
+  .contact-box .phone { font-size: 32px; font-weight: 700; color: #00A499; }
+
+  /* ─── SLIDE 3: SMARTnavigation ─── */
+  .slide-smartnav {
+    background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%);
+    color: #fff;
+  }
+  .smartnav-layout { display: flex; gap: 60px; width: 100%; align-items: center; }
+  .smartnav-left { flex: 1.1; }
+  .smartnav-right { flex: 0.9; display: flex; flex-direction: column; gap: 20px; }
+  .smartnav-left .badge {
+    display: inline-block; background: rgba(0,164,153,0.15); color: #00A499;
+    font-size: 16px; font-weight: 600; padding: 8px 18px; border-radius: 30px;
+    margin-bottom: 16px; letter-spacing: 0.5px;
+  }
+  .smartnav-left p { color: rgba(255,255,255,0.8); margin-bottom: 18px; }
+  .step-card {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px; padding: 22px 28px; display: flex; gap: 18px; align-items: flex-start;
+  }
+  .step-num {
+    background: #00A499; color: #fff; font-weight: 800; font-size: 18px;
+    width: 40px; height: 40px; border-radius: 10px; display: flex;
+    align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .step-card h4 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .step-card p { font-size: 17px; color: rgba(255,255,255,0.7); margin: 0; }
+
+  /* ─── SLIDE 4: SMARTconsult ─── */
+  .slide-consult {
+    background: linear-gradient(135deg, #f0f6fc 0%, #e8f4f8 100%);
+    color: #1a2744;
+  }
+  .consult-layout { display: flex; gap: 60px; width: 100%; align-items: center; }
+  .consult-left { flex: 1; }
+  .consult-right { flex: 1; }
+  .consult-left .badge {
+    display: inline-block; background: rgba(0,94,184,0.1); color: #005EB8;
+    font-size: 16px; font-weight: 600; padding: 8px 18px; border-radius: 30px;
+    margin-bottom: 16px;
+  }
+  .benefit-list { list-style: none; margin-top: 24px; }
+  .benefit-list li {
+    font-size: 21px; padding: 12px 0; display: flex; align-items: center; gap: 14px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .benefit-list li::before {
+    content: '\2713'; background: #00A499; color: #fff; width: 32px; height: 32px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 16px; flex-shrink: 0;
+  }
+  .consult-steps {
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  .consult-step {
+    background: #fff; border-radius: 14px; padding: 24px 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06); display: flex; gap: 18px; align-items: flex-start;
+  }
+  .consult-step .step-num { background: #005EB8; }
+  .consult-step h4 { font-size: 20px; font-weight: 700; color: #1a2744; margin-bottom: 4px; }
+  .consult-step p { font-size: 17px; color: #5a6a7a; margin: 0; }
+
+  /* ─── SLIDE 5: Our Surgeries ─── */
+  .slide-surgeries {
+    background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%);
+    color: #fff; flex-direction: column;
+  }
+  .surgeries-header { text-align: center; width: 100%; margin-bottom: 40px; }
+  .surgeries-header p { color: rgba(255,255,255,0.6); font-size: 20px; margin-top: 8px; }
+  .surgeries-grid {
+    display: flex; gap: 40px; width: 100%;
+  }
+  .surgery-card {
+    flex: 1; background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px; padding: 44px 36px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .surgery-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, #00A499, #005EB8);
+  }
+  .surgery-card h3 { font-size: 28px; color: #00A499; margin-bottom: 18px; }
+  .surgery-card .address { color: rgba(255,255,255,0.6); font-size: 20px; line-height: 1.7; margin-bottom: 24px; }
+  .surgery-card .phone-big {
+    font-size: 30px; font-weight: 700; color: #fff;
+    display: inline-block; padding: 12px 28px;
+    background: rgba(0,164,153,0.15); border-radius: 12px;
+    border: 1px solid rgba(0,164,153,0.3);
+  }
+
+  /* ─── SLIDE 6: NHS App ─── */
+  .slide-nhs-app {
+    background: linear-gradient(135deg, #005EB8 0%, #003f7f 100%);
+    color: #fff; flex-direction: column; text-align: center;
+  }
+  .nhs-app-features {
+    display: flex; gap: 30px; margin-top: 40px;
+  }
+  .nhs-feature {
+    flex: 1; background: rgba(255,255,255,0.1); border-radius: 16px;
+    padding: 30px; text-align: center;
+  }
+  .nhs-feature .icon { font-size: 48px; margin-bottom: 14px; }
+  .nhs-feature h3 { font-size: 24px; margin-bottom: 8px; }
+  .nhs-feature p { font-size: 18px; color: rgba(255,255,255,0.8); }
+
+  /* ─── SLIDE 7: NHS Campaigns ─── */
+  .slide-campaign {
+    background: linear-gradient(135deg, #f0f6fc 0%, #e8f4f8 100%);
+    color: #1a2744; flex-direction: column; text-align: center;
+  }
+  .campaign-cards {
+    display: flex; gap: 30px; margin-top: 40px;
+  }
+  .campaign-card {
+    flex: 1; background: #fff; border-radius: 18px; padding: 36px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06); text-align: center;
+  }
+  .campaign-card .icon { font-size: 52px; margin-bottom: 14px; }
+  .campaign-card h3 { font-size: 24px; color: #005EB8; margin-bottom: 10px; }
+  .campaign-card p { font-size: 19px; color: #5a6a7a; }
+
+  /* Animated gradient border on active slide cards */
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(0,164,153,0.1); }
+    50% { box-shadow: 0 0 30px rgba(0,164,153,0.25); }
+  }
+  .slide.active .welcome-card,
+  .slide.active .step-card,
+  .slide.active .surgery-card {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NHS Ticker -->
+<div class="ticker">
+  <div class="ticker-content" id="ticker">
+    <span>Call 111 for urgent medical advice when your GP is closed</span>
+    <span>Download the NHS App to book appointments and view your health record</span>
+    <span>Pharmacy First: Your pharmacist can treat 7 common conditions without a GP appointment</span>
+    <span>Eligible for a free NHS Health Check? Ask reception if you're aged 40-74</span>
+    <span>Need a sick note? Submit an online consultation for fit notes</span>
+    <span>Register for online services at reception or via the NHS App</span>
+    <span>Mental health support: call the NHS crisis line on 111 option 2</span>
+    <span>Call 111 for urgent medical advice when your GP is closed</span>
+    <span>Download the NHS App to book appointments and view your health record</span>
+    <span>Pharmacy First: Your pharmacist can treat 7 common conditions without a GP appointment</span>
+    <span>Eligible for a free NHS Health Check? Ask reception if you're aged 40-74</span>
+    <span>Need a sick note? Submit an online consultation for fit notes</span>
+    <span>Register for online services at reception or via the NHS App</span>
+    <span>Mental health support: call the NHS crisis line on 111 option 2</span>
+  </div>
+</div>
+
+
+<!-- Progress bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Slides -->
+<div class="slideshow" id="slideshow">
+
+  <!-- SLIDE 1: Welcome -->
+  <div class="slide slide-welcome active">
+    <h1>Welcome to<br><span>Bramley Village</span><br>Health & Wellbeing Centre</h1>
+    <p class="subtitle">Providing NHS primary care services to our community across three locations in Leeds</p>
+    <div class="welcome-cards">
+      <div class="welcome-card">
+        <div class="num">3</div>
+        <div class="label">Surgery Locations</div>
+      </div>
+      <div class="welcome-card">
+        <div class="num">8am-6:30pm</div>
+        <div class="label">Monday to Friday</div>
+      </div>
+      <div class="welcome-card">
+        <div class="num">NHS</div>
+        <div class="label">West Yorkshire ICB</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: Opening Hours -->
+  <div class="slide slide-hours">
+    <div class="hours-layout">
+      <div class="hours-left">
+        <h2>Opening Hours<br>& <span class="text-teal">Contact Details</span></h2>
+        <table class="hours-table">
+          <tr><td>Monday</td><td>8:00am - 6:30pm</td></tr>
+          <tr><td>Tuesday</td><td>8:00am - 6:30pm</td></tr>
+          <tr><td>Wednesday</td><td>8:00am - 6:30pm</td></tr>
+          <tr><td>Thursday</td><td>8:00am - 6:30pm</td></tr>
+          <tr><td>Friday</td><td>8:00am - 6:30pm</td></tr>
+          <tr><td>Weekend</td><td>Closed - Call 111</td></tr>
+        </table>
+      </div>
+      <div class="hours-right">
+        <div class="contact-box">
+          <h3>Bramley Village</h3>
+          <p>16 Highfield Road, Bramley, Leeds LS13 2BL</p>
+          <p class="phone">0113 256 3250</p>
+        </div>
+        <div class="contact-box" style="background: #00A499; margin-top: 16px;">
+          <h3>Middleton Park Surgery</h3>
+          <p>Middleton Park Avenue, Leeds LS10 4HT</p>
+          <p class="phone" style="color: #fff;">0113 467 7522</p>
+        </div>
+        <div class="contact-box" style="margin-top: 16px;">
+          <h3>Cottingley Surgery</h3>
+          <p>115 Cottingley Approach, Leeds LS11 0HJ</p>
+          <p class="phone">0113 295 4388</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: SMARTnavigation -->
+  <div class="slide slide-smartnav">
+    <div class="smartnav-layout">
+      <div class="smartnav-left">
+        <div class="badge">HOW WE TRIAGE YOUR CALL</div>
+        <h2>When you call us, our receptionists use <span class="text-teal">SMARTnavigation</span></h2>
+        <p>A structured triage system designed by GPs that helps our reception team direct you to the right care, first time. It's not AI - it's clinically guided scripts aligned with NHS guidance.</p>
+        <p style="margin-top: 16px;">This means you get seen by the right person, faster.</p>
+      </div>
+      <div class="smartnav-right">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div><h4>You call the surgery</h4><p>Our receptionist will ask about your symptoms</p></div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div><h4>Guided questions</h4><p>A GP-designed script checks for anything urgent</p></div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div><h4>Right care, first time</h4><p>You're directed to the best clinician or service for your need</p></div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <div><h4>Faster, safer care</h4><p>Less waiting, quicker access to the help you need</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: SMARTconsult / Online Consultations -->
+  <div class="slide slide-consult">
+    <div class="consult-layout">
+      <div class="consult-left">
+        <div class="badge">AVAILABLE 24/7 ONLINE</div>
+        <h2>Online Consultations<br><span class="text-nhs">SMARTconsult</span></h2>
+        <p>Submit a request to your GP online - no phone queues, no waiting rooms. Your request is reviewed by our clinical team and you'll receive a response, usually the same day.</p>
+        <ul class="benefit-list">
+          <li>Available anytime from your phone or computer</li>
+          <li>No need to call the surgery</li>
+          <li>Get advice, prescriptions, or referrals</li>
+          <li>Ideal for non-urgent medical concerns</li>
+        </ul>
+      </div>
+      <div class="consult-right">
+        <div class="consult-steps">
+          <div class="consult-step">
+            <div class="step-num">1</div>
+            <div><h4>Visit our website</h4><p>Go to bramleyonline.co.uk and click "eConsultation"</p></div>
+          </div>
+          <div class="consult-step">
+            <div class="step-num">2</div>
+            <div><h4>Answer a few questions</h4><p>Tell us about your symptoms or request</p></div>
+          </div>
+          <div class="consult-step">
+            <div class="step-num">3</div>
+            <div><h4>We review your request</h4><p>A clinician reviews and responds, usually the same day</p></div>
+          </div>
+          <div class="consult-step">
+            <div class="step-num">4</div>
+            <div><h4>Receive your outcome</h4><p>Advice, prescription, appointment, or onward referral</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: Our Surgeries -->
+  <div class="slide slide-surgeries">
+    <div class="surgeries-header">
+      <h2>Our <span class="text-teal">Three Surgeries</span></h2>
+      <p>All registered patients can attend any of our locations</p>
+    </div>
+    <div class="surgeries-grid">
+      <div class="surgery-card">
+        <h3>Bramley Village</h3>
+        <p class="address">16 Highfield Road<br>Bramley, Leeds<br>LS13 2BL</p>
+        <span class="phone-big">0113 256 3250</span>
+      </div>
+      <div class="surgery-card">
+        <h3>Middleton Park</h3>
+        <p class="address">Middleton Park Avenue<br>Middleton, Leeds<br>LS10 4HT</p>
+        <span class="phone-big">0113 467 7522</span>
+      </div>
+      <div class="surgery-card">
+        <h3>Cottingley</h3>
+        <p class="address">115 Cottingley Approach<br>Leeds<br>LS11 0HJ</p>
+        <span class="phone-big">0113 295 4388</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: NHS App -->
+  <div class="slide slide-nhs-app">
+    <h2>Get More From Your <span style="color:#00A499;">NHS App</span></h2>
+    <p style="max-width:800px; color:rgba(255,255,255,0.8);">Download the NHS App to manage your healthcare from your phone. Ask at reception if you need help setting up.</p>
+    <div class="nhs-app-features">
+      <div class="nhs-feature">
+        <div class="icon">💊</div>
+        <h3>Order Prescriptions</h3>
+        <p>Request repeat prescriptions online</p>
+      </div>
+      <div class="nhs-feature">
+        <div class="icon">📋</div>
+        <h3>Health Records</h3>
+        <p>View test results and medical history</p>
+      </div>
+      <div class="nhs-feature">
+        <div class="icon">📅</div>
+        <h3>Appointments</h3>
+        <p>View upcoming appointments and reminders</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: NHS Campaigns / Seasonal -->
+  <div class="slide slide-campaign">
+    <h2>Looking After <span class="text-nhs">Your Health</span></h2>
+    <div class="campaign-cards">
+      <div class="campaign-card">
+        <div class="icon">💉</div>
+        <h3>Flu Vaccinations</h3>
+        <p>Keep up to date with your annual flu jab and routine vaccinations. Ask reception or check the NHS App.</p>
+      </div>
+      <div class="campaign-card">
+        <div class="icon">🩺</div>
+        <h3>NHS Health Checks</h3>
+        <p>Aged 40-74? You're eligible for a free NHS Health Check. Book with our team today.</p>
+      </div>
+      <div class="campaign-card">
+        <div class="icon">🧠</div>
+        <h3>Mental Health</h3>
+        <p>Struggling? You're not alone. Talk to your GP or call the NHS crisis line: 111, option 2.</p>
+      </div>
+      <div class="campaign-card">
+        <div class="icon">🏪</div>
+        <h3>Pharmacy First</h3>
+        <p>Your pharmacist can now treat 7 common conditions on the NHS - no GP appointment needed.</p>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<!-- Dots -->
+<div class="dots" id="dots"></div>
+
+<script>
+  const SLIDE_DURATION = 12000; // 12 seconds per slide
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('dots');
+  const progressBar = document.getElementById('progressBar');
+  let current = 0;
+  let timer;
+
+  // Create dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dotsContainer.appendChild(dot);
+  });
+  const dots = document.querySelectorAll('.dot');
+
+  function goTo(index) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = index;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+
+    // Reset progress
+    progressBar.style.transition = 'none';
+    progressBar.style.width = '0%';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        progressBar.style.transition = `width ${SLIDE_DURATION}ms linear`;
+        progressBar.style.width = '100%';
+      });
+    });
+  }
+
+  function next() {
+    goTo((current + 1) % slides.length);
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(next, SLIDE_DURATION);
+  }
+
+  // Start
+  goTo(0);
+  startTimer();
+</script>
+</body>
+</html>
