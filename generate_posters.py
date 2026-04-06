@@ -29,34 +29,28 @@ W, H = A4
 MARGIN = 45
 CW = W - 2 * MARGIN
 
-# Check for logo files
+# Logo files
 LOGO_DIR = "/home/user/bramley-tv"
-SMARTNAV_LOGO = None
-FF_LOGO = None
+SMARTNAV_LOGO = os.path.join(LOGO_DIR, "smartnavigation.logo.png")
+FF_LOGO = os.path.join(LOGO_DIR, "Forbes and Fuller Transparent 3.png")
 
-for candidate in ["smartnav-logo.png", "smartnavigation-logo.png", "smart-navigation-logo.png", "logo-smartnav.png"]:
-    path = os.path.join(LOGO_DIR, candidate)
-    if os.path.exists(path):
-        SMARTNAV_LOGO = path
-        break
-
-for candidate in ["ff-logo.png", "fuller-forbes-logo.png", "fullerandforbes-logo.png"]:
-    path = os.path.join(LOGO_DIR, candidate)
-    if os.path.exists(path):
-        FF_LOGO = path
-        break
+if not os.path.exists(SMARTNAV_LOGO):
+    SMARTNAV_LOGO = None
+if not os.path.exists(FF_LOGO):
+    FF_LOGO = None
 
 
 def draw_smart_logo(c, cx, y, scale=1.0, dark_bg=False):
-    """Draw SMART navigation logo matching the real branding."""
+    """Draw SMART navigation logo using real image file."""
     if SMARTNAV_LOGO:
         img = ImageReader(SMARTNAV_LOGO)
         iw, ih = img.getSize()
-        target_h = 55 * scale
+        target_h = 50 * scale
         ratio = target_h / ih
         target_w = iw * ratio
         c.drawImage(SMARTNAV_LOGO, cx - target_w / 2, y - target_h / 2,
-                     width=target_w, height=target_h, mask='auto')
+                     width=target_w, height=target_h, mask='auto',
+                     preserveAspectRatio=True)
     else:
         # Accurate reproduction from reference image
         r = 34 * scale
@@ -122,15 +116,16 @@ def draw_ff_swirl(c, cx, cy, size=12, dark_bg=False):
 
 
 def draw_ff_logo(c, cx, y, scale=1.0, dark_bg=False):
-    """Draw Fuller and Forbes Healthcare Group logo."""
+    """Draw Fuller and Forbes Healthcare Group logo using real image."""
     if FF_LOGO:
         img = ImageReader(FF_LOGO)
         iw, ih = img.getSize()
-        target_h = 22 * scale
+        target_h = 28 * scale
         ratio = target_h / ih
         target_w = iw * ratio
         c.drawImage(FF_LOGO, cx - target_w / 2, y - target_h / 2,
-                     width=target_w, height=target_h, mask='auto')
+                     width=target_w, height=target_h, mask='auto',
+                     preserveAspectRatio=True)
     else:
         # Swirl icon
         draw_ff_swirl(c, cx - 55, y, size=10, dark_bg=dark_bg)
