@@ -341,7 +341,7 @@ POSTER2_HTML = f"""<!DOCTYPE html>
   <div class="case-sub">Real-world impact across 40+ practices nationally</div>
 
   <div class="big-stat">
-    <div class="big-stat-num">43%</div>
+    <div class="big-stat-num">47%</div>
     <div class="big-stat-text">reduction in receptionist<br>call handling time</div>
     <div class="big-stat-sub">Barnstaple to Newcastle \u2014 from Leeds practices to 40+ nationally</div>
   </div>
