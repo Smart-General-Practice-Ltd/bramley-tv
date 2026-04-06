@@ -24,161 +24,143 @@ POSTER1_HTML = f"""<!DOCTYPE html>
 
   .top-bar {{
     background: #fff;
-    padding: 28px 0 20px;
+    padding: 40px 0 30px;
     text-align: center;
   }}
-  .top-bar img {{ height: 52px; }}
+  .top-bar img {{ height: 80px; }}
 
   .blue-section {{
     background: #1159A2;
     color: #fff;
-    padding: 35px 38px 40px;
-    position: relative;
-  }}
-  .blue-section::before {{
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 50px;
-    background: linear-gradient(165deg, #fff 48%, #1159A2 48%);
+    padding: 40px 42px 45px;
   }}
 
   .section-label {{
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: 1.5px;
     opacity: 0.7;
-    margin-bottom: 18px;
-    margin-top: 40px;
+    margin-bottom: 20px;
   }}
 
   .headline {{
-    font-size: 34px;
+    font-size: 40px;
     font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 6px;
+    line-height: 1.15;
+    margin-bottom: 8px;
   }}
   .headline-sub {{
-    font-size: 30px;
-    font-weight: 800;
-    color: rgba(255,255,255,0.75);
-    margin-bottom: 6px;
+    font-size: 20px;
+    font-weight: 400;
+    opacity: 0.8;
+    margin-bottom: 12px;
   }}
   .desc {{
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.6;
-    opacity: 0.8;
-    margin-bottom: 28px;
+    opacity: 0.75;
+    margin-bottom: 30px;
   }}
 
   .price-card {{
     background: rgba(255,255,255,0.12);
-    border-radius: 12px;
-    padding: 24px 28px;
-    margin-bottom: 28px;
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 30px;
   }}
   .price-big {{
-    font-size: 54px;
+    font-size: 62px;
     font-weight: 800;
     display: inline;
   }}
   .price-period {{
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 400;
-    margin-left: 8px;
+    margin-left: 10px;
   }}
   .price-details {{
-    font-size: 13px;
+    font-size: 14px;
     opacity: 0.75;
-    margin-top: 10px;
-    line-height: 1.6;
+    margin-top: 12px;
+    line-height: 1.7;
   }}
 
   .stats-grid {{
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 10px;
   }}
   .stat-box {{
     flex: 1 1 45%;
     background: rgba(255,255,255,0.12);
-    border-radius: 10px;
-    padding: 18px 12px;
+    border-radius: 12px;
+    padding: 22px 14px;
     text-align: center;
   }}
   .stat-num {{
-    font-size: 30px;
+    font-size: 34px;
     font-weight: 800;
   }}
   .stat-label {{
-    font-size: 11px;
+    font-size: 12px;
     opacity: 0.7;
-    margin-top: 4px;
+    margin-top: 6px;
   }}
 
   .white-section {{
     background: #fff;
     color: #222;
-    padding: 32px 38px 28px;
+    padding: 38px 42px 32px;
   }}
   .white-section h3 {{
     color: #1159A2;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }}
 
   .bullet {{
     display: flex;
     align-items: flex-start;
-    gap: 14px;
-    margin-bottom: 16px;
+    gap: 16px;
+    margin-bottom: 20px;
   }}
   .bullet-check {{
-    width: 24px;
-    height: 24px;
-    min-width: 24px;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
     background: #1159A2;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     margin-top: 2px;
   }}
   .bullet-text b {{
-    font-size: 14px;
+    font-size: 16px;
     display: block;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
   }}
   .bullet-text span {{
-    font-size: 12px;
+    font-size: 13px;
     color: #666;
-    line-height: 1.4;
+    line-height: 1.5;
   }}
 
   .footer-blue {{
     background: #1159A2;
-    position: relative;
-    padding: 20px 38px 18px;
+    padding: 30px 42px 24px;
     text-align: center;
   }}
-  .footer-blue::before {{
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 40px;
-    background: linear-gradient(165deg, #fff 48%, #1159A2 48%);
-  }}
   .tagline {{
-    font-size: 16px;
+    font-size: 18px;
     font-style: italic;
     color: rgba(255,255,255,0.9);
-    margin-top: 28px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }}
   .footer-row {{
     display: flex;
@@ -186,10 +168,10 @@ POSTER1_HTML = f"""<!DOCTYPE html>
     align-items: center;
   }}
   .footer-url {{
-    font-size: 11px;
+    font-size: 12px;
     color: rgba(255,255,255,0.7);
   }}
-  .footer-row img {{ height: 32px; }}
+  .footer-row img {{ height: 48px; }}
 </style>
 </head>
 <body>
@@ -288,155 +270,137 @@ POSTER2_HTML = f"""<!DOCTYPE html>
 
   .top-bar {{
     background: #fff;
-    padding: 28px 0 20px;
+    padding: 40px 0 30px;
     text-align: center;
   }}
-  .top-bar img {{ height: 52px; }}
+  .top-bar img {{ height: 80px; }}
 
   .blue-section {{
     background: #1159A2;
     color: #fff;
-    padding: 35px 38px 40px;
-    position: relative;
-  }}
-  .blue-section::before {{
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 50px;
-    background: linear-gradient(165deg, #fff 48%, #1159A2 48%);
+    padding: 40px 42px 45px;
   }}
 
   .emis-badge {{
     background: rgba(255,255,255,0.15);
-    border-radius: 8px;
-    padding: 12px 20px;
+    border-radius: 10px;
+    padding: 16px 24px;
     text-align: center;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 700;
-    margin-top: 36px;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
   }}
 
   .case-label {{
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: 1.5px;
     opacity: 0.7;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }}
   .case-sub {{
-    font-size: 14px;
+    font-size: 16px;
     opacity: 0.8;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }}
 
   .big-stat {{
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 14px;
   }}
   .big-stat-num {{
-    font-size: 90px;
+    font-size: 110px;
     font-weight: 800;
     line-height: 1;
   }}
   .big-stat-text {{
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
-    margin-top: 8px;
+    margin-top: 10px;
   }}
   .big-stat-sub {{
-    font-size: 12px;
+    font-size: 13px;
     opacity: 0.7;
-    margin-top: 6px;
+    margin-top: 8px;
   }}
 
   .stats-row {{
     display: flex;
-    gap: 10px;
-    margin-top: 24px;
+    gap: 12px;
+    margin-top: 28px;
   }}
   .stat-box {{
     flex: 1;
     background: rgba(255,255,255,0.12);
-    border-radius: 10px;
-    padding: 16px 8px;
+    border-radius: 12px;
+    padding: 20px 10px;
     text-align: center;
   }}
   .stat-num {{
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 800;
   }}
   .stat-label {{
-    font-size: 10px;
+    font-size: 11px;
     opacity: 0.7;
-    margin-top: 4px;
+    margin-top: 6px;
     line-height: 1.3;
   }}
 
   .white-section {{
     background: #fff;
     color: #222;
-    padding: 32px 38px 28px;
+    padding: 38px 42px 32px;
   }}
   .white-section h3 {{
     color: #1159A2;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }}
 
   .bullet {{
     display: flex;
     align-items: flex-start;
-    gap: 14px;
-    margin-bottom: 14px;
+    gap: 16px;
+    margin-bottom: 18px;
   }}
   .bullet-check {{
-    width: 24px;
-    height: 24px;
-    min-width: 24px;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
     background: #1159A2;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     margin-top: 2px;
   }}
   .bullet-text b {{
-    font-size: 13px;
+    font-size: 15px;
     display: block;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
   }}
   .bullet-text span {{
-    font-size: 11px;
+    font-size: 12px;
     color: #666;
-    line-height: 1.4;
+    line-height: 1.5;
   }}
 
   .footer-blue {{
     background: #1159A2;
-    position: relative;
-    padding: 20px 38px 18px;
+    padding: 30px 42px 24px;
     text-align: center;
   }}
-  .footer-blue::before {{
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 40px;
-    background: linear-gradient(165deg, #fff 48%, #1159A2 48%);
-  }}
   .tagline {{
-    font-size: 16px;
+    font-size: 18px;
     font-style: italic;
     color: rgba(255,255,255,0.9);
-    margin-top: 28px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }}
   .footer-row {{
     display: flex;
@@ -444,10 +408,10 @@ POSTER2_HTML = f"""<!DOCTYPE html>
     align-items: center;
   }}
   .footer-url {{
-    font-size: 11px;
+    font-size: 12px;
     color: rgba(255,255,255,0.7);
   }}
-  .footer-row img {{ height: 32px; }}
+  .footer-row img {{ height: 48px; }}
 </style>
 </head>
 <body>
