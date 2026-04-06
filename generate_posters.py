@@ -1,85 +1,74 @@
 #!/usr/bin/env python3
 """
 Generate two SMART Navigation marketing posters as PDF.
-Clean straight-line sections, no diagonals. Real verified data.
+Straight lines. Alternating white / blue (#1159A2) sections.
+Only black and white text. No green/teal.
+Layout: top bar, two large sections, bottom bar.
 """
 
 from reportlab.lib.pagesizes import A4
-from reportlab.lib.units import mm
 from reportlab.lib.colors import HexColor, white, black
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase import pdfmetrics
 import os
 
 # ── Colours ──
+BLUE = HexColor('#1159A2')
+DARK_BLUE = HexColor('#0d4a8a')
 NAVY = HexColor('#0B2545')
-DARK_BLUE = HexColor('#13315C')
-BRAND_BLUE = HexColor('#1B4F8A')
-TEAL = HexColor('#00A499')
 WHITE = white
-LIGHT_GREY = HexColor('#F5F7FA')
-TEXT_GREY = HexColor('#6B7B8D')
-CHECK_BLUE = HexColor('#2E7DD1')
-CARD_BG = HexColor('#142d54')
-MUTED = HexColor('#a0b4cc')
-FOOTER_BG = HexColor('#0a1e3d')
+BLACK = black
+LIGHT_GREY = HexColor('#F0F3F7')
+MID_GREY = HexColor('#666666')
+LOGO_BLUE = HexColor('#1159A2')
 
 W, H = A4
 MARGIN = 40
 CW = W - 2 * MARGIN
 
 
-def draw_smart_logo(c, x, y, scale=1.0):
-    r = 28 * scale
-    c.setFillColor(BRAND_BLUE)
+def draw_smart_logo(c, x, y, scale=1.0, dark_bg=False):
+    """Logo: blue circle with SMART in white, 'navigation' beside it."""
+    r = 26 * scale
+    # Circle
+    c.setFillColor(LOGO_BLUE if not dark_bg else WHITE)
     c.circle(x + r, y, r, fill=1, stroke=0)
-    c.setFillColor(WHITE)
-    c.setFont("Helvetica-Bold", 11 * scale)
-    c.drawCentredString(x + r, y - 4 * scale, "SMART")
-    c.setFillColor(NAVY)
-    c.setFont("Helvetica", 22 * scale)
-    c.drawString(x + r * 2 + 8 * scale, y - 7 * scale, "navigation")
-    c.setFont("Helvetica", 8 * scale)
-    nav_w = pdfmetrics.stringWidth("navigation", "Helvetica", 22 * scale)
-    c.drawString(x + r * 2 + 8 * scale + nav_w + 2, y + 4 * scale, "\u2122")
+    # SMART inside circle
+    c.setFillColor(WHITE if not dark_bg else LOGO_BLUE)
+    c.setFont("Helvetica-Bold", 10.5 * scale)
+    c.drawCentredString(x + r, y - 3.5 * scale, "SMART")
+    # 'navigation' text
+    c.setFillColor(BLACK if not dark_bg else WHITE)
+    c.setFont("Helvetica", 20 * scale)
+    c.drawString(x + r * 2 + 7 * scale, y - 6.5 * scale, "navigation")
+    # TM
+    c.setFont("Helvetica", 7 * scale)
+    nav_w = pdfmetrics.stringWidth("navigation", "Helvetica", 20 * scale)
+    c.drawString(x + r * 2 + 7 * scale + nav_w + 2, y + 3 * scale, "\u2122")
 
 
-def draw_fuller_forbes(c, x, y, scale=1.0):
-    c.setFillColor(TEXT_GREY)
-    c.setFont("Helvetica", 9 * scale)
+def draw_fuller_forbes(c, x, y, dark_bg=False):
+    col = WHITE if dark_bg else MID_GREY
+    c.setFillColor(col)
+    c.setFont("Helvetica", 9)
     c.drawString(x, y + 5, "Fuller and Forbes")
-    c.setFont("Helvetica-Bold", 9 * scale)
+    c.setFont("Helvetica-Bold", 9)
     c.drawString(x, y - 7, "Healthcare Group")
 
 
-def draw_check_bullet(c, x, y, size=8):
-    c.setFillColor(CHECK_BLUE)
+def draw_check_bullet(c, x, y, size=7, dark_bg=False):
+    """Draw a white or blue check circle."""
+    if dark_bg:
+        c.setFillColor(WHITE)
+        check_col = BLUE
+    else:
+        c.setFillColor(BLUE)
+        check_col = WHITE
     c.circle(x, y + 2, size, fill=1, stroke=0)
-    c.setStrokeColor(WHITE)
+    c.setStrokeColor(check_col)
     c.setLineWidth(1.5)
-    c.line(x - 3.5, y + 1.5, x - 1, y - 1)
-    c.line(x - 1, y - 1, x + 4, y + 5)
-
-
-def draw_footer(c):
-    c.setFillColor(FOOTER_BG)
-    c.rect(0, 35, W, 50, fill=1, stroke=0)
-    c.setFillColor(TEAL)
-    c.setFont("Helvetica-BoldOblique", 13)
-    c.drawCentredString(W / 2, 55, "Safer triage. Less pressure on your practice.")
-
-    c.setFillColor(WHITE)
-    c.rect(0, 0, W, 35, fill=1, stroke=0)
-    c.setFillColor(TEXT_GREY)
-    c.setFont("Helvetica", 9)
-    c.drawString(MARGIN, 13, "smartnavigation.co.uk")
-    draw_fuller_forbes(c, W - 155, 8, scale=0.9)
-
-
-def draw_section_line(c, y):
-    c.setStrokeColor(HexColor('#1a3a6a'))
-    c.setLineWidth(0.5)
-    c.line(MARGIN, y, W - MARGIN, y)
+    c.line(x - 3, y + 1.5, x - 0.5, y - 0.5)
+    c.line(x - 0.5, y - 0.5, x + 3.5, y + 4.5)
 
 
 def wrap_text(text, font, size, max_width):
@@ -106,128 +95,133 @@ def create_poster1(filename):
     c = canvas.Canvas(filename, pagesize=A4)
     c.setTitle("SMART Navigation - Pricing & Usage")
 
-    # ── WHITE HEADER ──
-    header_bottom = H - 165
+    # ────────────────────────────────────────────
+    # TOP BAR - White with logo
+    # ────────────────────────────────────────────
+    top_bar_h = 80
+    top_bar_bottom = H - top_bar_h
     c.setFillColor(WHITE)
-    c.rect(0, header_bottom, W, H - header_bottom, fill=1, stroke=0)
+    c.rect(0, top_bar_bottom, W, top_bar_h, fill=1, stroke=0)
+    draw_smart_logo(c, MARGIN + 5, H - 45, scale=1.1)
 
-    draw_smart_logo(c, MARGIN + 5, H - 50, scale=1.15)
+    # ────────────────────────────────────────────
+    # SECTION 1 - BLUE: Pricing
+    # ────────────────────────────────────────────
+    sec1_top = top_bar_bottom
+    sec1_bottom = H / 2 + 20  # roughly upper half
+    sec1_h = sec1_top - sec1_bottom
+    c.setFillColor(BLUE)
+    c.rect(0, sec1_bottom, W, sec1_h, fill=1, stroke=0)
 
-    c.setFillColor(NAVY)
-    c.setFont("Helvetica-Bold", 12)
-    c.drawString(MARGIN + 5, H - 82, "Voice")
-    c.setFillColor(TEXT_GREY)
-    c.setFont("Helvetica", 10.5)
-    c.drawString(MARGIN + 47, H - 82, "AI-led telephone triage for primary care")
+    y = sec1_top - 28
+    # Section label
+    c.setFillColor(HexColor('#ffffff80'))
+    c.setFont("Helvetica-Bold", 11)
+    c.drawString(MARGIN + 8, y, "STAGE 1: PRICING")
 
-    # Stage 1 label
-    c.setFillColor(LIGHT_GREY)
-    c.roundRect(MARGIN, header_bottom + 10, CW, 38, 6, fill=1, stroke=0)
-    c.setFillColor(NAVY)
-    c.setFont("Helvetica-Bold", 15)
-    c.drawString(MARGIN + 14, header_bottom + 23, "Stage 1: Pricing")
-
-    # ── NAVY MAIN SECTION ──
-    c.setFillColor(NAVY)
-    c.rect(0, 85, W, header_bottom - 85, fill=1, stroke=0)
-
-    # Headline
-    y = header_bottom - 30
+    y -= 35
     c.setFillColor(WHITE)
-    c.setFont("Helvetica-Bold", 26)
-    c.drawCentredString(W / 2, y, "Simple, transparent pricing")
+    c.setFont("Helvetica-Bold", 28)
+    c.drawString(MARGIN + 8, y, "Simple, transparent pricing")
     y -= 22
-    c.setFillColor(TEAL)
-    c.setFont("Helvetica", 15)
-    c.drawCentredString(W / 2, y, "designed for NHS primary care")
+    c.setFont("Helvetica", 14)
+    c.drawString(MARGIN + 8, y, "designed for NHS primary care")
 
-    # Pricing card
-    y -= 38
-    card_h = 130
-    c.setFillColor(CARD_BG)
-    c.roundRect(MARGIN + 8, y - card_h, CW - 16, card_h, 10, fill=1, stroke=0)
+    # Price highlight
+    y -= 45
+    # White rounded box for price
+    c.setFillColor(HexColor('#ffffff18'))
+    c.roundRect(MARGIN + 8, y - 85, CW - 16, 85, 10, fill=1, stroke=0)
 
-    c.setFillColor(TEAL)
-    c.setFont("Helvetica-Bold", 36)
-    c.drawString(MARGIN + 26, y - 38, "\u00a31,000")
     c.setFillColor(WHITE)
-    c.setFont("Helvetica-Bold", 14)
-    c.drawString(MARGIN + 175, y - 30, "for 12 months")
+    c.setFont("Helvetica-Bold", 42)
+    c.drawString(MARGIN + 24, y - 38, "\u00a31,000")
+    c.setFont("Helvetica", 16)
+    c.drawString(MARGIN + 210, y - 30, "for 12 months")
 
-    c.setFillColor(MUTED)
-    c.setFont("Helvetica", 11.5)
-    c.drawString(MARGIN + 26, y - 58, "Per practice, all-inclusive")
+    c.setFont("Helvetica", 12)
+    c.drawString(MARGIN + 24, y - 58, "Per practice, all-inclusive. No hidden charges. No auto-renewals.")
+    c.drawString(MARGIN + 24, y - 74, "Includes full onboarding, training & clinical support.")
 
-    c.setFillColor(TEAL)
-    c.setFont("Helvetica-Bold", 12)
-    c.drawString(MARGIN + 26, y - 82, "No hidden charges  |  No auto-renewals")
-    c.setFillColor(MUTED)
-    c.setFont("Helvetica", 11)
-    c.drawString(MARGIN + 26, y - 100, "Includes full onboarding, training & clinical support")
-    c.drawString(MARGIN + 26, y - 116, "From single-site surgeries to ICBs")
-
-    # Usage & Adoption
-    y -= card_h + 28
-    draw_section_line(c, y + 10)
+    # ────────────────────────────────────────────
+    # SECTION 2 - WHITE: Usage & Data
+    # ────────────────────────────────────────────
+    sec2_top = sec1_bottom
+    sec2_bottom = 80  # leave room for footer
     c.setFillColor(WHITE)
-    c.setFont("Helvetica-Bold", 17)
-    c.drawString(MARGIN + 8, y - 8, "Usage & Adoption")
+    c.rect(0, sec2_bottom, W, sec2_top - sec2_bottom, fill=1, stroke=0)
+
+    y = sec2_top - 28
+    c.setFillColor(BLUE)
+    c.setFont("Helvetica-Bold", 11)
+    c.drawString(MARGIN + 8, y, "USAGE & ADOPTION")
 
     y -= 32
-    box_w = (CW - 30) / 2
-    box_h = 68
 
-    stats_row1 = [("152,508", "Patients triaged (2024-25)"), ("40+", "Practices nationally")]
+    # Stats boxes - 2x2 grid
+    box_w = (CW - 24) / 2
+    box_h = 62
+
+    stats_row1 = [("152,508", "Patients triaged (2024\u201325)"), ("40+", "Practices nationally")]
     stats_row2 = [("\u00a34.7M", "NHS savings in 12 months"), ("71 hrs/wk", "GP time saved")]
 
     for stats in [stats_row1, stats_row2]:
         for col_i, (stat, label) in enumerate(stats):
-            bx = MARGIN + 8 + col_i * (box_w + 14)
+            bx = MARGIN + 4 + col_i * (box_w + 16)
             by = y - box_h
-            c.setFillColor(CARD_BG)
-            c.roundRect(bx, by, box_w, box_h, 10, fill=1, stroke=0)
-            c.setFillColor(TEAL)
+            c.setFillColor(BLUE)
+            c.roundRect(bx, by, box_w, box_h, 8, fill=1, stroke=0)
+            c.setFillColor(WHITE)
             c.setFont("Helvetica-Bold", 26)
             c.drawCentredString(bx + box_w / 2, by + box_h - 26, stat)
-            c.setFillColor(MUTED)
-            c.setFont("Helvetica", 10.5)
-            c.drawCentredString(bx + box_w / 2, by + 12, label)
-        y -= box_h + 12
+            c.setFont("Helvetica", 10)
+            c.drawCentredString(bx + box_w / 2, by + 10, label)
+        y -= box_h + 10
 
     # Stage 2: AVT
-    y -= 10
-    draw_section_line(c, y + 8)
-    c.setFillColor(WHITE)
-    c.setFont("Helvetica-Bold", 16)
-    c.drawString(MARGIN + 8, y - 10, "Stage 2: Automated Voice Triage (AVT)")
+    y -= 14
+    c.setStrokeColor(HexColor('#d0d8e0'))
+    c.setLineWidth(0.5)
+    c.line(MARGIN, y + 8, W - MARGIN, y + 8)
 
-    y -= 32
-    c.setFillColor(MUTED)
-    c.setFont("Helvetica", 11.5)
-    desc_lines = [
-        "AI-powered voice agent handles patient calls 24/7,",
-        "guiding them through clinician-designed triage pathways.",
-    ]
-    for line in desc_lines:
-        c.drawString(MARGIN + 8, y, line)
-        y -= 16
+    c.setFillColor(BLACK)
+    c.setFont("Helvetica-Bold", 15)
+    c.drawString(MARGIN + 8, y - 8, "Stage 2: Automated Voice Triage (AVT)")
 
-    y -= 6
+    y -= 30
+    c.setFillColor(MID_GREY)
+    c.setFont("Helvetica", 11)
+    c.drawString(MARGIN + 8, y, "AI-powered voice agent handles patient calls 24/7,")
+    y -= 15
+    c.drawString(MARGIN + 8, y, "guiding them through clinician-designed triage pathways.")
+
+    y -= 20
     avt_bullets = [
         "Handles overflow and out-of-hours calls automatically",
         "Same clinically-safe pathways used by receptionists",
         "Seamless handoff to human staff when needed",
     ]
     for bullet in avt_bullets:
-        c.setFillColor(TEAL)
-        c.setFont("Helvetica-Bold", 9)
+        c.setFillColor(BLUE)
+        c.setFont("Helvetica-Bold", 8)
         c.drawString(MARGIN + 12, y + 1, "\u25cf")
-        c.setFillColor(HexColor('#c0d0e0'))
+        c.setFillColor(BLACK)
         c.setFont("Helvetica", 10.5)
         c.drawString(MARGIN + 24, y, bullet)
         y -= 15
 
-    draw_footer(c)
+    # ────────────────────────────────────────────
+    # BOTTOM BAR - Blue
+    # ────────────────────────────────────────────
+    c.setFillColor(BLUE)
+    c.rect(0, 0, W, 80, fill=1, stroke=0)
+    c.setFillColor(WHITE)
+    c.setFont("Helvetica-BoldOblique", 13)
+    c.drawCentredString(W / 2, 48, "Safer triage. Less pressure on your practice.")
+    c.setFont("Helvetica", 9)
+    c.drawString(MARGIN, 18, "smartnavigation.co.uk")
+    draw_fuller_forbes(c, W - 155, 13, dark_bg=True)
+
     c.save()
     print(f"Created: {filename}")
 
@@ -240,63 +234,58 @@ def create_poster2(filename):
     c = canvas.Canvas(filename, pagesize=A4)
     c.setTitle("SMART Navigation - Case Study & Overview")
 
-    # ── WHITE HEADER ──
-    header_bottom = H - 190
+    # ────────────────────────────────────────────
+    # TOP BAR - White with logo + EMIS badge
+    # ────────────────────────────────────────────
+    top_bar_h = 105
+    top_bar_bottom = H - top_bar_h
     c.setFillColor(WHITE)
-    c.rect(0, header_bottom, W, H - header_bottom, fill=1, stroke=0)
+    c.rect(0, top_bar_bottom, W, top_bar_h, fill=1, stroke=0)
+    draw_smart_logo(c, MARGIN + 5, H - 42, scale=1.1)
 
-    draw_smart_logo(c, MARGIN + 5, H - 50, scale=1.15)
-
-    c.setFillColor(NAVY)
+    # EMIS badge
+    badge_y = H - 75
+    c.setFillColor(BLUE)
+    c.roundRect(MARGIN + 25, badge_y - 22, CW - 50, 28, 6, fill=1, stroke=0)
+    c.setFillColor(WHITE)
     c.setFont("Helvetica-Bold", 12)
-    c.drawString(MARGIN + 5, H - 82, "Voice")
-    c.setFillColor(TEXT_GREY)
-    c.setFont("Helvetica", 10.5)
-    c.drawString(MARGIN + 47, H - 82, "Clinician-designed AI telephone triage")
+    c.drawCentredString(W / 2, badge_y - 14, "EMIS Partner API  \u2014  Fully Integrated")
 
-    # EMIS / Integration badge
-    badge_y = H - 120
-    c.setFillColor(BRAND_BLUE)
-    c.roundRect(MARGIN + 30, badge_y - 48, CW - 60, 42, 8, fill=1, stroke=0)
+    # ────────────────────────────────────────────
+    # SECTION 1 - BLUE: Case Study
+    # ────────────────────────────────────────────
+    sec1_top = top_bar_bottom
+    sec1_bottom = H / 2 - 20
+    c.setFillColor(BLUE)
+    c.rect(0, sec1_bottom, W, sec1_top - sec1_bottom, fill=1, stroke=0)
+
+    y = sec1_top - 25
+    c.setFillColor(HexColor('#ffffff80'))
+    c.setFont("Helvetica-Bold", 11)
+    c.drawString(MARGIN + 8, y, "CASE STUDY")
+
+    y -= 28
     c.setFillColor(WHITE)
-    c.setFont("Helvetica-Bold", 15)
-    c.drawCentredString(W / 2, badge_y - 32, "EMIS Partner API  \u2014  Fully Integrated")
-
-    # ── NAVY MAIN SECTION ──
-    c.setFillColor(NAVY)
-    c.rect(0, 85, W, header_bottom - 85, fill=1, stroke=0)
-
-    # Case Study headline
-    y = header_bottom - 28
-    c.setFillColor(WHITE)
-    c.setFont("Helvetica-Bold", 22)
-    c.drawCentredString(W / 2, y, "Case Study")
-
-    y -= 22
-    c.setFillColor(MUTED)
     c.setFont("Helvetica", 12)
     c.drawCentredString(W / 2, y, "Real-world impact across 40+ practices nationally")
 
-    # Big stat: 43%
-    y -= 55
-    c.setFillColor(TEAL)
-    c.setFont("Helvetica-Bold", 68)
+    # Big stat
+    y -= 58
+    c.setFont("Helvetica-Bold", 72)
     c.drawCentredString(W / 2, y, "43%")
 
     y -= 24
-    c.setFillColor(WHITE)
     c.setFont("Helvetica-Bold", 15)
     c.drawCentredString(W / 2, y, "reduction in receptionist call handling time")
 
     y -= 18
-    c.setFillColor(MUTED)
     c.setFont("Helvetica", 11)
-    c.drawCentredString(W / 2, y, "Barnstaple to Newcastle \u2014 from a handful of Leeds practices to 40+ nationally")
+    c.drawCentredString(W / 2, y, "Barnstaple to Newcastle \u2014 from Leeds practices to 40+ nationally")
 
     # 3 stat boxes
-    y -= 38
+    y -= 35
     box_w = (CW - 40) / 3
-    box_h = 65
+    box_h = 60
     stats = [
         ("\u00a34.7M", "NHS savings", "in 12 months"),
         ("285/wk", "GP appointments", "freed up"),
@@ -304,25 +293,31 @@ def create_poster2(filename):
     ]
     for i, (stat, line1, line2) in enumerate(stats):
         bx = MARGIN + 8 + i * (box_w + 12)
-        c.setFillColor(CARD_BG)
-        c.roundRect(bx, y - box_h, box_w, box_h, 10, fill=1, stroke=0)
-        c.setFillColor(TEAL)
-        c.setFont("Helvetica-Bold", 24)
-        c.drawCentredString(bx + box_w / 2, y - 25, stat)
-        c.setFillColor(MUTED)
-        c.setFont("Helvetica", 10)
-        c.drawCentredString(bx + box_w / 2, y - 42, line1)
+        c.setFillColor(HexColor('#ffffff18'))
+        c.roundRect(bx, y - box_h, box_w, box_h, 8, fill=1, stroke=0)
+        c.setFillColor(WHITE)
+        c.setFont("Helvetica-Bold", 22)
+        c.drawCentredString(bx + box_w / 2, y - 23, stat)
+        c.setFont("Helvetica", 9.5)
+        c.drawCentredString(bx + box_w / 2, y - 39, line1)
         if line2:
-            c.drawCentredString(bx + box_w / 2, y - 54, line2)
+            c.drawCentredString(bx + box_w / 2, y - 51, line2)
 
-    # Bullet Point Overview
-    y -= box_h + 22
-    draw_section_line(c, y + 8)
+    # ────────────────────────────────────────────
+    # SECTION 2 - WHITE: Bullet Point Overview
+    # ────────────────────────────────────────────
+    sec2_top = sec1_bottom
+    sec2_bottom = 80
     c.setFillColor(WHITE)
-    c.setFont("Helvetica-Bold", 17)
-    c.drawString(MARGIN + 8, y - 8, "Bullet Point Overview")
+    c.rect(0, sec2_bottom, W, sec2_top - sec2_bottom, fill=1, stroke=0)
 
-    y -= 32
+    y = sec2_top - 25
+    c.setFillColor(BLUE)
+    c.setFont("Helvetica-Bold", 11)
+    c.drawString(MARGIN + 8, y, "OVERVIEW")
+
+    y -= 28
+
     bullets = [
         ("AI-led patient triage",
          "Patients speak directly to the system which guides them through safe, clinician-designed navigation questions."),
@@ -337,22 +332,33 @@ def create_poster2(filename):
     ]
 
     for title, desc in bullets:
-        draw_check_bullet(c, MARGIN + 18, y + 2, 7)
+        draw_check_bullet(c, MARGIN + 16, y + 2, 7, dark_bg=False)
 
-        c.setFillColor(WHITE)
+        c.setFillColor(BLACK)
         c.setFont("Helvetica-Bold", 12)
-        c.drawString(MARGIN + 32, y, title)
+        c.drawString(MARGIN + 30, y, title)
 
-        y -= 16
-        c.setFillColor(MUTED)
-        c.setFont("Helvetica", 10)
-        wrapped = wrap_text(desc, "Helvetica", 10, CW - 45)
+        y -= 15
+        c.setFillColor(MID_GREY)
+        c.setFont("Helvetica", 9.5)
+        wrapped = wrap_text(desc, "Helvetica", 9.5, CW - 40)
         for line in wrapped:
-            c.drawString(MARGIN + 32, y, line)
-            y -= 13
+            c.drawString(MARGIN + 30, y, line)
+            y -= 12
         y -= 10
 
-    draw_footer(c)
+    # ────────────────────────────────────────────
+    # BOTTOM BAR - Blue
+    # ────────────────────────────────────────────
+    c.setFillColor(BLUE)
+    c.rect(0, 0, W, 80, fill=1, stroke=0)
+    c.setFillColor(WHITE)
+    c.setFont("Helvetica-BoldOblique", 13)
+    c.drawCentredString(W / 2, 48, "Safer triage. Less pressure on your practice.")
+    c.setFont("Helvetica", 9)
+    c.drawString(MARGIN, 18, "smartnavigation.co.uk")
+    draw_fuller_forbes(c, W - 155, 13, dark_bg=True)
+
     c.save()
     print(f"Created: {filename}")
 
