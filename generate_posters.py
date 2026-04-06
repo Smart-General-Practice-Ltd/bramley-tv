@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Generate posters as HTML then convert to PDF with weasyprint."""
+"""Generate posters as HTML then convert to PDF with weasyprint.
+All stats from smartnavigation.co.uk only."""
 import os
 from weasyprint import HTML
 from base64 import b64encode
@@ -14,7 +15,6 @@ def img_to_data_uri(path):
 SN_LOGO = img_to_data_uri(os.path.join(LOGO_DIR, "smartnavigation.logo.png"))
 FF_LOGO = img_to_data_uri(os.path.join(LOGO_DIR, "Forbes and Fuller Transparent 3.png"))
 
-# ── Shared CSS for both posters ──
 SHARED_CSS = """
   @page { size: 210mm 495mm; margin: 0; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -176,6 +176,12 @@ POSTER1_HTML = f"""<!DOCTYPE html>
     margin-top: 14px;
     line-height: 1.7;
   }}
+  .price-trial {{
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 12px;
+    opacity: 0.9;
+  }}
 </style>
 </head>
 <body>
@@ -195,29 +201,30 @@ POSTER1_HTML = f"""<!DOCTYPE html>
 
   <div class="price-card">
     <div class="price-big">&pound;1,000</div>
-    <span class="price-period">for 12 months</span>
+    <span class="price-period">per practice / year</span>
     <div class="price-details">
-      Per practice, all-inclusive. No hidden charges.<br>
-      No auto-renewals. Full onboarding, training &amp; support included.
+      Flat rate. No hidden or variable costs.<br>
+      Free technical support and updates included.
     </div>
+    <div class="price-trial">\u2713 3 months free trial</div>
   </div>
 
   <div class="stats-grid">
     <div class="stat-box">
-      <div class="stat-num">152,508</div>
-      <div class="stat-label">Patients triaged (2024\u201325)</div>
+      <div class="stat-num">100+</div>
+      <div class="stat-label">Practices across England</div>
     </div>
     <div class="stat-box">
-      <div class="stat-num">40+</div>
-      <div class="stat-label">Practices nationally</div>
+      <div class="stat-num">500k+</div>
+      <div class="stat-label">Patients covered</div>
     </div>
     <div class="stat-box">
-      <div class="stat-num">&pound;4.7M</div>
-      <div class="stat-label">NHS savings in 12 months</div>
+      <div class="stat-num">79:1</div>
+      <div class="stat-label">Return on investment</div>
     </div>
     <div class="stat-box">
-      <div class="stat-num">71 hrs/wk</div>
-      <div class="stat-label">GP time saved</div>
+      <div class="stat-num">&lt;&pound;3/day</div>
+      <div class="stat-label">For a 7,000 patient practice</div>
     </div>
   </div>
 </div>
@@ -287,7 +294,7 @@ POSTER2_HTML = f"""<!DOCTYPE html>
     margin-bottom: 14px;
   }}
   .case-sub {{
-    font-size: 18px;
+    font-size: 16px;
     opacity: 0.8;
     text-align: center;
     margin-bottom: 28px;
@@ -307,24 +314,48 @@ POSTER2_HTML = f"""<!DOCTYPE html>
     margin-top: 12px;
   }}
   .big-stat-sub {{
-    font-size: 15px;
+    font-size: 14px;
     opacity: 0.7;
     margin-top: 10px;
   }}
+  .breakdown {{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+    margin-bottom: 10px;
+  }}
+  .breakdown-box {{
+    flex: 1 1 calc(50% - 10px);
+    max-width: calc(50% - 5px);
+    background: rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 18px 12px;
+    text-align: center;
+  }}
+  .breakdown-box .num {{
+    font-size: 30px;
+    font-weight: 800;
+  }}
+  .breakdown-box .lbl {{
+    font-size: 12px;
+    opacity: 0.7;
+    margin-top: 4px;
+  }}
   .stats-row {{
     display: flex;
-    gap: 14px;
-    margin-top: 30px;
+    gap: 12px;
+    margin-top: 14px;
   }}
   .stats-row .stat-box {{
     flex: 1;
-    padding: 22px 12px;
+    padding: 18px 10px;
   }}
   .stats-row .stat-num {{
-    font-size: 32px;
+    font-size: 28px;
   }}
   .stats-row .stat-label {{
-    font-size: 12px;
+    font-size: 11px;
   }}
 </style>
 </head>
@@ -337,27 +368,45 @@ POSTER2_HTML = f"""<!DOCTYPE html>
 <div class="blue-section">
   <div class="emis-badge">EMIS Partner API \u2014 Fully Integrated</div>
 
-  <div class="case-label">CASE STUDY</div>
-  <div class="case-sub">Real-world impact across 40+ practices nationally</div>
+  <div class="case-label">12-MONTH CASE STUDY</div>
+  <div class="case-sub">April 2024 \u2013 March 2025 &bull; 17 practices &bull; 152,508 patients triaged</div>
 
   <div class="big-stat">
     <div class="big-stat-num">47%</div>
-    <div class="big-stat-text">reduction in receptionist<br>call handling time</div>
-    <div class="big-stat-sub">Barnstaple to Newcastle \u2014 from Leeds practices to 40+ nationally</div>
+    <div class="big-stat-text">of patients redirected<br>away from the GP</div>
+  </div>
+
+  <div class="breakdown">
+    <div class="breakdown-box">
+      <div class="num">15%</div>
+      <div class="lbl">to eConsultations</div>
+    </div>
+    <div class="breakdown-box">
+      <div class="num">12%</div>
+      <div class="lbl">to Community Pharmacy</div>
+    </div>
+    <div class="breakdown-box">
+      <div class="num">11%</div>
+      <div class="lbl">to other clinicians<br>(Nurse, HCA)</div>
+    </div>
+    <div class="breakdown-box">
+      <div class="num">9%</div>
+      <div class="lbl">to A&amp;E / Walk-in</div>
+    </div>
   </div>
 
   <div class="stats-row">
     <div class="stat-box">
-      <div class="stat-num">&pound;4.7M</div>
-      <div class="stat-label">NHS savings<br>in 12 months</div>
+      <div class="stat-num">&pound;1.36M</div>
+      <div class="stat-label">GP cost<br>reallocated</div>
     </div>
     <div class="stat-box">
-      <div class="stat-num">285/wk</div>
-      <div class="stat-label">GP appointments<br>freed up</div>
+      <div class="stat-num">71,679</div>
+      <div class="stat-label">GP appointments<br>avoided</div>
     </div>
     <div class="stat-box">
-      <div class="stat-num">&pound;300K</div>
-      <div class="stat-label">Saved per practice<br>per year</div>
+      <div class="stat-num">79:1</div>
+      <div class="stat-label">ROI for a 7,000<br>patient practice</div>
     </div>
   </div>
 </div>
@@ -368,35 +417,35 @@ POSTER2_HTML = f"""<!DOCTYPE html>
     <div class="bullet-check">\u2713</div>
     <div class="bullet-text">
       <b>Receptionist-led patient triage</b>
-      <span>Patients speak directly to the system which guides them through safe navigation questions.</span>
+      <span>Structured, GP-designed scripts guide your reception team to direct patients to the right care, first time.</span>
     </div>
   </div>
   <div class="bullet">
     <div class="bullet-check">\u2713</div>
     <div class="bullet-text">
-      <b>Reduce reception pressure</b>
-      <span>Free staff from lengthy triage calls. 71 hours of GP time saved every week.</span>
+      <b>Replaces the duty doctor system</b>
+      <span>Frees GPs and makes better use of the whole practice team.</span>
     </div>
   </div>
   <div class="bullet">
     <div class="bullet-check">\u2713</div>
     <div class="bullet-text">
-      <b>Consistent, structured outcomes</b>
-      <span>Every patient assessed using the same safe pathways, aligned with NICE guidance.</span>
+      <b>NICE CKS aligned guidance</b>
+      <span>Every pathway reviewed by GP clinical leads and aligned with NICE guidance.</span>
     </div>
   </div>
   <div class="bullet">
     <div class="bullet-check">\u2713</div>
     <div class="bullet-text">
-      <b>Built for NHS primary care</b>
-      <span>Designed around real GP workflows. Pathways reviewed by GP clinical leads.</span>
+      <b>2026/27 GP contract ready</b>
+      <span>Safe, consistent, auditable process for same-day access and care navigation.</span>
     </div>
   </div>
   <div class="bullet">
     <div class="bullet-check">\u2713</div>
     <div class="bullet-text">
-      <b>EMIS Partner API integration</b>
-      <span>Seamless integration with clinical systems. Triage data uploaded into patient records.</span>
+      <b>Set up in 30 minutes</b>
+      <span>Your reception team begins using structured triage immediately.</span>
     </div>
   </div>
 </div>
