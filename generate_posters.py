@@ -100,81 +100,69 @@ def wrap(text, font, size, max_w):
 def create_poster1(filename):
     c = canvas.Canvas(filename, pagesize=A4)
 
-    # Fixed section positions (top-down)
-    # Top white bar: logo
-    top = H
+    # Fixed section positions
     top_bottom = H - 85
-
-    # Blue section: pricing (takes up about 40% of page)
-    blue_bottom = 390
-
-    # White section: usage + AVT (takes up rest)
+    blue_bottom = 455   # blue section shorter - no dead space
     white_bottom = 70
-
-    # Blue footer bar
-    footer_top = white_bottom
 
     # ── TOP WHITE BAR ──
     c.setFillColor(WHITE)
-    c.rect(0, top_bottom, W, top - top_bottom, fill=1, stroke=0)
+    c.rect(0, top_bottom, W, H - top_bottom, fill=1, stroke=0)
     draw_logo(c, W / 2 + 10, H - 44, h=46)
 
     # ── BLUE SECTION: PRICING ──
     c.setFillColor(BLUE)
     c.rect(0, blue_bottom, W, top_bottom - blue_bottom, fill=1, stroke=0)
 
-    y = top_bottom - 35
+    y = top_bottom - 30
     c.setFillColor(WHITE)
     c.setFont("Helvetica-Bold", 11)
     c.drawString(M, y, "STAGE 1: PRICING")
 
-    # Main headline - big and centred
-    y -= 40
-    c.setFont("Helvetica-Bold", 32)
-    c.drawCentredString(W / 2, y, "Simple, transparent")
-    y -= 36
-    c.drawCentredString(W / 2, y, "pricing")
-    y -= 22
-    c.setFont("Helvetica", 14)
+    # Headline - single line
+    y -= 38
+    c.setFont("Helvetica-Bold", 28)
+    c.drawCentredString(W / 2, y, "Simple, transparent pricing")
+    y -= 20
+    c.setFont("Helvetica", 13)
     c.drawCentredString(W / 2, y, "designed for NHS primary care")
 
-    # Price highlight box - prominent
-    y -= 40
-    card_h = 95
+    # Price box
+    y -= 32
+    card_h = 88
     c.setFillColor(CARD_BLUE)
     c.roundRect(M, y - card_h, CW, card_h, 10, fill=1, stroke=0)
 
-    # £1,000 big and bold
     c.setFillColor(WHITE)
-    c.setFont("Helvetica-Bold", 50)
-    c.drawString(M + 22, y - 48, "\u00a31,000")
-    pw = pdfmetrics.stringWidth("\u00a31,000", "Helvetica-Bold", 50)
-    c.setFont("Helvetica", 18)
-    c.drawString(M + 30 + pw, y - 40, "for 12 months")
+    c.setFont("Helvetica-Bold", 46)
+    c.drawString(M + 20, y - 44, "\u00a31,000")
+    pw = pdfmetrics.stringWidth("\u00a31,000", "Helvetica-Bold", 46)
+    c.setFont("Helvetica", 17)
+    c.drawString(M + 28 + pw, y - 36, "for 12 months")
 
     c.setFillColor(LIGHT_TEXT)
     c.setFont("Helvetica", 11)
-    c.drawString(M + 22, y - 66, "Per practice, all-inclusive. No hidden charges.")
-    c.drawString(M + 22, y - 80, "No auto-renewals. Full onboarding, training & support included.")
+    c.drawString(M + 20, y - 62, "Per practice, all-inclusive. No hidden charges.")
+    c.drawString(M + 20, y - 76, "No auto-renewals. Full onboarding, training & support included.")
 
-    y -= card_h + 22
+    y -= card_h + 18
     c.setFillColor(LIGHT_TEXT)
-    c.setFont("Helvetica-Oblique", 11)
+    c.setFont("Helvetica-Oblique", 10.5)
     c.drawCentredString(W / 2, y, "From single-site surgeries to ICBs \u2014 one simple price.")
 
     # ── WHITE SECTION: USAGE & AVT ──
     c.setFillColor(WHITE)
     c.rect(0, white_bottom, W, blue_bottom - white_bottom, fill=1, stroke=0)
 
-    y = blue_bottom - 32
+    y = blue_bottom - 28
     c.setFillColor(BLUE)
-    c.setFont("Helvetica-Bold", 20)
+    c.setFont("Helvetica-Bold", 18)
     c.drawString(M, y, "Usage & Adoption")
 
-    # 2x2 stat grid - nice and big
-    y -= 28
+    # 2x2 stat grid
+    y -= 26
     bw = (CW - 14) / 2
-    bh = 70
+    bh = 64
 
     for row in [
         [("152,508", "Patients triaged (2024\u201325)"), ("40+", "Practices nationally")],
@@ -185,46 +173,46 @@ def create_poster1(filename):
             c.setFillColor(BLUE)
             c.roundRect(bx, y - bh, bw, bh, 8, fill=1, stroke=0)
             c.setFillColor(WHITE)
-            c.setFont("Helvetica-Bold", 28)
-            c.drawCentredString(bx + bw / 2, y - 30, num)
-            c.setFont("Helvetica", 10.5)
-            c.drawCentredString(bx + bw / 2, y - bh + 14, lbl)
-        y -= bh + 10
+            c.setFont("Helvetica-Bold", 26)
+            c.drawCentredString(bx + bw / 2, y - 27, num)
+            c.setFont("Helvetica", 10)
+            c.drawCentredString(bx + bw / 2, y - bh + 12, lbl)
+        y -= bh + 8
 
-    # Stage 2: AVT - with proper spacing
-    y -= 8
+    # Stage 2: AVT
+    y -= 6
     c.setStrokeColor(HexColor('#c8d4e0'))
     c.setLineWidth(0.5)
     c.line(M, y + 4, W - M, y + 4)
 
     c.setFillColor(BLACK)
-    c.setFont("Helvetica-Bold", 16)
-    c.drawString(M, y - 14, "Stage 2: Automated Voice Triage")
+    c.setFont("Helvetica-Bold", 14)
+    c.drawString(M, y - 12, "Stage 2: Automated Voice Triage")
 
-    y -= 34
+    y -= 28
     c.setFillColor(MID_GREY)
-    c.setFont("Helvetica", 11)
+    c.setFont("Helvetica", 10.5)
     c.drawString(M, y, "AI-powered voice agent handles patient calls 24/7, guiding")
-    y -= 15
+    y -= 14
     c.drawString(M, y, "them through clinician-designed triage pathways.")
 
-    y -= 22
+    y -= 18
     for bullet in [
         "Handles overflow and out-of-hours calls automatically",
         "Same clinically-safe pathways used by receptionists",
         "Seamless handoff to human staff when needed",
     ]:
         c.setFillColor(BLUE)
-        c.setFont("Helvetica", 8)
+        c.setFont("Helvetica", 7)
         c.drawString(M + 4, y + 2, "\u25cf")
         c.setFillColor(BLACK)
-        c.setFont("Helvetica", 11)
+        c.setFont("Helvetica", 10.5)
         c.drawString(M + 16, y, bullet)
-        y -= 16
+        y -= 15
 
     # ── BLUE FOOTER ──
     c.setFillColor(BLUE)
-    c.rect(0, 0, W, footer_top, fill=1, stroke=0)
+    c.rect(0, 0, W, white_bottom, fill=1, stroke=0)
 
     c.setFillColor(WHITE)
     c.setFont("Helvetica-BoldOblique", 13)
