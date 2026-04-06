@@ -14,164 +14,168 @@ def img_to_data_uri(path):
 SN_LOGO = img_to_data_uri(os.path.join(LOGO_DIR, "smartnavigation.logo.png"))
 FF_LOGO = img_to_data_uri(os.path.join(LOGO_DIR, "Forbes and Fuller Transparent 3.png"))
 
-POSTER1_HTML = f"""<!DOCTYPE html>
-<html>
-<head>
-<style>
-  @page {{ size: 210mm 495mm; margin: 0; }}
-  * {{ margin: 0; padding: 0; box-sizing: border-box; }}
-  body {{ font-family: Helvetica, Arial, sans-serif; width: 210mm; height: 495mm; }}
+# ── Shared CSS for both posters ──
+SHARED_CSS = """
+  @page { size: 210mm 495mm; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Helvetica, Arial, sans-serif; width: 210mm; height: 495mm; }
 
-  .top-bar {{
+  .top-bar {
     background: #fff;
-    padding: 40px 0 30px;
+    padding: 44px 0 36px;
     text-align: center;
-  }}
-  .top-bar img {{ height: 80px; }}
+  }
+  .top-bar img { height: 90px; }
 
-  .blue-section {{
+  .blue-section {
     background: #1159A2;
     color: #fff;
-    padding: 40px 42px 45px;
-  }}
+    padding: 44px 44px 48px;
+  }
 
-  .section-label {{
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    opacity: 0.7;
-    margin-bottom: 20px;
-  }}
-
-  .headline {{
-    font-size: 40px;
-    font-weight: 800;
-    line-height: 1.15;
-    margin-bottom: 8px;
-  }}
-  .headline-sub {{
-    font-size: 20px;
-    font-weight: 400;
-    opacity: 0.8;
-    margin-bottom: 12px;
-  }}
-  .desc {{
-    font-size: 15px;
-    line-height: 1.6;
-    opacity: 0.75;
-    margin-bottom: 30px;
-  }}
-
-  .price-card {{
-    background: rgba(255,255,255,0.12);
-    border-radius: 14px;
-    padding: 28px 32px;
-    margin-bottom: 30px;
-  }}
-  .price-big {{
-    font-size: 62px;
-    font-weight: 800;
-    display: inline;
-  }}
-  .price-period {{
-    font-size: 22px;
-    font-weight: 400;
-    margin-left: 10px;
-  }}
-  .price-details {{
-    font-size: 14px;
-    opacity: 0.75;
-    margin-top: 12px;
-    line-height: 1.7;
-  }}
-
-  .stats-grid {{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 10px;
-  }}
-  .stat-box {{
-    flex: 1 1 45%;
-    background: rgba(255,255,255,0.12);
-    border-radius: 12px;
-    padding: 22px 14px;
-    text-align: center;
-  }}
-  .stat-num {{
-    font-size: 34px;
-    font-weight: 800;
-  }}
-  .stat-label {{
-    font-size: 12px;
-    opacity: 0.7;
-    margin-top: 6px;
-  }}
-
-  .white-section {{
+  .white-section {
     background: #fff;
     color: #222;
-    padding: 38px 42px 32px;
-  }}
-  .white-section h3 {{
+    padding: 42px 44px 36px;
+  }
+  .white-section h3 {
     color: #1159A2;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 700;
-    margin-bottom: 24px;
-  }}
+    margin-bottom: 28px;
+  }
 
-  .bullet {{
+  .bullet {
     display: flex;
     align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 20px;
-  }}
-  .bullet-check {{
-    width: 28px;
-    height: 28px;
-    min-width: 28px;
+    gap: 18px;
+    margin-bottom: 22px;
+  }
+  .bullet-check {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
     background: #1159A2;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
     margin-top: 2px;
-  }}
-  .bullet-text b {{
-    font-size: 16px;
-    display: block;
-    margin-bottom: 3px;
-  }}
-  .bullet-text span {{
-    font-size: 13px;
-    color: #666;
-    line-height: 1.5;
-  }}
-
-  .footer-blue {{
-    background: #1159A2;
-    padding: 30px 42px 24px;
-    text-align: center;
-  }}
-  .tagline {{
+  }
+  .bullet-text b {
     font-size: 18px;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .bullet-text span {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  .footer-white {
+    background: #fff;
+    padding: 28px 44px 28px;
+    border-top: 1px solid #e0e0e0;
+  }
+  .tagline {
+    font-size: 20px;
     font-style: italic;
-    color: rgba(255,255,255,0.9);
-    margin-bottom: 20px;
-  }}
-  .footer-row {{
+    color: #1159A2;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .footer-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  .footer-url {
+    font-size: 14px;
+    color: #888;
+  }
+  .footer-row img { height: 65px; }
+
+  .stats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .stat-box {
+    flex: 1 1 calc(50% - 14px);
+    max-width: calc(50% - 7px);
+    background: rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 24px 16px;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 38px;
+    font-weight: 800;
+  }
+  .stat-label {
+    font-size: 14px;
+    opacity: 0.7;
+    margin-top: 6px;
+  }
+"""
+
+POSTER1_HTML = f"""<!DOCTYPE html>
+<html>
+<head>
+<style>
+  {SHARED_CSS}
+
+  .section-label {{
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    opacity: 0.7;
+    margin-bottom: 22px;
   }}
-  .footer-url {{
-    font-size: 12px;
-    color: rgba(255,255,255,0.7);
+  .headline {{
+    font-size: 44px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 10px;
   }}
-  .footer-row img {{ height: 48px; }}
+  .headline-sub {{
+    font-size: 22px;
+    font-weight: 400;
+    opacity: 0.8;
+    margin-bottom: 14px;
+  }}
+  .desc {{
+    font-size: 17px;
+    line-height: 1.6;
+    opacity: 0.75;
+    margin-bottom: 32px;
+  }}
+  .price-card {{
+    background: rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 30px 34px;
+    margin-bottom: 34px;
+  }}
+  .price-big {{
+    font-size: 68px;
+    font-weight: 800;
+    display: inline;
+  }}
+  .price-period {{
+    font-size: 24px;
+    font-weight: 400;
+    margin-left: 12px;
+  }}
+  .price-details {{
+    font-size: 16px;
+    opacity: 0.75;
+    margin-top: 14px;
+    line-height: 1.7;
+  }}
 </style>
 </head>
 <body>
@@ -185,8 +189,8 @@ POSTER1_HTML = f"""<!DOCTYPE html>
   <div class="headline">Simple, transparent pricing</div>
   <div class="headline-sub">designed for NHS primary care</div>
   <div class="desc">
-    SMART Navigation Voice guides patients through structured, clinician-designed
-    triage pathways over the phone.
+    SMART Navigation Voice guides patients through structured,
+    clinician-designed triage pathways over the phone.
   </div>
 
   <div class="price-card">
@@ -201,7 +205,7 @@ POSTER1_HTML = f"""<!DOCTYPE html>
   <div class="stats-grid">
     <div class="stat-box">
       <div class="stat-num">152,508</div>
-      <div class="stat-label">Patients triaged (2024–25)</div>
+      <div class="stat-label">Patients triaged (2024\u201325)</div>
     </div>
     <div class="stat-box">
       <div class="stat-num">40+</div>
@@ -221,35 +225,35 @@ POSTER1_HTML = f"""<!DOCTYPE html>
 <div class="white-section">
   <h3>Stage 2: Automated Voice Triage</h3>
   <div class="bullet">
-    <div class="bullet-check">✓</div>
+    <div class="bullet-check">\u2713</div>
     <div class="bullet-text">
       <b>AI-led patient triage</b>
       <span>Patients speak directly to the system which guides them through safe navigation questions.</span>
     </div>
   </div>
   <div class="bullet">
-    <div class="bullet-check">✓</div>
+    <div class="bullet-check">\u2713</div>
     <div class="bullet-text">
       <b>Reduce reception pressure</b>
       <span>Free staff from lengthy triage calls.</span>
     </div>
   </div>
   <div class="bullet">
-    <div class="bullet-check">✓</div>
+    <div class="bullet-check">\u2713</div>
     <div class="bullet-text">
       <b>Consistent, structured outcomes</b>
       <span>Every patient assessed using the same safe pathways.</span>
     </div>
   </div>
   <div class="bullet">
-    <div class="bullet-check">✓</div>
+    <div class="bullet-check">\u2713</div>
     <div class="bullet-text">
       <b>Built for NHS primary care</b>
     </div>
   </div>
 </div>
 
-<div class="footer-blue">
+<div class="footer-white">
   <div class="tagline">Safer triage.<br>Less pressure on your practice.</div>
   <div class="footer-row">
     <span class="footer-url">smartnavigation.co.uk</span>
@@ -264,154 +268,64 @@ POSTER2_HTML = f"""<!DOCTYPE html>
 <html>
 <head>
 <style>
-  @page {{ size: 210mm 495mm; margin: 0; }}
-  * {{ margin: 0; padding: 0; box-sizing: border-box; }}
-  body {{ font-family: Helvetica, Arial, sans-serif; width: 210mm; height: 495mm; }}
-
-  .top-bar {{
-    background: #fff;
-    padding: 40px 0 30px;
-    text-align: center;
-  }}
-  .top-bar img {{ height: 80px; }}
-
-  .blue-section {{
-    background: #1159A2;
-    color: #fff;
-    padding: 40px 42px 45px;
-  }}
+  {SHARED_CSS}
 
   .emis-badge {{
     background: rgba(255,255,255,0.15);
-    border-radius: 10px;
-    padding: 16px 24px;
+    border-radius: 12px;
+    padding: 18px 28px;
     text-align: center;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
-    margin-bottom: 28px;
+    margin-bottom: 32px;
   }}
-
   .case-label {{
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     letter-spacing: 1.5px;
     opacity: 0.7;
-    margin-bottom: 12px;
-  }}
-  .case-sub {{
-    font-size: 16px;
-    opacity: 0.8;
-    text-align: center;
-    margin-bottom: 24px;
-  }}
-
-  .big-stat {{
-    text-align: center;
     margin-bottom: 14px;
   }}
+  .case-sub {{
+    font-size: 18px;
+    opacity: 0.8;
+    text-align: center;
+    margin-bottom: 28px;
+  }}
+  .big-stat {{
+    text-align: center;
+    margin-bottom: 16px;
+  }}
   .big-stat-num {{
-    font-size: 110px;
+    font-size: 120px;
     font-weight: 800;
     line-height: 1;
   }}
   .big-stat-text {{
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 700;
-    margin-top: 10px;
+    margin-top: 12px;
   }}
   .big-stat-sub {{
-    font-size: 13px;
+    font-size: 15px;
     opacity: 0.7;
-    margin-top: 8px;
+    margin-top: 10px;
   }}
-
   .stats-row {{
     display: flex;
-    gap: 12px;
-    margin-top: 28px;
+    gap: 14px;
+    margin-top: 30px;
   }}
-  .stat-box {{
+  .stats-row .stat-box {{
     flex: 1;
-    background: rgba(255,255,255,0.12);
-    border-radius: 12px;
-    padding: 20px 10px;
-    text-align: center;
+    padding: 22px 12px;
   }}
-  .stat-num {{
-    font-size: 28px;
-    font-weight: 800;
+  .stats-row .stat-num {{
+    font-size: 32px;
   }}
-  .stat-label {{
-    font-size: 11px;
-    opacity: 0.7;
-    margin-top: 6px;
-    line-height: 1.3;
-  }}
-
-  .white-section {{
-    background: #fff;
-    color: #222;
-    padding: 38px 42px 32px;
-  }}
-  .white-section h3 {{
-    color: #1159A2;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 24px;
-  }}
-
-  .bullet {{
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 18px;
-  }}
-  .bullet-check {{
-    width: 28px;
-    height: 28px;
-    min-width: 28px;
-    background: #1159A2;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 700;
-    margin-top: 2px;
-  }}
-  .bullet-text b {{
-    font-size: 15px;
-    display: block;
-    margin-bottom: 3px;
-  }}
-  .bullet-text span {{
+  .stats-row .stat-label {{
     font-size: 12px;
-    color: #666;
-    line-height: 1.5;
   }}
-
-  .footer-blue {{
-    background: #1159A2;
-    padding: 30px 42px 24px;
-    text-align: center;
-  }}
-  .tagline {{
-    font-size: 18px;
-    font-style: italic;
-    color: rgba(255,255,255,0.9);
-    margin-bottom: 20px;
-  }}
-  .footer-row {{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }}
-  .footer-url {{
-    font-size: 12px;
-    color: rgba(255,255,255,0.7);
-  }}
-  .footer-row img {{ height: 48px; }}
 </style>
 </head>
 <body>
@@ -421,7 +335,7 @@ POSTER2_HTML = f"""<!DOCTYPE html>
 </div>
 
 <div class="blue-section">
-  <div class="emis-badge">EMIS Partner API — Fully Integrated</div>
+  <div class="emis-badge">EMIS Partner API \u2014 Fully Integrated</div>
 
   <div class="case-label">CASE STUDY</div>
   <div class="case-sub">Real-world impact across 40+ practices nationally</div>
@@ -429,7 +343,7 @@ POSTER2_HTML = f"""<!DOCTYPE html>
   <div class="big-stat">
     <div class="big-stat-num">43%</div>
     <div class="big-stat-text">reduction in receptionist<br>call handling time</div>
-    <div class="big-stat-sub">Barnstaple to Newcastle — from Leeds practices to 40+ nationally</div>
+    <div class="big-stat-sub">Barnstaple to Newcastle \u2014 from Leeds practices to 40+ nationally</div>
   </div>
 
   <div class="stats-row">
@@ -451,35 +365,35 @@ POSTER2_HTML = f"""<!DOCTYPE html>
 <div class="white-section">
   <h3>Overview</h3>
   <div class="bullet">
-    <div class="bullet-check">✓</div>
+    <div class="bullet-check">\u2713</div>
     <div class="bullet-text">
       <b>AI-led patient triage</b>
       <span>Patients speak directly to the system which guides them through safe navigation questions.</span>
     </div>
   </div>
   <div class="bullet">
-    <div class="bullet-check">✓</div>
+    <div class="bullet-check">\u2713</div>
     <div class="bullet-text">
       <b>Reduce reception pressure</b>
       <span>Free staff from lengthy triage calls. 71 hours of GP time saved every week.</span>
     </div>
   </div>
   <div class="bullet">
-    <div class="bullet-check">✓</div>
+    <div class="bullet-check">\u2713</div>
     <div class="bullet-text">
       <b>Consistent, structured outcomes</b>
       <span>Every patient assessed using the same safe pathways, aligned with NICE guidance.</span>
     </div>
   </div>
   <div class="bullet">
-    <div class="bullet-check">✓</div>
+    <div class="bullet-check">\u2713</div>
     <div class="bullet-text">
       <b>Built for NHS primary care</b>
       <span>Designed around real GP workflows. Pathways reviewed by GP clinical leads.</span>
     </div>
   </div>
   <div class="bullet">
-    <div class="bullet-check">✓</div>
+    <div class="bullet-check">\u2713</div>
     <div class="bullet-text">
       <b>EMIS Partner API integration</b>
       <span>Seamless integration with clinical systems. Triage data uploaded into patient records.</span>
@@ -487,7 +401,7 @@ POSTER2_HTML = f"""<!DOCTYPE html>
   </div>
 </div>
 
-<div class="footer-blue">
+<div class="footer-white">
   <div class="tagline">Safer triage.<br>Less pressure on your practice.</div>
   <div class="footer-row">
     <span class="footer-url">smartnavigation.co.uk</span>
@@ -500,11 +414,8 @@ POSTER2_HTML = f"""<!DOCTYPE html>
 
 if __name__ == "__main__":
     d = "/home/user/bramley-tv"
-
     HTML(string=POSTER1_HTML).write_pdf(os.path.join(d, "smartnav-poster-pricing.pdf"))
     print("Created: smartnav-poster-pricing.pdf")
-
     HTML(string=POSTER2_HTML).write_pdf(os.path.join(d, "smartnav-poster-case-study.pdf"))
     print("Created: smartnav-poster-case-study.pdf")
-
     print("Done!")
