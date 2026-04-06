@@ -97,7 +97,7 @@ SHARED_CSS = """
     font-size: 14px;
     color: #888;
   }
-  .footer-row img { height: 65px; }
+  .footer-row img { height: 85px; }
 
   .stats-grid {
     display: flex;
@@ -190,7 +190,7 @@ POSTER1_HTML = f"""<!DOCTYPE html>
   <div class="headline-sub">designed for NHS primary care</div>
   <div class="desc">
     SMART Navigation Voice guides patients through structured,
-    clinician-designed triage pathways over the phone.
+    clinician-designed triage pathways over the phone, safely and consistently.
   </div>
 
   <div class="price-card">
@@ -223,11 +223,11 @@ POSTER1_HTML = f"""<!DOCTYPE html>
 </div>
 
 <div class="white-section">
-  <h3>Stage 2: Automated Voice Triage</h3>
+  <h3>Stage 2: Ambient Voice Technology</h3>
   <div class="bullet">
     <div class="bullet-check">\u2713</div>
     <div class="bullet-text">
-      <b>AI-led patient triage</b>
+      <b>Clinician-led patient triage</b>
       <span>Patients speak directly to the system which guides them through safe navigation questions.</span>
     </div>
   </div>
@@ -367,7 +367,7 @@ POSTER2_HTML = f"""<!DOCTYPE html>
   <div class="bullet">
     <div class="bullet-check">\u2713</div>
     <div class="bullet-text">
-      <b>AI-led patient triage</b>
+      <b>Clinician-led patient triage</b>
       <span>Patients speak directly to the system which guides them through safe navigation questions.</span>
     </div>
   </div>
