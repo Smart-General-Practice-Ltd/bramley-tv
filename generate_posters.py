@@ -97,7 +97,7 @@ SHARED_CSS = """
     font-size: 14px;
     color: #888;
   }
-  .footer-row img { height: 85px; }
+  .footer-row img { height: 110px; }
 
   .stats-grid {
     display: flex;
@@ -227,7 +227,7 @@ POSTER1_HTML = f"""<!DOCTYPE html>
   <div class="bullet">
     <div class="bullet-check">\u2713</div>
     <div class="bullet-text">
-      <b>Clinician-led patient triage</b>
+      <b>Receptionist-led patient triage</b>
       <span>Patients speak directly to the system which guides them through safe navigation questions.</span>
     </div>
   </div>
@@ -367,7 +367,7 @@ POSTER2_HTML = f"""<!DOCTYPE html>
   <div class="bullet">
     <div class="bullet-check">\u2713</div>
     <div class="bullet-text">
-      <b>Clinician-led patient triage</b>
+      <b>Receptionist-led patient triage</b>
       <span>Patients speak directly to the system which guides them through safe navigation questions.</span>
     </div>
   </div>
