@@ -7,6 +7,8 @@ All stats from smartnavigation.co.uk."""
 import os
 from weasyprint import HTML
 from base64 import b64encode
+from io import BytesIO
+import qrcode
 
 LOGO_DIR = "/home/user/bramley-tv"
 
@@ -15,8 +17,20 @@ def img_to_data_uri(path):
         data = b64encode(f.read()).decode()
     return f"data:image/png;base64,{data}"
 
+def make_qr(url, fill='#1159A2', back='white'):
+    qr = qrcode.QRCode(version=1, box_size=10, border=2)
+    qr.add_data(url)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color=fill, back_color=back)
+    buf = BytesIO()
+    img.save(buf, format='PNG')
+    data = b64encode(buf.getvalue()).decode()
+    return f"data:image/png;base64,{data}"
+
 SN_LOGO = img_to_data_uri(os.path.join(LOGO_DIR, "smartnavigation.logo.png"))
 FF_LOGO = img_to_data_uri(os.path.join(LOGO_DIR, "Forbes and Fuller Transparent 3.png"))
+QR_BLUE = make_qr('https://smartnavigation.co.uk/contact', fill='#1159A2', back='white')
+QR_WHITE = make_qr('https://smartnavigation.co.uk/contact', fill='white', back='#0e4d8e')
 
 # ═══════════════════════════════════════════════════════════════
 # POSTER 1: THE CONTRACT POSTER
@@ -131,8 +145,16 @@ POSTER1_HTML = f"""<!DOCTYPE html>
   }}
   .strip-qr {{
     text-align: center;
-    font-size: 48px;
+    margin-top: 40px;
+  }}
+  .strip-qr img {{
+    height: 280px;
+    border-radius: 20px;
+  }}
+  .strip-qr-label {{
+    font-size: 44px;
     opacity: 0.7;
+    margin-top: 20px;
   }}
 
   .footer-white {{
@@ -198,12 +220,15 @@ POSTER1_HTML = f"""<!DOCTYPE html>
   <div class="strip-features">
     <span class="strip-feat">EMIS Partner API &mdash; fully integrated</span>
     <span class="strip-feat"><span class="dot">&bull;</span> Set up in 30 mins</span>
-    <span class="strip-feat"><span class="dot">&bull;</span> 3 months free</span>
+    <span class="strip-feat"><span class="dot">&bull;</span> 3 month free trial</span>
     <span class="strip-feat"><span class="dot">&bull;</span> 100+ practices</span>
     <span class="strip-feat"><span class="dot">&bull;</span> 500k+ patients</span>
   </div>
   <div class="strip-url">smartnavigation.co.uk</div>
-  <div class="strip-qr">\u25a1 Scan QR to book a demo</div>
+  <div class="strip-qr">
+    <img src="{QR_BLUE}" alt="QR code"><br>
+    <div class="strip-qr-label">Scan to book a demo</div>
+  </div>
 </div>
 
 <div class="footer-white">
@@ -452,9 +477,12 @@ POSTER2_HTML = f"""<!DOCTYPE html>
 
 <div class="pricing-strip">
   <div class="pricing-main">&pound;1,000 / practice / year</div>
-  <div class="pricing-details">3 months free trial &bull; EMIS Partner API integrated</div>
+  <div class="pricing-details">3 month free trial &bull; EMIS Partner API integrated</div>
   <div class="pricing-url">smartnavigation.co.uk</div>
-  <div class="pricing-qr">\u25a1 Scan QR to book a demo</div>
+  <div class="pricing-qr">
+    <img src="{QR_BLUE}" alt="QR code" style="height:280px; border-radius:20px; margin-top:30px;"><br>
+    <div style="font-size:44px; opacity:0.7; margin-top:20px;">Scan to book a demo</div>
+  </div>
 </div>
 
 <div class="footer-white">
