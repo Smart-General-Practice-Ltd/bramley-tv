@@ -132,10 +132,10 @@ POSTER1_HTML = f"""<!DOCTYPE html>
   .strip-feat {{
     font-size: 72px;
     font-weight: 600;
-    color: #1159A2;
+    color: #333;
   }}
   .strip-feat .dot {{
-    opacity: 0.5;
+    opacity: 0.4;
     margin: 0 10px;
   }}
   .strip-url {{
@@ -153,7 +153,7 @@ POSTER1_HTML = f"""<!DOCTYPE html>
   }}
   .strip-qr-label {{
     font-size: 64px;
-    color: #888;
+    color: #999;
     margin-top: 40px;
   }}
 
