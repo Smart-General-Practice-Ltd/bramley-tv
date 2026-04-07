@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
-"""Generate posters as HTML then convert to PDF with weasyprint.
-All stats from smartnavigation.co.uk only."""
+"""Generate two SMART Navigation posters as HTML->PDF.
+Poster 1: The Contract Poster
+Poster 2: The Proof Poster
+All stats from smartnavigation.co.uk."""
 import os
 from weasyprint import HTML
 from base64 import b64encode
@@ -15,253 +17,201 @@ def img_to_data_uri(path):
 SN_LOGO = img_to_data_uri(os.path.join(LOGO_DIR, "smartnavigation.logo.png"))
 FF_LOGO = img_to_data_uri(os.path.join(LOGO_DIR, "Forbes and Fuller Transparent 3.png"))
 
-SHARED_CSS = """
-  @page { size: 210mm 495mm; margin: 0; }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: Helvetica, Arial, sans-serif; width: 210mm; height: 495mm; }
-
-  .top-bar {
-    background: #fff;
-    padding: 44px 0 36px;
-    text-align: center;
-  }
-  .top-bar img { height: 90px; }
-
-  .blue-section {
-    background: #1159A2;
-    color: #fff;
-    padding: 44px 44px 48px;
-  }
-
-  .white-section {
-    background: #fff;
-    color: #222;
-    padding: 42px 44px 36px;
-  }
-  .white-section h3 {
-    color: #1159A2;
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 28px;
-  }
-
-  .bullet {
-    display: flex;
-    align-items: flex-start;
-    gap: 18px;
-    margin-bottom: 22px;
-  }
-  .bullet-check {
-    width: 32px;
-    height: 32px;
-    min-width: 32px;
-    background: #1159A2;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 700;
-    margin-top: 2px;
-  }
-  .bullet-text b {
-    font-size: 18px;
-    display: block;
-    margin-bottom: 4px;
-  }
-  .bullet-text span {
-    font-size: 15px;
-    color: #555;
-    line-height: 1.5;
-  }
-
-  .footer-white {
-    background: #fff;
-    padding: 28px 44px 28px;
-    border-top: 1px solid #e0e0e0;
-  }
-  .tagline {
-    font-size: 20px;
-    font-style: italic;
-    color: #1159A2;
-    text-align: center;
-    margin-bottom: 24px;
-  }
-  .footer-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .footer-url {
-    font-size: 14px;
-    color: #888;
-  }
-  .footer-row img { height: 110px; }
-
-  .stats-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-  }
-  .stat-box {
-    flex: 1 1 calc(50% - 14px);
-    max-width: calc(50% - 7px);
-    background: rgba(255,255,255,0.12);
-    border-radius: 14px;
-    padding: 24px 16px;
-    text-align: center;
-  }
-  .stat-num {
-    font-size: 38px;
-    font-weight: 800;
-  }
-  .stat-label {
-    font-size: 14px;
-    opacity: 0.7;
-    margin-top: 6px;
-  }
-"""
+# ═══════════════════════════════════════════════════════════════
+# POSTER 1: THE CONTRACT POSTER
+# ═══════════════════════════════════════════════════════════════
 
 POSTER1_HTML = f"""<!DOCTYPE html>
 <html>
 <head>
 <style>
-  {SHARED_CSS}
+  @page {{ size: 210mm 495mm; margin: 0; }}
+  * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+  body {{ font-family: Helvetica, Arial, sans-serif; width: 210mm; height: 495mm; color: #222; }}
 
-  .section-label {{
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    opacity: 0.7;
-    margin-bottom: 22px;
+  /* ── TOP BANNER (blue) ── */
+  .top-banner {{
+    background: #1159A2;
+    color: #fff;
+    padding: 36px 40px 32px;
+    text-align: center;
   }}
-  .headline {{
-    font-size: 44px;
-    font-weight: 800;
-    line-height: 1.15;
+  .top-banner img {{
+    height: 70px;
+    margin-bottom: 28px;
+  }}
+  .contract-quote {{
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.35;
     margin-bottom: 10px;
   }}
-  .headline-sub {{
-    font-size: 22px;
-    font-weight: 400;
-    opacity: 0.8;
-    margin-bottom: 14px;
+  .contract-attrib {{
+    font-size: 13px;
+    opacity: 0.65;
+    font-style: italic;
   }}
-  .desc {{
-    font-size: 17px;
-    line-height: 1.6;
-    opacity: 0.75;
-    margin-bottom: 32px;
+
+  /* ── SUB-HEADLINE (white) ── */
+  .sub-headline {{
+    background: #fff;
+    padding: 28px 40px;
+    text-align: center;
   }}
-  .price-card {{
-    background: rgba(255,255,255,0.12);
-    border-radius: 14px;
-    padding: 30px 34px;
-    margin-bottom: 34px;
-  }}
-  .price-big {{
-    font-size: 68px;
+  .sub-headline h2 {{
+    font-size: 26px;
     font-weight: 800;
-    display: inline;
+    color: #1159A2;
+    line-height: 1.3;
   }}
-  .price-period {{
-    font-size: 24px;
-    font-weight: 400;
-    margin-left: 12px;
+
+  /* ── TABLE SECTION (white) ── */
+  .table-section {{
+    background: #fff;
+    padding: 10px 40px 36px;
   }}
-  .price-details {{
-    font-size: 16px;
-    opacity: 0.75;
-    margin-top: 14px;
-    line-height: 1.7;
+  .req-table {{
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
   }}
-  .price-trial {{
+  .req-table th {{
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 14px;
+    text-align: left;
+    color: #888;
+  }}
+  .req-table td {{
+    padding: 18px 18px;
+    font-size: 15px;
+    line-height: 1.45;
+    vertical-align: top;
+  }}
+  .req-table tr td:first-child {{
+    background: #f0f4f8;
+    border-radius: 10px 0 0 10px;
+    font-weight: 700;
+    color: #333;
+    width: 45%;
+  }}
+  .req-table tr td:last-child {{
+    background: #1159A2;
+    color: #fff;
+    border-radius: 0 10px 10px 0;
+    font-weight: 600;
+  }}
+
+  /* ── BOTTOM STRIP (blue) ── */
+  .bottom-strip {{
+    background: #1159A2;
+    color: #fff;
+    padding: 30px 40px 20px;
+  }}
+  .strip-features {{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }}
+  .strip-feat {{
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+  }}
+  .strip-feat .dot {{
+    opacity: 0.5;
+    margin: 0 2px;
+  }}
+  .strip-url {{
+    text-align: center;
     font-size: 18px;
     font-weight: 700;
-    margin-top: 12px;
-    opacity: 0.9;
+    margin-bottom: 18px;
+  }}
+  .strip-qr {{
+    text-align: center;
+    font-size: 13px;
+    opacity: 0.7;
+    margin-bottom: 8px;
+  }}
+
+  /* ── FOOTER (white) ── */
+  .footer-white {{
+    background: #fff;
+    padding: 20px 40px;
+    border-top: 1px solid #e0e0e0;
+  }}
+  .footer-row {{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }}
+  .footer-url {{
+    font-size: 13px;
+    color: #999;
+  }}
+  .footer-row img {{
+    height: 110px;
   }}
 </style>
 </head>
 <body>
 
-<div class="top-bar">
+<div class="top-banner">
   <img src="{SN_LOGO}" alt="SMART navigation">
+  <div class="contract-quote">
+    &ldquo;From 1 April 2026, every clinically urgent<br>
+    request must be dealt with the same day.&rdquo;
+  </div>
+  <div class="contract-attrib">NHS England, GP Contract 2026/27</div>
 </div>
 
-<div class="blue-section">
-  <div class="section-label">STAGE 1: PRICING</div>
-  <div class="headline">Simple, transparent pricing</div>
-  <div class="headline-sub">designed for NHS primary care</div>
-  <div class="desc">
-    SMART Navigation Voice guides patients through structured,
-    clinician-designed triage pathways over the phone, safely and consistently.
-  </div>
-
-  <div class="price-card">
-    <div class="price-big">&pound;1,000</div>
-    <span class="price-period">per practice / year</span>
-    <div class="price-details">
-      Flat rate. No hidden or variable costs.<br>
-      Free technical support and updates included.
-    </div>
-    <div class="price-trial">\u2713 3 months free trial</div>
-  </div>
-
-  <div class="stats-grid">
-    <div class="stat-box">
-      <div class="stat-num">100+</div>
-      <div class="stat-label">Practices across England</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-num">500k+</div>
-      <div class="stat-label">Patients covered</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-num">79:1</div>
-      <div class="stat-label">Return on investment</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-num">&lt;&pound;3/day</div>
-      <div class="stat-label">For a 7,000 patient practice</div>
-    </div>
-  </div>
+<div class="sub-headline">
+  <h2>SMARTnavigation is how<br>EMIS practices deliver it.</h2>
 </div>
 
-<div class="white-section">
-  <h3>Stage 2: Ambient Voice Technology</h3>
-  <div class="bullet">
-    <div class="bullet-check">\u2713</div>
-    <div class="bullet-text">
-      <b>Receptionist-led patient triage</b>
-      <span>Patients speak directly to the system which guides them through safe navigation questions.</span>
-    </div>
+<div class="table-section">
+  <table class="req-table">
+    <tr>
+      <th>Contract requirement</th>
+      <th>How SMARTnavigation delivers it</th>
+    </tr>
+    <tr>
+      <td>Same-day urgent response</td>
+      <td>GP-designed, NICE CKS aligned triage from the first call</td>
+    </tr>
+    <tr>
+      <td>No &ldquo;call back tomorrow&rdquo;</td>
+      <td>Structured pathway on every contact, first time</td>
+    </tr>
+    <tr>
+      <td>Auditable same-day % for NHSE metrics</td>
+      <td>Every triage logged, GPAD-mapped</td>
+    </tr>
+    <tr>
+      <td>Online consultations uncapped</td>
+      <td>Reception-led navigation absorbs the 8am rush</td>
+    </tr>
+  </table>
+</div>
+
+<div class="bottom-strip">
+  <div class="strip-features">
+    <span class="strip-feat">EMIS Partner API &mdash; fully integrated</span>
+    <span class="strip-feat"><span class="dot">&bull;</span> Set up in 30 mins</span>
+    <span class="strip-feat"><span class="dot">&bull;</span> 3 months free</span>
+    <span class="strip-feat"><span class="dot">&bull;</span> 100+ practices</span>
+    <span class="strip-feat"><span class="dot">&bull;</span> 500k+ patients</span>
   </div>
-  <div class="bullet">
-    <div class="bullet-check">\u2713</div>
-    <div class="bullet-text">
-      <b>Reduce reception pressure</b>
-      <span>Free staff from lengthy triage calls.</span>
-    </div>
-  </div>
-  <div class="bullet">
-    <div class="bullet-check">\u2713</div>
-    <div class="bullet-text">
-      <b>Consistent, structured outcomes</b>
-      <span>Every patient assessed using the same safe pathways.</span>
-    </div>
-  </div>
-  <div class="bullet">
-    <div class="bullet-check">\u2713</div>
-    <div class="bullet-text">
-      <b>Built for NHS primary care</b>
-    </div>
-  </div>
+  <div class="strip-url">smartnavigation.co.uk</div>
+  <div class="strip-qr">\u25a1 Scan QR to book a demo</div>
 </div>
 
 <div class="footer-white">
-  <div class="tagline">Safer triage.<br>Less pressure on your practice.</div>
   <div class="footer-row">
     <span class="footer-url">smartnavigation.co.uk</span>
     <img src="{FF_LOGO}" alt="Fuller and Forbes Healthcare Group">
@@ -271,91 +221,181 @@ POSTER1_HTML = f"""<!DOCTYPE html>
 </body>
 </html>"""
 
+# ═══════════════════════════════════════════════════════════════
+# POSTER 2: THE PROOF POSTER
+# ═══════════════════════════════════════════════════════════════
+
 POSTER2_HTML = f"""<!DOCTYPE html>
 <html>
 <head>
 <style>
-  {SHARED_CSS}
+  @page {{ size: 210mm 495mm; margin: 0; }}
+  * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+  body {{ font-family: Helvetica, Arial, sans-serif; width: 210mm; height: 495mm; color: #222; }}
 
-  .emis-badge {{
-    background: rgba(255,255,255,0.15);
-    border-radius: 12px;
-    padding: 18px 28px;
+  /* ── TOP BAR (white) ── */
+  .top-bar {{
+    background: #fff;
+    padding: 36px 40px 24px;
     text-align: center;
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 32px;
   }}
-  .case-label {{
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    opacity: 0.7;
-    margin-bottom: 14px;
-  }}
-  .case-sub {{
-    font-size: 16px;
-    opacity: 0.8;
-    text-align: center;
-    margin-bottom: 28px;
-  }}
-  .big-stat {{
-    text-align: center;
+  .top-bar img {{
+    height: 70px;
     margin-bottom: 16px;
   }}
-  .big-stat-num {{
+  .strapline {{
+    font-size: 24px;
+    font-weight: 800;
+    color: #1159A2;
+  }}
+
+  /* ── HERO STAT SECTION (blue) ── */
+  .hero-section {{
+    background: #1159A2;
+    color: #fff;
+    padding: 40px 40px 44px;
+    text-align: center;
+  }}
+  .case-label {{
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    opacity: 0.6;
+    margin-bottom: 6px;
+  }}
+  .case-sub {{
+    font-size: 14px;
+    opacity: 0.7;
+    margin-bottom: 24px;
+  }}
+  .hero-num {{
     font-size: 120px;
     font-weight: 800;
     line-height: 1;
   }}
-  .big-stat-text {{
+  .hero-text {{
     font-size: 22px;
     font-weight: 700;
-    margin-top: 12px;
-  }}
-  .big-stat-sub {{
-    font-size: 14px;
-    opacity: 0.7;
     margin-top: 10px;
+    margin-bottom: 28px;
   }}
+
+  /* Breakdown */
   .breakdown {{
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 24px;
-    margin-bottom: 10px;
+    margin-bottom: 28px;
   }}
-  .breakdown-box {{
+  .bd-box {{
     flex: 1 1 calc(50% - 10px);
     max-width: calc(50% - 5px);
     background: rgba(255,255,255,0.12);
     border-radius: 12px;
-    padding: 18px 12px;
+    padding: 16px 10px;
     text-align: center;
   }}
-  .breakdown-box .num {{
-    font-size: 30px;
+  .bd-box .num {{
+    font-size: 32px;
     font-weight: 800;
   }}
-  .breakdown-box .lbl {{
-    font-size: 12px;
+  .bd-box .lbl {{
+    font-size: 13px;
     opacity: 0.7;
     margin-top: 4px;
   }}
-  .stats-row {{
+
+  /* Impact row */
+  .impact-row {{
     display: flex;
-    gap: 12px;
-    margin-top: 14px;
+    gap: 10px;
   }}
-  .stats-row .stat-box {{
+  .impact-box {{
     flex: 1;
-    padding: 18px 10px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 16px 8px;
+    text-align: center;
   }}
-  .stats-row .stat-num {{
+  .impact-box .num {{
+    font-size: 24px;
+    font-weight: 800;
+  }}
+  .impact-box .lbl {{
+    font-size: 10px;
+    opacity: 0.7;
+    margin-top: 4px;
+    line-height: 1.3;
+  }}
+
+  /* ── TESTIMONIAL (white) ── */
+  .testimonial {{
+    background: #fff;
+    padding: 36px 40px;
+  }}
+  .quote-text {{
+    font-size: 19px;
+    font-style: italic;
+    color: #333;
+    line-height: 1.5;
+    margin-bottom: 14px;
+    position: relative;
+    padding-left: 24px;
+    border-left: 4px solid #1159A2;
+  }}
+  .quote-attr {{
+    font-size: 14px;
+    color: #888;
+    padding-left: 28px;
+  }}
+  .quote-attr strong {{
+    color: #333;
+  }}
+
+  /* ── PRICING STRIP (blue) ── */
+  .pricing-strip {{
+    background: #1159A2;
+    color: #fff;
+    padding: 28px 40px;
+    text-align: center;
+  }}
+  .pricing-main {{
     font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 8px;
   }}
-  .stats-row .stat-label {{
-    font-size: 11px;
+  .pricing-details {{
+    font-size: 15px;
+    opacity: 0.8;
+    margin-bottom: 16px;
+  }}
+  .pricing-url {{
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }}
+  .pricing-qr {{
+    font-size: 13px;
+    opacity: 0.7;
+  }}
+
+  /* ── FOOTER (white) ── */
+  .footer-white {{
+    background: #fff;
+    padding: 20px 40px;
+    border-top: 1px solid #e0e0e0;
+  }}
+  .footer-row {{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }}
+  .footer-url {{
+    font-size: 13px;
+    color: #999;
+  }}
+  .footer-row img {{
+    height: 110px;
   }}
 </style>
 </head>
@@ -363,95 +403,74 @@ POSTER2_HTML = f"""<!DOCTYPE html>
 
 <div class="top-bar">
   <img src="{SN_LOGO}" alt="SMART navigation">
+  <div class="strapline">Contract-ready. Already proven.</div>
 </div>
 
-<div class="blue-section">
-  <div class="emis-badge">EMIS Partner API \u2014 Fully Integrated</div>
-
+<div class="hero-section">
   <div class="case-label">12-MONTH CASE STUDY</div>
   <div class="case-sub">April 2024 \u2013 March 2025 &bull; 17 practices &bull; 152,508 patients triaged</div>
 
-  <div class="big-stat">
-    <div class="big-stat-num">47%</div>
-    <div class="big-stat-text">of patients redirected<br>away from the GP</div>
-  </div>
+  <div class="hero-num">47%</div>
+  <div class="hero-text">of patients safely redirected<br>away from the GP</div>
 
   <div class="breakdown">
-    <div class="breakdown-box">
+    <div class="bd-box">
       <div class="num">15%</div>
-      <div class="lbl">to eConsultations</div>
+      <div class="lbl">eConsultations</div>
     </div>
-    <div class="breakdown-box">
+    <div class="bd-box">
       <div class="num">12%</div>
-      <div class="lbl">to Community Pharmacy</div>
+      <div class="lbl">Community Pharmacy</div>
     </div>
-    <div class="breakdown-box">
+    <div class="bd-box">
       <div class="num">11%</div>
-      <div class="lbl">to other clinicians<br>(Nurse, HCA)</div>
+      <div class="lbl">Other clinicians<br>(Nurse, HCA)</div>
     </div>
-    <div class="breakdown-box">
+    <div class="bd-box">
       <div class="num">9%</div>
-      <div class="lbl">to A&amp;E / Walk-in</div>
+      <div class="lbl">A&amp;E / Walk-in</div>
     </div>
   </div>
 
-  <div class="stats-row">
-    <div class="stat-box">
-      <div class="stat-num">&pound;1.36M</div>
-      <div class="stat-label">GP cost<br>reallocated</div>
+  <div class="impact-row">
+    <div class="impact-box">
+      <div class="num">&pound;1.36M</div>
+      <div class="lbl">GP cost<br>reallocated</div>
     </div>
-    <div class="stat-box">
-      <div class="stat-num">71,679</div>
-      <div class="stat-label">GP appointments<br>avoided</div>
+    <div class="impact-box">
+      <div class="num">71,679</div>
+      <div class="lbl">GP appts<br>avoided</div>
     </div>
-    <div class="stat-box">
-      <div class="stat-num">79:1</div>
-      <div class="stat-label">ROI for a 7,000<br>patient practice</div>
+    <div class="impact-box">
+      <div class="num">17,920</div>
+      <div class="lbl">GP hours<br>saved</div>
+    </div>
+    <div class="impact-box">
+      <div class="num">79:1</div>
+      <div class="lbl">ROI</div>
     </div>
   </div>
 </div>
 
-<div class="white-section">
-  <h3>Overview</h3>
-  <div class="bullet">
-    <div class="bullet-check">\u2713</div>
-    <div class="bullet-text">
-      <b>Receptionist-led patient triage</b>
-      <span>Structured, GP-designed scripts guide your reception team to direct patients to the right care, first time.</span>
-    </div>
+<div class="testimonial">
+  <div class="quote-text">
+    &ldquo;We don&rsquo;t get the same 8am rush anymore&hellip;
+    reception feel safer and more confident.&rdquo;
   </div>
-  <div class="bullet">
-    <div class="bullet-check">\u2713</div>
-    <div class="bullet-text">
-      <b>Replaces the duty doctor system</b>
-      <span>Frees GPs and makes better use of the whole practice team.</span>
-    </div>
+  <div class="quote-attr">
+    <strong>Adam Bolton</strong>, Practice Manager<br>
+    Bramley Surgery, Leeds
   </div>
-  <div class="bullet">
-    <div class="bullet-check">\u2713</div>
-    <div class="bullet-text">
-      <b>NICE CKS aligned guidance</b>
-      <span>Every pathway reviewed by GP clinical leads and aligned with NICE guidance.</span>
-    </div>
-  </div>
-  <div class="bullet">
-    <div class="bullet-check">\u2713</div>
-    <div class="bullet-text">
-      <b>2026/27 GP contract ready</b>
-      <span>Safe, consistent, auditable process for same-day access and care navigation.</span>
-    </div>
-  </div>
-  <div class="bullet">
-    <div class="bullet-check">\u2713</div>
-    <div class="bullet-text">
-      <b>Set up in 30 minutes</b>
-      <span>Your reception team begins using structured triage immediately.</span>
-    </div>
-  </div>
+</div>
+
+<div class="pricing-strip">
+  <div class="pricing-main">&pound;1,000 / practice / year</div>
+  <div class="pricing-details">3 months free trial &bull; EMIS Partner API integrated</div>
+  <div class="pricing-url">smartnavigation.co.uk</div>
+  <div class="pricing-qr">\u25a1 Scan QR to book a demo</div>
 </div>
 
 <div class="footer-white">
-  <div class="tagline">Safer triage.<br>Less pressure on your practice.</div>
   <div class="footer-row">
     <span class="footer-url">smartnavigation.co.uk</span>
     <img src="{FF_LOGO}" alt="Fuller and Forbes Healthcare Group">
