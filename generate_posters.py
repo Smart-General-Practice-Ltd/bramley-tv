@@ -29,8 +29,8 @@ def make_qr(url, fill='#1159A2', back='white'):
 
 SN_LOGO = img_to_data_uri(os.path.join(LOGO_DIR, "smartnavigation.logo.png"))
 FF_LOGO = img_to_data_uri(os.path.join(LOGO_DIR, "Forbes and Fuller Transparent 3.png"))
-QR_BLUE = make_qr('https://smartnavigation.co.uk/contact', fill='#1159A2', back='white')
-QR_WHITE = make_qr('https://smartnavigation.co.uk/contact', fill='white', back='#0e4d8e')
+QR_BLUE = make_qr('https://smartnavigation.co.uk', fill='#1159A2', back='white')
+QR_WHITE = make_qr('https://smartnavigation.co.uk', fill='white', back='#0e4d8e')
 
 # ═══════════════════════════════════════════════════════════════
 # POSTER 1: THE CONTRACT POSTER
