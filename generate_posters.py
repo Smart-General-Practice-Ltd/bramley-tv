@@ -2,6 +2,7 @@
 """Generate two SMART Navigation posters as HTML->PDF.
 Poster 1: The Contract Poster
 Poster 2: The Proof Poster
+Size: 800mm x 2000mm (roll-up banner)
 All stats from smartnavigation.co.uk."""
 import os
 from weasyprint import HTML
@@ -25,75 +26,72 @@ POSTER1_HTML = f"""<!DOCTYPE html>
 <html>
 <head>
 <style>
-  @page {{ size: 210mm 495mm; margin: 0; }}
+  @page {{ size: 800mm 2000mm; margin: 0; }}
   * {{ margin: 0; padding: 0; box-sizing: border-box; }}
-  body {{ font-family: Helvetica, Arial, sans-serif; width: 210mm; height: 495mm; color: #222; }}
+  body {{ font-family: Helvetica, Arial, sans-serif; width: 800mm; height: 2000mm; color: #222; }}
 
-  /* ── TOP BANNER (white with blue text) ── */
   .top-banner {{
     background: #fff;
     color: #1159A2;
-    padding: 36px 40px 32px;
+    padding: 140px 160px 120px;
     text-align: center;
   }}
   .top-banner img {{
-    height: 70px;
-    margin-bottom: 28px;
+    height: 280px;
+    margin-bottom: 100px;
   }}
   .contract-quote {{
-    font-size: 22px;
+    font-size: 82px;
     font-weight: 700;
-    line-height: 1.35;
-    margin-bottom: 10px;
+    line-height: 1.3;
+    margin-bottom: 36px;
     color: #222;
   }}
   .contract-attrib {{
-    font-size: 13px;
+    font-size: 48px;
     color: #888;
     font-style: italic;
   }}
 
-  /* ── SUB-HEADLINE (white) ── */
   .sub-headline {{
     background: #fff;
-    padding: 28px 40px;
+    padding: 100px 160px;
     text-align: center;
   }}
   .sub-headline h2 {{
-    font-size: 26px;
+    font-size: 100px;
     font-weight: 800;
     color: #1159A2;
-    line-height: 1.3;
+    line-height: 1.25;
   }}
 
-  /* ── TABLE SECTION (white) ── */
   .table-section {{
     background: #fff;
-    padding: 10px 40px 36px;
+    padding: 40px 160px 140px;
   }}
   .req-table {{
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 10px;
+    border-spacing: 0 36px;
   }}
   .req-table th {{
-    font-size: 13px;
+    font-size: 48px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 10px 14px;
+    letter-spacing: 4px;
+    padding: 36px 50px;
     text-align: left;
     color: #888;
   }}
   .req-table td {{
-    padding: 18px 18px;
-    font-size: 15px;
-    line-height: 1.45;
+    padding: 65px 65px;
+    font-size: 56px;
+    line-height: 1.4;
     vertical-align: top;
   }}
   .req-table tr td:first-child {{
     background: #f0f4f8;
-    border-radius: 10px 0 0 10px;
+    border-radius: 36px 0 0 36px;
     font-weight: 700;
     color: #333;
     width: 45%;
@@ -101,50 +99,46 @@ POSTER1_HTML = f"""<!DOCTYPE html>
   .req-table tr td:last-child {{
     background: #1159A2;
     color: #fff;
-    border-radius: 0 10px 10px 0;
+    border-radius: 0 36px 36px 0;
     font-weight: 600;
   }}
 
-  /* ── BOTTOM STRIP (blue) ── */
   .bottom-strip {{
     background: #1159A2;
     color: #fff;
-    padding: 30px 40px 20px;
+    padding: 110px 160px 80px;
   }}
   .strip-features {{
     display: flex;
     flex-wrap: wrap;
-    gap: 8px 20px;
+    gap: 30px 70px;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 70px;
   }}
   .strip-feat {{
-    font-size: 14px;
+    font-size: 52px;
     font-weight: 600;
-    white-space: nowrap;
   }}
   .strip-feat .dot {{
     opacity: 0.5;
-    margin: 0 2px;
+    margin: 0 8px;
   }}
   .strip-url {{
     text-align: center;
-    font-size: 18px;
+    font-size: 68px;
     font-weight: 700;
-    margin-bottom: 18px;
+    margin-bottom: 60px;
   }}
   .strip-qr {{
     text-align: center;
-    font-size: 13px;
+    font-size: 48px;
     opacity: 0.7;
-    margin-bottom: 8px;
   }}
 
-  /* ── FOOTER (white) ── */
   .footer-white {{
     background: #fff;
-    padding: 20px 40px;
-    border-top: 1px solid #e0e0e0;
+    padding: 70px 160px;
+    border-top: 3px solid #e0e0e0;
   }}
   .footer-row {{
     display: flex;
@@ -152,11 +146,11 @@ POSTER1_HTML = f"""<!DOCTYPE html>
     align-items: center;
   }}
   .footer-url {{
-    font-size: 13px;
+    font-size: 48px;
     color: #999;
   }}
   .footer-row img {{
-    height: 110px;
+    height: 400px;
   }}
 </style>
 </head>
@@ -165,7 +159,7 @@ POSTER1_HTML = f"""<!DOCTYPE html>
 <div class="top-banner">
   <img src="{SN_LOGO}" alt="SMART navigation">
   <div class="contract-quote">
-    &ldquo;From 1 April 2026, every clinically urgent<br>
+    &ldquo;From 1 April 2026, every clinically urgent
     request must be dealt with the same day.&rdquo;
   </div>
   <div class="contract-attrib">NHS England, GP Contract 2026/27</div>
@@ -230,161 +224,153 @@ POSTER2_HTML = f"""<!DOCTYPE html>
 <html>
 <head>
 <style>
-  @page {{ size: 210mm 495mm; margin: 0; }}
+  @page {{ size: 800mm 2000mm; margin: 0; }}
   * {{ margin: 0; padding: 0; box-sizing: border-box; }}
-  body {{ font-family: Helvetica, Arial, sans-serif; width: 210mm; height: 495mm; color: #222; }}
+  body {{ font-family: Helvetica, Arial, sans-serif; width: 800mm; height: 2000mm; color: #222; }}
 
-  /* ── TOP BAR (white) ── */
   .top-bar {{
     background: #fff;
-    padding: 40px 40px 28px;
+    padding: 140px 160px 100px;
     text-align: center;
   }}
   .top-bar img {{
-    height: 80px;
-    margin-bottom: 18px;
+    height: 300px;
+    margin-bottom: 60px;
   }}
   .strapline {{
-    font-size: 26px;
+    font-size: 100px;
     font-weight: 800;
     color: #1159A2;
   }}
 
-  /* ── HERO STAT SECTION (blue) ── */
   .hero-section {{
     background: #1159A2;
     color: #fff;
-    padding: 40px 40px 44px;
+    padding: 140px 160px 160px;
     text-align: center;
   }}
   .case-label {{
-    font-size: 13px;
+    font-size: 48px;
     font-weight: 700;
-    letter-spacing: 1.5px;
+    letter-spacing: 6px;
     opacity: 0.6;
-    margin-bottom: 6px;
+    margin-bottom: 20px;
   }}
   .case-sub {{
-    font-size: 14px;
+    font-size: 48px;
     opacity: 0.7;
-    margin-bottom: 24px;
+    margin-bottom: 80px;
   }}
   .hero-num {{
-    font-size: 120px;
+    font-size: 440px;
     font-weight: 800;
     line-height: 1;
   }}
   .hero-text {{
-    font-size: 22px;
+    font-size: 80px;
     font-weight: 700;
-    margin-top: 10px;
-    margin-bottom: 28px;
+    margin-top: 36px;
+    margin-bottom: 100px;
   }}
 
-  /* Breakdown */
   .breakdown {{
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 28px;
+    gap: 36px;
+    margin-bottom: 100px;
   }}
   .bd-box {{
-    flex: 1 1 calc(50% - 10px);
-    max-width: calc(50% - 5px);
+    flex: 1 1 calc(50% - 36px);
+    max-width: calc(50% - 18px);
     background: rgba(255,255,255,0.12);
-    border-radius: 12px;
-    padding: 16px 10px;
+    border-radius: 40px;
+    padding: 60px 36px;
     text-align: center;
   }}
   .bd-box .num {{
-    font-size: 32px;
+    font-size: 120px;
     font-weight: 800;
   }}
   .bd-box .lbl {{
-    font-size: 13px;
+    font-size: 48px;
     opacity: 0.7;
-    margin-top: 4px;
+    margin-top: 16px;
   }}
 
-  /* Impact row */
   .impact-row {{
     display: flex;
-    gap: 10px;
+    gap: 36px;
   }}
   .impact-box {{
     flex: 1;
     background: rgba(255,255,255,0.12);
-    border-radius: 12px;
-    padding: 16px 8px;
+    border-radius: 40px;
+    padding: 56px 28px;
     text-align: center;
   }}
   .impact-box .num {{
-    font-size: 24px;
+    font-size: 88px;
     font-weight: 800;
   }}
   .impact-box .lbl {{
-    font-size: 10px;
+    font-size: 38px;
     opacity: 0.7;
-    margin-top: 4px;
+    margin-top: 16px;
     line-height: 1.3;
   }}
 
-  /* ── TESTIMONIAL (white) ── */
   .testimonial {{
     background: #fff;
-    padding: 36px 40px;
+    padding: 130px 160px;
   }}
   .quote-text {{
-    font-size: 19px;
+    font-size: 72px;
     font-style: italic;
     color: #333;
-    line-height: 1.5;
-    margin-bottom: 14px;
-    position: relative;
-    padding-left: 24px;
-    border-left: 4px solid #1159A2;
+    line-height: 1.45;
+    margin-bottom: 50px;
+    padding-left: 80px;
+    border-left: 14px solid #1159A2;
   }}
   .quote-attr {{
-    font-size: 14px;
+    font-size: 52px;
     color: #888;
-    padding-left: 28px;
+    padding-left: 94px;
   }}
   .quote-attr strong {{
     color: #333;
   }}
 
-  /* ── PRICING STRIP (blue) ── */
   .pricing-strip {{
     background: #1159A2;
     color: #fff;
-    padding: 28px 40px;
+    padding: 100px 160px;
     text-align: center;
   }}
   .pricing-main {{
-    font-size: 28px;
+    font-size: 105px;
     font-weight: 800;
-    margin-bottom: 8px;
+    margin-bottom: 30px;
   }}
   .pricing-details {{
-    font-size: 15px;
+    font-size: 56px;
     opacity: 0.8;
-    margin-bottom: 16px;
+    margin-bottom: 56px;
   }}
   .pricing-url {{
-    font-size: 18px;
+    font-size: 68px;
     font-weight: 700;
-    margin-bottom: 12px;
+    margin-bottom: 40px;
   }}
   .pricing-qr {{
-    font-size: 13px;
+    font-size: 48px;
     opacity: 0.7;
   }}
 
-  /* ── FOOTER (white) ── */
   .footer-white {{
     background: #fff;
-    padding: 20px 40px;
-    border-top: 1px solid #e0e0e0;
+    padding: 70px 160px;
+    border-top: 3px solid #e0e0e0;
   }}
   .footer-row {{
     display: flex;
@@ -392,11 +378,11 @@ POSTER2_HTML = f"""<!DOCTYPE html>
     align-items: center;
   }}
   .footer-url {{
-    font-size: 13px;
+    font-size: 48px;
     color: #999;
   }}
   .footer-row img {{
-    height: 110px;
+    height: 400px;
   }}
 </style>
 </head>
