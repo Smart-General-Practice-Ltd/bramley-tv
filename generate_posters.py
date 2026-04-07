@@ -2,7 +2,7 @@
 """Generate two SMART Navigation posters as HTML->PDF.
 Poster 1: The Contract Poster
 Poster 2: The Proof Poster
-Size: 800mm x 2000mm (roll-up banner)
+Size: 800mm x 2000mm (roll-up banner) - content fills full height.
 All stats from smartnavigation.co.uk."""
 import os
 from weasyprint import HTML
@@ -18,7 +18,7 @@ def img_to_data_uri(path):
     return f"data:image/png;base64,{data}"
 
 def make_qr(url, fill='#1159A2', back='white'):
-    qr = qrcode.QRCode(version=1, box_size=10, border=2)
+    qr = qrcode.QRCode(version=1, box_size=20, border=2)
     qr.add_data(url)
     qr.make(fit=True)
     img = qr.make_image(fill_color=fill, back_color=back)
@@ -46,34 +46,33 @@ POSTER1_HTML = f"""<!DOCTYPE html>
 
   .top-banner {{
     background: #fff;
-    color: #1159A2;
-    padding: 140px 160px 120px;
+    padding: 120px 140px 100px;
     text-align: center;
   }}
   .top-banner img {{
-    height: 280px;
-    margin-bottom: 100px;
+    height: 500px;
+    margin-bottom: 120px;
   }}
   .contract-quote {{
-    font-size: 82px;
+    font-size: 150px;
     font-weight: 700;
     line-height: 1.3;
-    margin-bottom: 36px;
+    margin-bottom: 60px;
     color: #222;
   }}
   .contract-attrib {{
-    font-size: 48px;
+    font-size: 80px;
     color: #888;
     font-style: italic;
   }}
 
   .sub-headline {{
     background: #1159A2;
-    padding: 100px 160px;
+    padding: 160px 140px;
     text-align: center;
   }}
   .sub-headline h2 {{
-    font-size: 100px;
+    font-size: 160px;
     font-weight: 800;
     color: #fff;
     line-height: 1.25;
@@ -81,31 +80,31 @@ POSTER1_HTML = f"""<!DOCTYPE html>
 
   .table-section {{
     background: #1159A2;
-    padding: 40px 160px 140px;
+    padding: 60px 140px 160px;
   }}
   .req-table {{
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 36px;
+    border-spacing: 0 50px;
   }}
   .req-table th {{
-    font-size: 48px;
+    font-size: 70px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 4px;
-    padding: 36px 50px;
+    letter-spacing: 6px;
+    padding: 50px 70px;
     text-align: left;
     color: rgba(255,255,255,0.6);
   }}
   .req-table td {{
-    padding: 65px 65px;
-    font-size: 56px;
-    line-height: 1.4;
+    padding: 90px 90px;
+    font-size: 80px;
+    line-height: 1.35;
     vertical-align: top;
   }}
   .req-table tr td:first-child {{
     background: rgba(255,255,255,0.1);
-    border-radius: 36px 0 0 36px;
+    border-radius: 50px 0 0 50px;
     font-weight: 700;
     color: #fff;
     width: 45%;
@@ -113,54 +112,55 @@ POSTER1_HTML = f"""<!DOCTYPE html>
   .req-table tr td:last-child {{
     background: rgba(255,255,255,0.2);
     color: #fff;
-    border-radius: 0 36px 36px 0;
+    border-radius: 0 50px 50px 0;
     font-weight: 600;
   }}
 
   .bottom-strip {{
-    background: #1159A2;
-    color: #fff;
-    padding: 110px 160px 80px;
+    background: #fff;
+    color: #222;
+    padding: 140px 140px 100px;
+    text-align: center;
   }}
   .strip-features {{
     display: flex;
     flex-wrap: wrap;
-    gap: 30px 70px;
+    gap: 40px 80px;
     justify-content: center;
-    margin-bottom: 70px;
+    margin-bottom: 100px;
   }}
   .strip-feat {{
-    font-size: 52px;
+    font-size: 72px;
     font-weight: 600;
+    color: #1159A2;
   }}
   .strip-feat .dot {{
     opacity: 0.5;
-    margin: 0 8px;
+    margin: 0 10px;
   }}
   .strip-url {{
-    text-align: center;
-    font-size: 68px;
+    font-size: 100px;
     font-weight: 700;
-    margin-bottom: 60px;
+    color: #1159A2;
+    margin-bottom: 80px;
   }}
   .strip-qr {{
     text-align: center;
-    margin-top: 40px;
   }}
   .strip-qr img {{
-    height: 280px;
-    border-radius: 20px;
+    height: 500px;
+    border-radius: 30px;
   }}
   .strip-qr-label {{
-    font-size: 44px;
-    opacity: 0.7;
-    margin-top: 20px;
+    font-size: 64px;
+    color: #888;
+    margin-top: 40px;
   }}
 
   .footer-white {{
     background: #fff;
-    padding: 70px 160px;
-    border-top: 3px solid #e0e0e0;
+    padding: 80px 140px;
+    border-top: 4px solid #e0e0e0;
   }}
   .footer-row {{
     display: flex;
@@ -168,11 +168,11 @@ POSTER1_HTML = f"""<!DOCTYPE html>
     align-items: center;
   }}
   .footer-url {{
-    font-size: 48px;
+    font-size: 64px;
     color: #999;
   }}
   .footer-row img {{
-    height: 400px;
+    height: 500px;
   }}
 </style>
 </head>
@@ -255,15 +255,15 @@ POSTER2_HTML = f"""<!DOCTYPE html>
 
   .top-bar {{
     background: #fff;
-    padding: 140px 160px 100px;
+    padding: 120px 140px 100px;
     text-align: center;
   }}
   .top-bar img {{
-    height: 300px;
-    margin-bottom: 60px;
+    height: 500px;
+    margin-bottom: 80px;
   }}
   .strapline {{
-    font-size: 100px;
+    font-size: 160px;
     font-weight: 800;
     color: #1159A2;
   }}
@@ -271,96 +271,96 @@ POSTER2_HTML = f"""<!DOCTYPE html>
   .hero-section {{
     background: #1159A2;
     color: #fff;
-    padding: 140px 160px 160px;
+    padding: 160px 140px 180px;
     text-align: center;
   }}
   .case-label {{
-    font-size: 48px;
+    font-size: 72px;
     font-weight: 700;
-    letter-spacing: 6px;
+    letter-spacing: 8px;
     opacity: 0.6;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }}
   .case-sub {{
-    font-size: 48px;
+    font-size: 64px;
     opacity: 0.7;
-    margin-bottom: 80px;
+    margin-bottom: 120px;
   }}
   .hero-num {{
-    font-size: 440px;
+    font-size: 700px;
     font-weight: 800;
-    line-height: 1;
+    line-height: 0.9;
   }}
   .hero-text {{
-    font-size: 80px;
+    font-size: 120px;
     font-weight: 700;
-    margin-top: 36px;
-    margin-bottom: 100px;
+    margin-top: 60px;
+    margin-bottom: 140px;
   }}
 
   .breakdown {{
     display: flex;
     flex-wrap: wrap;
-    gap: 36px;
-    margin-bottom: 100px;
+    gap: 50px;
+    margin-bottom: 120px;
   }}
   .bd-box {{
-    flex: 1 1 calc(50% - 36px);
-    max-width: calc(50% - 18px);
+    flex: 1 1 calc(50% - 50px);
+    max-width: calc(50% - 25px);
     background: rgba(255,255,255,0.12);
-    border-radius: 40px;
-    padding: 60px 36px;
+    border-radius: 60px;
+    padding: 80px 50px;
     text-align: center;
   }}
   .bd-box .num {{
-    font-size: 120px;
+    font-size: 180px;
     font-weight: 800;
   }}
   .bd-box .lbl {{
-    font-size: 48px;
+    font-size: 64px;
     opacity: 0.7;
-    margin-top: 16px;
+    margin-top: 20px;
   }}
 
   .impact-row {{
     display: flex;
-    gap: 36px;
+    gap: 50px;
   }}
   .impact-box {{
     flex: 1;
     background: rgba(255,255,255,0.12);
-    border-radius: 40px;
-    padding: 56px 28px;
+    border-radius: 60px;
+    padding: 80px 40px;
     text-align: center;
   }}
   .impact-box .num {{
-    font-size: 88px;
+    font-size: 130px;
     font-weight: 800;
   }}
   .impact-box .lbl {{
-    font-size: 38px;
+    font-size: 52px;
     opacity: 0.7;
-    margin-top: 16px;
+    margin-top: 20px;
     line-height: 1.3;
   }}
 
   .testimonial {{
     background: #fff;
-    padding: 130px 160px;
+    padding: 160px 140px;
   }}
   .quote-text {{
-    font-size: 72px;
+    font-size: 100px;
     font-style: italic;
     color: #333;
     line-height: 1.45;
-    margin-bottom: 50px;
-    padding-left: 80px;
-    border-left: 14px solid #1159A2;
+    margin-bottom: 80px;
+    padding-left: 100px;
+    border-left: 18px solid #1159A2;
   }}
   .quote-attr {{
-    font-size: 52px;
+    font-size: 72px;
     color: #888;
-    padding-left: 94px;
+    padding-left: 118px;
   }}
   .quote-attr strong {{
     color: #333;
@@ -369,33 +369,39 @@ POSTER2_HTML = f"""<!DOCTYPE html>
   .pricing-strip {{
     background: #1159A2;
     color: #fff;
-    padding: 100px 160px;
+    padding: 140px 140px 160px;
     text-align: center;
   }}
   .pricing-main {{
-    font-size: 105px;
+    font-size: 160px;
     font-weight: 800;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
   }}
   .pricing-details {{
-    font-size: 56px;
+    font-size: 80px;
     opacity: 0.8;
-    margin-bottom: 56px;
+    margin-bottom: 80px;
   }}
   .pricing-url {{
-    font-size: 68px;
+    font-size: 100px;
     font-weight: 700;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
   }}
-  .pricing-qr {{
-    font-size: 48px;
+  .pricing-qr img {{
+    height: 500px;
+    border-radius: 30px;
+    margin-top: 40px;
+  }}
+  .pricing-qr-label {{
+    font-size: 64px;
     opacity: 0.7;
+    margin-top: 40px;
   }}
 
   .footer-white {{
     background: #fff;
-    padding: 70px 160px;
-    border-top: 3px solid #e0e0e0;
+    padding: 80px 140px;
+    border-top: 4px solid #e0e0e0;
   }}
   .footer-row {{
     display: flex;
@@ -403,11 +409,11 @@ POSTER2_HTML = f"""<!DOCTYPE html>
     align-items: center;
   }}
   .footer-url {{
-    font-size: 48px;
+    font-size: 64px;
     color: #999;
   }}
   .footer-row img {{
-    height: 400px;
+    height: 500px;
   }}
 </style>
 </head>
@@ -480,8 +486,8 @@ POSTER2_HTML = f"""<!DOCTYPE html>
   <div class="pricing-details">3 month free trial &bull; EMIS Partner API integrated</div>
   <div class="pricing-url">smartnavigation.co.uk</div>
   <div class="pricing-qr">
-    <img src="{QR_BLUE}" alt="QR code" style="height:280px; border-radius:20px; margin-top:30px;"><br>
-    <div style="font-size:44px; opacity:0.7; margin-top:20px;">Scan to book a demo</div>
+    <img src="{QR_BLUE}" alt="QR code"><br>
+    <div class="pricing-qr-label">Scan to book a demo</div>
   </div>
 </div>
 
