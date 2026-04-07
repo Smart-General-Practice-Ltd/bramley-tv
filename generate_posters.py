@@ -29,10 +29,10 @@ POSTER1_HTML = f"""<!DOCTYPE html>
   * {{ margin: 0; padding: 0; box-sizing: border-box; }}
   body {{ font-family: Helvetica, Arial, sans-serif; width: 210mm; height: 495mm; color: #222; }}
 
-  /* ── TOP BANNER (blue) ── */
+  /* ── TOP BANNER (white with blue text) ── */
   .top-banner {{
-    background: #1159A2;
-    color: #fff;
+    background: #fff;
+    color: #1159A2;
     padding: 36px 40px 32px;
     text-align: center;
   }}
@@ -45,10 +45,11 @@ POSTER1_HTML = f"""<!DOCTYPE html>
     font-weight: 700;
     line-height: 1.35;
     margin-bottom: 10px;
+    color: #222;
   }}
   .contract-attrib {{
     font-size: 13px;
-    opacity: 0.65;
+    color: #888;
     font-style: italic;
   }}
 
@@ -236,15 +237,15 @@ POSTER2_HTML = f"""<!DOCTYPE html>
   /* ── TOP BAR (white) ── */
   .top-bar {{
     background: #fff;
-    padding: 36px 40px 24px;
+    padding: 40px 40px 28px;
     text-align: center;
   }}
   .top-bar img {{
-    height: 70px;
-    margin-bottom: 16px;
+    height: 80px;
+    margin-bottom: 18px;
   }}
   .strapline {{
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 800;
     color: #1159A2;
   }}
