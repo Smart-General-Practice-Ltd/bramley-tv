@@ -54,19 +54,19 @@ POSTER1_HTML = f"""<!DOCTYPE html>
   }}
 
   .sub-headline {{
-    background: #fff;
+    background: #1159A2;
     padding: 100px 160px;
     text-align: center;
   }}
   .sub-headline h2 {{
     font-size: 100px;
     font-weight: 800;
-    color: #1159A2;
+    color: #fff;
     line-height: 1.25;
   }}
 
   .table-section {{
-    background: #fff;
+    background: #1159A2;
     padding: 40px 160px 140px;
   }}
   .req-table {{
@@ -81,7 +81,7 @@ POSTER1_HTML = f"""<!DOCTYPE html>
     letter-spacing: 4px;
     padding: 36px 50px;
     text-align: left;
-    color: #888;
+    color: rgba(255,255,255,0.6);
   }}
   .req-table td {{
     padding: 65px 65px;
@@ -90,14 +90,14 @@ POSTER1_HTML = f"""<!DOCTYPE html>
     vertical-align: top;
   }}
   .req-table tr td:first-child {{
-    background: #f0f4f8;
+    background: rgba(255,255,255,0.1);
     border-radius: 36px 0 0 36px;
     font-weight: 700;
-    color: #333;
+    color: #fff;
     width: 45%;
   }}
   .req-table tr td:last-child {{
-    background: #1159A2;
+    background: rgba(255,255,255,0.2);
     color: #fff;
     border-radius: 0 36px 36px 0;
     font-weight: 600;
