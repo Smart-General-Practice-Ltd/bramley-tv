@@ -210,7 +210,7 @@ POSTER1_HTML = f"""<!DOCTYPE html>
       <td>Every triage logged, GPAD-mapped</td>
     </tr>
     <tr>
-      <td>Online consultations uncapped</td>
+      <td>Manage uncapped online demand</td>
       <td>Reception-led navigation absorbs the 8am rush</td>
     </tr>
   </table>
