@@ -476,8 +476,8 @@ POSTER2_HTML = f"""<!DOCTYPE html>
     reception feel safer and more confident.&rdquo;
   </div>
   <div class="quote-attr">
-    <strong>Adam Bolton</strong>, Practice Manager<br>
-    Bramley Surgery, Leeds
+    <strong>Lucy McNaught</strong>, Practice Manager<br>
+    Briercliffe Medical Centre
   </div>
 </div>
 
