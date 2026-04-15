@@ -14,10 +14,10 @@
   /* Slide container */
   .slideshow { position: relative; width: 100%; height: 100%; }
   .slide {
-    position: absolute; top: 50px; left: 0; right: 0; bottom: 0;
+    position: absolute; top: 64px; left: 0; right: 0; bottom: 0;
     display: flex; align-items: center; justify-content: center;
     opacity: 0; transition: opacity 1.2s ease;
-    padding: 50px 80px 40px;
+    padding: 40px 70px 40px;
   }
   .slide.active { opacity: 1; z-index: 2; }
 
@@ -41,26 +41,26 @@
 
   /* NHS ticker */
   .ticker {
-    position: fixed; top: 0; left: 0; right: 0; height: 50px;
+    position: fixed; top: 0; left: 0; right: 0; height: 64px;
     background: #005EB8; display: flex; align-items: center; z-index: 100;
     overflow: hidden;
   }
   .ticker-content {
     display: flex; white-space: nowrap; animation: scroll-left 60s linear infinite;
-    color: #fff; font-size: 18px; font-weight: 500; gap: 80px;
+    color: #fff; font-size: 24px; font-weight: 500; gap: 90px;
   }
-  .ticker-content span { display: inline-flex; align-items: center; gap: 10px; }
-  .ticker-content span::before { content: '\2022'; color: #00A499; font-size: 24px; }
+  .ticker-content span { display: inline-flex; align-items: center; gap: 12px; }
+  .ticker-content span::before { content: '\2022'; color: #00A499; font-size: 30px; }
   @keyframes scroll-left {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
 
   /* Common elements */
-  h1 { font-size: 56px; font-weight: 800; line-height: 1.15; margin-bottom: 20px; }
-  h2 { font-size: 42px; font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
-  h3 { font-size: 28px; font-weight: 700; margin-bottom: 10px; }
-  p { font-size: 22px; line-height: 1.5; }
+  h1 { font-size: 72px; font-weight: 800; line-height: 1.15; margin-bottom: 22px; }
+  h2 { font-size: 54px; font-weight: 700; line-height: 1.2; margin-bottom: 18px; }
+  h3 { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+  p { font-size: 28px; line-height: 1.5; }
   .text-nhs { color: #005EB8; }
   .text-teal { color: #00A499; }
   .text-white { color: #fff; }
@@ -71,22 +71,22 @@
     background: linear-gradient(135deg, #0a1628 0%, #0d2137 50%, #0a1628 100%);
     flex-direction: column; text-align: center; color: #fff;
   }
-  .slide-welcome h1 { font-size: 64px; }
+  .slide-welcome h1 { font-size: 84px; }
   .slide-welcome h1 span { color: #00A499; }
   .slide-welcome .subtitle {
-    font-size: 26px; color: rgba(255,255,255,0.7); margin-top: 10px;
-    max-width: 900px;
+    font-size: 34px; color: rgba(255,255,255,0.7); margin-top: 14px;
+    max-width: 1100px;
   }
   .welcome-cards {
-    display: flex; gap: 30px; margin-top: 50px;
+    display: flex; gap: 32px; margin-top: 50px;
   }
   .welcome-card {
     background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 16px; padding: 30px 36px; text-align: center;
-    min-width: 220px;
+    border-radius: 16px; padding: 32px 40px; text-align: center;
+    min-width: 260px;
   }
-  .welcome-card .num { font-size: 44px; font-weight: 800; color: #00A499; }
-  .welcome-card .label { font-size: 17px; color: rgba(255,255,255,0.7); margin-top: 6px; }
+  .welcome-card .num { font-size: 56px; font-weight: 800; color: #00A499; }
+  .welcome-card .label { font-size: 22px; color: rgba(255,255,255,0.7); margin-top: 8px; }
 
   /* ─── SLIDE 2: Opening Hours ─── */
   .slide-hours {
@@ -97,21 +97,21 @@
   .hours-left { flex: 1; }
   .hours-right { flex: 1; }
   .hours-table {
-    width: 100%; border-collapse: collapse; margin-top: 20px;
-    font-size: 22px;
+    width: 100%; border-collapse: collapse; margin-top: 18px;
+    font-size: 28px;
   }
   .hours-table td {
-    padding: 14px 20px; border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 12px 18px; border-bottom: 1px solid rgba(0,0,0,0.08);
   }
-  .hours-table td:first-child { font-weight: 600; width: 200px; }
+  .hours-table td:first-child { font-weight: 600; width: 240px; }
   .hours-table td:last-child { color: #005EB8; font-weight: 600; }
   .contact-box {
     background: #005EB8; color: #fff; border-radius: 16px;
-    padding: 30px; margin-top: 20px;
+    padding: 22px 28px; margin-top: 14px;
   }
-  .contact-box h3 { color: #fff; margin-bottom: 14px; }
-  .contact-box p { font-size: 20px; line-height: 1.8; }
-  .contact-box .phone { font-size: 32px; font-weight: 700; color: #00A499; }
+  .contact-box h3 { color: #fff; margin-bottom: 8px; font-size: 30px; }
+  .contact-box p { font-size: 24px; line-height: 1.55; }
+  .contact-box .phone { font-size: 40px; font-weight: 700; color: #00A499; margin-top: 4px; }
 
   /* ─── SLIDE 3: SMARTnavigation ─── */
   .slide-smartnav {
@@ -123,21 +123,21 @@
   .smartnav-right { flex: 0.9; display: flex; flex-direction: column; gap: 20px; }
   .smartnav-left .badge {
     display: inline-block; background: rgba(0,164,153,0.15); color: #00A499;
-    font-size: 16px; font-weight: 600; padding: 8px 18px; border-radius: 30px;
-    margin-bottom: 16px; letter-spacing: 0.5px;
+    font-size: 20px; font-weight: 600; padding: 10px 22px; border-radius: 30px;
+    margin-bottom: 18px; letter-spacing: 0.5px;
   }
   .smartnav-left p { color: rgba(255,255,255,0.8); margin-bottom: 18px; }
   .step-card {
     background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 14px; padding: 22px 28px; display: flex; gap: 18px; align-items: flex-start;
+    border-radius: 14px; padding: 18px 24px; display: flex; gap: 18px; align-items: flex-start;
   }
   .step-num {
-    background: #00A499; color: #fff; font-weight: 800; font-size: 18px;
-    width: 40px; height: 40px; border-radius: 10px; display: flex;
+    background: #00A499; color: #fff; font-weight: 800; font-size: 22px;
+    width: 48px; height: 48px; border-radius: 10px; display: flex;
     align-items: center; justify-content: center; flex-shrink: 0;
   }
-  .step-card h4 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
-  .step-card p { font-size: 17px; color: rgba(255,255,255,0.7); margin: 0; }
+  .step-card h4 { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+  .step-card p { font-size: 22px; color: rgba(255,255,255,0.7); margin: 0; line-height: 1.35; }
 
   /* ─── SLIDE 4: SMARTconsult ─── */
   .slide-consult {
@@ -149,55 +149,55 @@
   .consult-right { flex: 1; }
   .consult-left .badge {
     display: inline-block; background: rgba(0,94,184,0.1); color: #005EB8;
-    font-size: 16px; font-weight: 600; padding: 8px 18px; border-radius: 30px;
-    margin-bottom: 16px;
+    font-size: 20px; font-weight: 600; padding: 10px 22px; border-radius: 30px;
+    margin-bottom: 18px;
   }
-  .benefit-list { list-style: none; margin-top: 24px; }
+  .benefit-list { list-style: none; margin-top: 20px; }
   .benefit-list li {
-    font-size: 21px; padding: 12px 0; display: flex; align-items: center; gap: 14px;
+    font-size: 26px; padding: 10px 0; display: flex; align-items: center; gap: 16px;
     border-bottom: 1px solid rgba(0,0,0,0.06);
   }
   .benefit-list li::before {
-    content: '\2713'; background: #00A499; color: #fff; width: 32px; height: 32px;
+    content: '\2713'; background: #00A499; color: #fff; width: 38px; height: 38px;
     border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 16px; flex-shrink: 0;
+    font-weight: 700; font-size: 20px; flex-shrink: 0;
   }
   .consult-steps {
-    display: flex; flex-direction: column; gap: 18px;
+    display: flex; flex-direction: column; gap: 14px;
   }
   .consult-step {
-    background: #fff; border-radius: 14px; padding: 24px 28px;
+    background: #fff; border-radius: 14px; padding: 18px 24px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06); display: flex; gap: 18px; align-items: flex-start;
   }
   .consult-step .step-num { background: #005EB8; }
-  .consult-step h4 { font-size: 20px; font-weight: 700; color: #1a2744; margin-bottom: 4px; }
-  .consult-step p { font-size: 17px; color: #5a6a7a; margin: 0; }
+  .consult-step h4 { font-size: 26px; font-weight: 700; color: #1a2744; margin-bottom: 4px; }
+  .consult-step p { font-size: 22px; color: #5a6a7a; margin: 0; line-height: 1.35; }
 
   /* ─── SLIDE 5: Our Surgeries ─── */
   .slide-surgeries {
     background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%);
     color: #fff; flex-direction: column;
   }
-  .surgeries-header { text-align: center; width: 100%; margin-bottom: 40px; }
-  .surgeries-header p { color: rgba(255,255,255,0.6); font-size: 20px; margin-top: 8px; }
+  .surgeries-header { text-align: center; width: 100%; margin-bottom: 36px; }
+  .surgeries-header p { color: rgba(255,255,255,0.6); font-size: 26px; margin-top: 10px; }
   .surgeries-grid {
-    display: flex; gap: 40px; width: 100%;
+    display: flex; gap: 36px; width: 100%;
   }
   .surgery-card {
     flex: 1; background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 20px; padding: 44px 36px; text-align: center;
+    border-radius: 20px; padding: 40px 32px; text-align: center;
     position: relative; overflow: hidden;
   }
   .surgery-card::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
     background: linear-gradient(90deg, #00A499, #005EB8);
   }
-  .surgery-card h3 { font-size: 28px; color: #00A499; margin-bottom: 18px; }
-  .surgery-card .address { color: rgba(255,255,255,0.6); font-size: 20px; line-height: 1.7; margin-bottom: 24px; }
+  .surgery-card h3 { font-size: 36px; color: #00A499; margin-bottom: 20px; }
+  .surgery-card .address { color: rgba(255,255,255,0.6); font-size: 26px; line-height: 1.6; margin-bottom: 26px; }
   .surgery-card .phone-big {
-    font-size: 30px; font-weight: 700; color: #fff;
-    display: inline-block; padding: 12px 28px;
+    font-size: 38px; font-weight: 700; color: #fff;
+    display: inline-block; padding: 14px 32px;
     background: rgba(0,164,153,0.15); border-radius: 12px;
     border: 1px solid rgba(0,164,153,0.3);
   }
@@ -208,15 +208,15 @@
     color: #fff; flex-direction: column; text-align: center;
   }
   .nhs-app-features {
-    display: flex; gap: 30px; margin-top: 40px;
+    display: flex; gap: 30px; margin-top: 44px;
   }
   .nhs-feature {
     flex: 1; background: rgba(255,255,255,0.1); border-radius: 16px;
-    padding: 30px; text-align: center;
+    padding: 32px 28px; text-align: center;
   }
-  .nhs-feature .icon { font-size: 48px; margin-bottom: 14px; }
-  .nhs-feature h3 { font-size: 24px; margin-bottom: 8px; }
-  .nhs-feature p { font-size: 18px; color: rgba(255,255,255,0.8); }
+  .nhs-feature .icon { font-size: 64px; margin-bottom: 16px; }
+  .nhs-feature h3 { font-size: 30px; margin-bottom: 10px; }
+  .nhs-feature p { font-size: 24px; color: rgba(255,255,255,0.8); line-height: 1.4; }
 
   /* ─── SLIDE 7: NHS Campaigns ─── */
   .slide-campaign {
@@ -224,15 +224,15 @@
     color: #1a2744; flex-direction: column; text-align: center;
   }
   .campaign-cards {
-    display: flex; gap: 30px; margin-top: 40px;
+    display: flex; gap: 28px; margin-top: 40px;
   }
   .campaign-card {
-    flex: 1; background: #fff; border-radius: 18px; padding: 36px;
+    flex: 1; background: #fff; border-radius: 18px; padding: 34px 28px;
     box-shadow: 0 2px 16px rgba(0,0,0,0.06); text-align: center;
   }
-  .campaign-card .icon { font-size: 52px; margin-bottom: 14px; }
-  .campaign-card h3 { font-size: 24px; color: #005EB8; margin-bottom: 10px; }
-  .campaign-card p { font-size: 19px; color: #5a6a7a; }
+  .campaign-card .icon { font-size: 68px; margin-bottom: 16px; }
+  .campaign-card h3 { font-size: 30px; color: #005EB8; margin-bottom: 12px; }
+  .campaign-card p { font-size: 24px; color: #5a6a7a; line-height: 1.45; }
 
   /* Animated gradient border on active slide cards */
   @keyframes pulse-glow {
