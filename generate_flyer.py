@@ -8,13 +8,13 @@ alternating white and #1159A2 backgrounds, rounded semi-transparent
 pills for stats, no column splits, no gradients.
 
 Height budget (mm):
-  top       18
-  contract  36
+  top       20
+  contract  32
   pricing   14
-  what      22
-  proof     40
-  features  50
-  cta       22
+  what      18
+  proof     46
+  features  54
+  cta       18
   footer     8
   ----------
   total    210
@@ -59,60 +59,59 @@ FLYER_HTML = f"""<!DOCTYPE html>
 
   .band {{ overflow: hidden; }}
 
-  /* ── Band 1: Top (white, 18mm) ───────────────────────────────────── */
+  /* ── Band 1: Top (white, 20mm) ───────────────────────────────────── */
   .top {{
-    height: 18mm;
+    height: 20mm;
     background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5mm;
+    gap: 6mm;
     padding: 0 8mm;
   }}
-  .top img {{ height: 11mm; }}
+  .top img {{ height: 13mm; }}
   .top-tagline {{
-    font-size: 10pt;
+    font-size: 11pt;
     font-weight: 800;
     color: #1159A2;
-    line-height: 1.1;
-    border-left: 0.4mm solid #1159A2;
-    padding-left: 4mm;
+    line-height: 1.15;
+    border-left: 0.8mm solid #1159A2;
+    padding-left: 5mm;
   }}
 
-  /* ── Band 2: Contract hero (blue, 36mm) ──────────────────────────── */
+  /* ── Band 2: Contract hero (blue, 32mm) ──────────────────────────── */
   .contract {{
-    height: 36mm;
+    height: 32mm;
     background: #1159A2;
     color: #fff;
-    padding: 4mm 8mm;
+    padding: 4mm 10mm;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 2mm;
   }}
   .contract-label {{
     font-size: 6.8pt;
     font-weight: 800;
-    letter-spacing: 2.6px;
-    color: rgba(255,255,255,0.65);
-    margin-bottom: 2.5mm;
+    letter-spacing: 2.4px;
+    color: rgba(255,255,255,0.7);
   }}
   .contract-quote {{
-    font-size: 12.5pt;
+    font-size: 12pt;
     font-weight: 800;
     line-height: 1.2;
-    margin-bottom: 2mm;
   }}
   .contract-attrib {{
     font-size: 6.8pt;
     font-style: italic;
     color: rgba(255,255,255,0.7);
-    margin-bottom: 3mm;
   }}
   .contract-payoff {{
     font-size: 9.5pt;
     font-weight: 700;
     line-height: 1.2;
+    margin-top: 1mm;
   }}
 
   /* ── Band 3: Pricing strip (white, 14mm) ─────────────────────────── */
@@ -122,37 +121,41 @@ FLYER_HTML = f"""<!DOCTYPE html>
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5mm;
-    border-bottom: 0.3mm solid #e5e5e5;
+    gap: 6mm;
   }}
   .pricing-price {{
     font-size: 22pt;
-    font-weight: 300;
+    font-weight: 500;
     color: #1159A2;
     line-height: 1;
     letter-spacing: -0.5px;
   }}
-  .pricing-price .year {{ font-size: 9pt; margin-left: 0.5mm; }}
+  .pricing-price .year {{ font-size: 9pt; margin-left: 0.5mm; font-weight: 400; }}
   .pricing-divider {{
-    width: 0.3mm;
-    height: 8mm;
+    width: 0.6mm;
+    height: 9mm;
     background: #1159A2;
-    opacity: 0.3;
+    opacity: 0.35;
   }}
   .pricing-offer {{
-    font-size: 9pt;
+    font-size: 10pt;
     font-weight: 700;
     color: #1159A2;
     line-height: 1.2;
   }}
   .pricing-offer em {{ font-style: italic; font-weight: 800; }}
 
-  /* ── Band 4: What is it (white, 22mm) ────────────────────────────── */
+  /* ── Band 4: What is it (white, 18mm) ────────────────────────────── */
   .what {{
-    height: 22mm;
+    height: 18mm;
     background: #fff;
-    padding: 3mm 10mm 3mm;
+    padding: 3mm 10mm;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-top: 0.3mm solid #e5e5e5;
+    border-bottom: 0.3mm solid #e5e5e5;
   }}
   .what h2 {{
     font-size: 11pt;
@@ -161,19 +164,19 @@ FLYER_HTML = f"""<!DOCTYPE html>
     margin-bottom: 1.5mm;
   }}
   .what p {{
-    font-size: 7.2pt;
-    line-height: 1.35;
+    font-size: 7.4pt;
+    line-height: 1.4;
     color: #333;
     max-width: 125mm;
     margin: 0 auto;
   }}
 
-  /* ── Band 5: Case study (blue, 40mm) ─────────────────────────────── */
+  /* ── Band 5: Case study (blue, 46mm) ─────────────────────────────── */
   .proof {{
-    height: 40mm;
+    height: 46mm;
     background: #1159A2;
     color: #fff;
-    padding: 3.5mm 6mm 4mm;
+    padding: 4mm 6mm 4mm;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -182,58 +185,54 @@ FLYER_HTML = f"""<!DOCTYPE html>
     font-size: 6.5pt;
     font-weight: 800;
     letter-spacing: 2.4px;
-    color: rgba(255,255,255,0.65);
+    color: rgba(255,255,255,0.7);
     margin-bottom: 1mm;
   }}
   .proof-sub {{
     font-size: 7pt;
     color: rgba(255,255,255,0.8);
-    margin-bottom: 2mm;
-  }}
-  .proof-hero {{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3mm;
     margin-bottom: 2.5mm;
   }}
-  .proof-hero-num {{
-    font-size: 30pt;
+  .proof-hero {{
+    font-size: 26pt;
     font-weight: 800;
-    line-height: 0.9;
+    line-height: 1;
+    margin-bottom: 0.5mm;
   }}
   .proof-hero-text {{
     font-size: 8.5pt;
     font-weight: 700;
-    text-align: left;
     line-height: 1.2;
-    max-width: 52mm;
+    margin-bottom: 3mm;
+    opacity: 0.95;
   }}
   .proof-pills {{
     display: flex;
-    gap: 1.5mm;
+    gap: 1.8mm;
     margin-top: auto;
   }}
   .pill {{
     flex: 1;
-    background: rgba(255,255,255,0.14);
-    border-radius: 2mm;
-    padding: 2mm 1mm;
+    background: rgba(255,255,255,0.16);
+    border-radius: 3mm;
+    padding: 2mm 1.5mm 2.2mm;
     text-align: center;
   }}
-  .pill-num {{ font-size: 11pt; font-weight: 800; line-height: 1; }}
+  .pill-num {{ font-size: 12.5pt; font-weight: 800; line-height: 1; }}
   .pill-lbl {{
     font-size: 5.6pt;
-    color: rgba(255,255,255,0.85);
+    color: rgba(255,255,255,0.88);
     margin-top: 0.8mm;
-    line-height: 1.15;
+    line-height: 1.2;
   }}
 
-  /* ── Band 6: Features (white, 50mm) ──────────────────────────────── */
+  /* ── Band 6: Features (white, 54mm) ──────────────────────────────── */
   .features {{
-    height: 50mm;
+    height: 54mm;
     background: #fff;
     padding: 3mm 6mm 3mm;
+    display: flex;
+    flex-direction: column;
   }}
   .features h2 {{
     font-size: 10pt;
@@ -241,29 +240,33 @@ FLYER_HTML = f"""<!DOCTYPE html>
     color: #1159A2;
     text-align: center;
     margin-bottom: 2.5mm;
+    flex: 0 0 auto;
   }}
   .feat-grid {{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 1.8mm 2mm;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 1.8mm 2.2mm;
+    flex: 1;
+    min-height: 0;
   }}
   .feat {{
     background: #f4f7fb;
-    border-left: 0.7mm solid #1159A2;
-    border-radius: 1.2mm;
-    padding: 1.8mm 2.2mm;
+    border-left: 0.8mm solid #1159A2;
+    border-radius: 1.5mm;
+    padding: 1.8mm 2.4mm;
     display: flex;
     gap: 2mm;
-    align-items: flex-start;
+    align-items: center;
+    overflow: hidden;
   }}
   .feat-icon {{
-    width: 6mm;
-    height: 6mm;
+    width: 6.5mm;
+    height: 6.5mm;
     flex-shrink: 0;
-    margin-top: 0.2mm;
   }}
-  .feat-icon svg {{ width: 6mm; height: 6mm; }}
+  .feat-icon svg {{ width: 6.5mm; height: 6.5mm; }}
+  .feat-body {{ flex: 1; min-width: 0; }}
   .feat h4 {{
     font-size: 7.2pt;
     font-weight: 800;
@@ -277,9 +280,9 @@ FLYER_HTML = f"""<!DOCTYPE html>
     color: #333;
   }}
 
-  /* ── Band 7: CTA (blue, 22mm) ────────────────────────────────────── */
+  /* ── Band 7: CTA (blue, 18mm) ────────────────────────────────────── */
   .cta {{
-    height: 22mm;
+    height: 18mm;
     background: #1159A2;
     color: #fff;
     padding: 3mm 6mm;
@@ -380,10 +383,8 @@ FLYER_HTML = f"""<!DOCTYPE html>
 <div class="band proof">
   <div class="proof-label">12-MONTH CASE STUDY</div>
   <div class="proof-sub">April 2024 &ndash; March 2025 &bull; 17 practices &bull; 152,508 patients triaged</div>
-  <div class="proof-hero">
-    <div class="proof-hero-num">47%</div>
-    <div class="proof-hero-text">of patients safely redirected away from the GP</div>
-  </div>
+  <div class="proof-hero">47%</div>
+  <div class="proof-hero-text">of patients safely redirected away from the GP</div>
   <div class="proof-pills">
     <div class="pill"><div class="pill-num">15%</div><div class="pill-lbl">eConsultations</div></div>
     <div class="pill"><div class="pill-num">12%</div><div class="pill-lbl">Community<br>Pharmacy</div></div>
@@ -405,7 +406,7 @@ FLYER_HTML = f"""<!DOCTYPE html>
           <path d="M32 7.2v5.6 M29.2 10h5.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
         </svg>
       </div>
-      <div>
+      <div class="feat-body">
         <h4>Age Triage</h4>
         <p>Scripts adapt questions to the patient&rsquo;s age.</p>
       </div>
@@ -419,7 +420,7 @@ FLYER_HTML = f"""<!DOCTYPE html>
           <rect x="18.5" y="26" width="3" height="3" fill="#1159A2" rx="0.7"/>
         </svg>
       </div>
-      <div>
+      <div class="feat-body">
         <h4>Red Flag Screening</h4>
         <p>Condition-specific red flags guide patients away from Primary Care.</p>
       </div>
@@ -435,7 +436,7 @@ FLYER_HTML = f"""<!DOCTYPE html>
           <path d="M4 22 L10 21 M3 27 L11 26 M4 31 L9 30" stroke="#1159A2" stroke-width="1.8" stroke-linecap="round"/>
         </svg>
       </div>
-      <div>
+      <div class="feat-body">
         <h4>Same Day Triage</h4>
         <p>Same-day condition-specific questions book patients into same-day slots.</p>
       </div>
@@ -447,7 +448,7 @@ FLYER_HTML = f"""<!DOCTYPE html>
           <path d="M14 6 h12 v8 h8 v12 h-8 v8 h-12 v-8 h-8 v-12 h8 z" fill="#1159A2"/>
         </svg>
       </div>
-      <div>
+      <div class="feat-body">
         <h4>Pharmacy First</h4>
         <p>Filters patients into bookable pharmacist slots to prevent looping.</p>
       </div>
@@ -464,7 +465,7 @@ FLYER_HTML = f"""<!DOCTYPE html>
           <polygon points="18,16.7 24,20 18,23.3" fill="#fff"/>
         </svg>
       </div>
-      <div>
+      <div class="feat-body">
         <h4>EMIS Write-Back</h4>
         <p>Automatic write-back &mdash; no PDFs, no manual steps.</p>
       </div>
@@ -479,7 +480,7 @@ FLYER_HTML = f"""<!DOCTYPE html>
           <line x1="14" y1="35" x2="26" y2="35" stroke="#1159A2" stroke-width="2.4" stroke-linecap="round"/>
         </svg>
       </div>
-      <div>
+      <div class="feat-body">
         <h4>Ambient Voice Technology</h4>
         <p>Trialling in a Leeds practice: ambient voice answering calls on SMARTnav scripts.</p>
       </div>
