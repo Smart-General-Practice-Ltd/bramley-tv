@@ -6,11 +6,11 @@ Cleaner, less busy version: cut "What is it?", cut the top tagline,
 cut 2 features. Leaves more air, bigger logos, cleaner hierarchy.
 
 Height budget (mm):
-  top       14
-  contract  24
-  pricing   14
-  what      28
-  proof     42
+  top       12
+  contract  22
+  pricing   12
+  what      26
+  proof     50
   features  52
   cta       14
   footer    22
@@ -73,20 +73,20 @@ FLYER_HTML = f"""<!DOCTYPE html>
 
   .band {{ overflow: hidden; }}
 
-  /* ── Band 1: Top (white, 14mm) ───────────────────────────────────── */
+  /* ── Band 1: Top (white, 12mm) ───────────────────────────────────── */
   .top {{
-    height: 14mm;
+    height: 12mm;
     background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 8mm;
   }}
-  .top img {{ height: 10mm; }}
+  .top img {{ height: 8mm; }}
 
-  /* ── Band 2: Contract hero (blue, 24mm) ──────────────────────────── */
+  /* ── Band 2: Contract hero (blue, 22mm) ──────────────────────────── */
   .contract {{
-    height: 24mm;
+    height: 22mm;
     background: #1159A2;
     color: #fff;
     padding: 3mm 10mm;
@@ -94,55 +94,55 @@ FLYER_HTML = f"""<!DOCTYPE html>
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 2mm;
+    gap: 1.8mm;
   }}
   .contract-label {{
-    font-size: 7pt;
+    font-size: 6.5pt;
     font-weight: 800;
-    letter-spacing: 2.4px;
+    letter-spacing: 2.2px;
     text-transform: uppercase;
     color: rgba(255,255,255,0.7);
   }}
   .contract-quote {{
-    font-size: 13pt;
+    font-size: 12pt;
     font-weight: 800;
     line-height: 1.2;
   }}
 
-  /* ── Band 3: Pricing (white, 14mm) ───────────────────────────────── */
+  /* ── Band 3: Pricing (white, 12mm) ───────────────────────────────── */
   .pricing {{
-    height: 14mm;
+    height: 12mm;
     background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 7mm;
+    gap: 6mm;
   }}
   .pricing-price {{
-    font-size: 24pt;
+    font-size: 20pt;
     font-weight: 500;
     color: #111;
     line-height: 1;
     letter-spacing: -0.5px;
   }}
-  .pricing-price .year {{ font-size: 10pt; margin-left: 0.5mm; font-weight: 400; }}
+  .pricing-price .year {{ font-size: 9pt; margin-left: 0.4mm; font-weight: 400; }}
   .pricing-divider {{
-    width: 0.6mm;
-    height: 10mm;
+    width: 0.5mm;
+    height: 8mm;
     background: #111;
     opacity: 0.3;
   }}
   .pricing-offer {{
-    font-size: 11pt;
+    font-size: 9.5pt;
     font-weight: 700;
     color: #111;
     line-height: 1.3;
   }}
   .pricing-offer em {{ font-style: italic; font-weight: 800; }}
 
-  /* ── Band 4: What — paragraphs only (white, 28mm) ───────────────── */
+  /* ── Band 4: What — paragraphs only (white, 26mm) ───────────────── */
   .what {{
-    height: 28mm;
+    height: 26mm;
     background: #fff;
     padding: 2mm 10mm;
     text-align: center;
@@ -153,49 +153,49 @@ FLYER_HTML = f"""<!DOCTYPE html>
     border-bottom: 0.3mm solid #e5e5e5;
   }}
   .what p {{
-    font-size: 7pt;
-    line-height: 1.35;
+    font-size: 6.5pt;
+    line-height: 1.3;
     color: #333;
     max-width: 128mm;
     margin: 0 auto;
   }}
-  .what p + p {{ margin-top: 1.5mm; }}
+  .what p + p {{ margin-top: 1.3mm; }}
 
-  /* ── Band 5: Case study (blue, 42mm) ─────────────────────────────── */
+  /* ── Band 5: Case study (blue, 50mm) with big gap below pills ───── */
   .proof {{
-    height: 42mm;
+    height: 50mm;
     background: #1159A2;
     color: #fff;
-    padding: 5mm 7mm 5mm;
+    padding: 3mm 7mm 7mm;
     text-align: center;
     display: flex;
     flex-direction: column;
   }}
   .proof-label {{
-    font-size: 7pt;
+    font-size: 6.5pt;
     font-weight: 800;
-    letter-spacing: 2.4px;
+    letter-spacing: 2.2px;
     text-transform: uppercase;
     color: rgba(255,255,255,0.7);
     margin-bottom: 1mm;
   }}
   .proof-sub {{
-    font-size: 7pt;
+    font-size: 6.5pt;
     line-height: 1.3;
     color: rgba(255,255,255,0.85);
     margin-bottom: 2mm;
   }}
   .proof-hero {{
-    font-size: 24pt;
+    font-size: 22pt;
     font-weight: 800;
     line-height: 1;
     margin-bottom: 0.5mm;
   }}
   .proof-hero-text {{
-    font-size: 9pt;
+    font-size: 8.5pt;
     font-weight: 700;
     line-height: 1.2;
-    margin-bottom: 2mm;
+    margin-bottom: 3mm;
   }}
   .proof-pills {{
     display: flex;
@@ -206,19 +206,19 @@ FLYER_HTML = f"""<!DOCTYPE html>
     flex: 1;
     background: rgba(255,255,255,0.16);
     border-radius: 2.5mm;
-    padding: 2mm 1.3mm;
+    padding: 1.6mm 1.2mm;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 13mm;
+    min-height: 11mm;
   }}
-  .pill-num {{ font-size: 12pt; font-weight: 800; line-height: 1; }}
+  .pill-num {{ font-size: 11pt; font-weight: 800; line-height: 1; }}
   .pill-lbl {{
-    font-size: 5.8pt;
+    font-size: 5.3pt;
     color: rgba(255,255,255,0.9);
-    margin-top: 1mm;
+    margin-top: 0.8mm;
     line-height: 1.2;
   }}
 
@@ -226,7 +226,7 @@ FLYER_HTML = f"""<!DOCTYPE html>
   .features {{
     height: 52mm;
     background: #fff;
-    padding: 6mm 7mm 3mm;
+    padding: 3mm 7mm 3mm;
     display: flex;
     flex-direction: column;
   }}
@@ -241,28 +241,28 @@ FLYER_HTML = f"""<!DOCTYPE html>
   .feat {{
     background: #f7fafd;
     border-radius: 1.5mm;
-    padding: 1.8mm 2.4mm 1.8mm 2mm;
+    padding: 1.6mm 2.2mm 1.6mm 2mm;
     display: flex;
     gap: 2mm;
     align-items: center;
     overflow: hidden;
   }}
   .feat-icon {{
-    width: 7mm;
-    height: 7mm;
+    width: 6.5mm;
+    height: 6.5mm;
     flex-shrink: 0;
   }}
-  .feat-icon svg {{ width: 7mm; height: 7mm; }}
+  .feat-icon svg {{ width: 6.5mm; height: 6.5mm; }}
   .feat-body {{ flex: 1; min-width: 0; }}
   .feat h4 {{
-    font-size: 8pt;
+    font-size: 7.5pt;
     font-weight: 800;
     color: #111;
     margin-bottom: 0.4mm;
     line-height: 1.15;
   }}
   .feat p {{
-    font-size: 6.5pt;
+    font-size: 6pt;
     line-height: 1.25;
     color: #333;
   }}
