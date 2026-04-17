@@ -46,6 +46,7 @@ def make_qr(url, fill='#1159A2', back='white'):
 
 SN_LOGO = img_to_data_uri(os.path.join(LOGO_DIR, "smartnavigation.logo.png"))
 FF_LOGO = img_to_data_uri(os.path.join(LOGO_DIR, "Forbes and Fuller Transparent 3.png"))
+SGP_LOGO = img_to_data_uri(os.path.join(LOGO_DIR, "smart-general-practice-logo.png"))
 QR_WHITE = make_qr('https://smartnavigation.co.uk', fill='white', back='#1159A2')
 
 FLYER_HTML = f"""<!DOCTYPE html>
@@ -332,33 +333,8 @@ FLYER_HTML = f"""<!DOCTYPE html>
     justify-content: space-between;
     padding: 0 6mm;
   }}
-  .footer .ff {{ max-height: 7.2mm; }}
-  .sgp-logo {{ display: flex; align-items: center; gap: 1.6mm; }}
-  .sgp-circle {{
-    width: 6.5mm;
-    height: 6.5mm;
-    border-radius: 50%;
-    background: #1159A2;
-    color: #fff;
-    font-size: 5pt;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: 0.2px;
-  }}
-  .sgp-text {{
-    font-size: 9.5pt;
-    color: #111;
-    font-weight: 400;
-    line-height: 1;
-  }}
-  .sgp-tm {{
-    font-size: 4pt;
-    vertical-align: super;
-    margin-left: 0.3mm;
-    font-weight: 600;
-  }}
+  .footer .ff {{ max-height: 7.5mm; }}
+  .footer .sgp {{ max-height: 7.5mm; }}
 </style>
 </head>
 <body>
@@ -514,10 +490,7 @@ FLYER_HTML = f"""<!DOCTYPE html>
 <!-- Band 8: Footer -->
 <div class="band footer">
   <img class="ff" src="{FF_LOGO}" alt="Fuller and Forbes Healthcare Group">
-  <div class="sgp-logo">
-    <span class="sgp-circle">SMART</span>
-    <span class="sgp-text">general practice<span class="sgp-tm">TM</span></span>
-  </div>
+  <img class="sgp" src="{SGP_LOGO}" alt="SMART general practice">
 </div>
 
 </body>
