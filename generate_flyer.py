@@ -9,13 +9,13 @@ pills for stats, no column splits, no gradients.
 
 Height budget (mm):
   top       20
-  contract  32
+  contract  30
   pricing   14
   what      18
   proof     46
   features  52
   cta       18
-  footer    10
+  footer    12
   ----------
   total    210
 """
@@ -56,7 +56,26 @@ FLYER_HTML = f"""<!DOCTYPE html>
   @page {{ size: 148mm 210mm; margin: 0; }}
   * {{ margin: 0; padding: 0; box-sizing: border-box; }}
   html, body {{ width: 148mm; height: 210mm; }}
-  body {{ font-family: Helvetica, Arial, sans-serif; color: #222; overflow: hidden; }}
+  body {{
+    font-family: Helvetica, Arial, sans-serif;
+    color: #111;
+    overflow: hidden;
+    font-size: 8pt;           /* body default */
+    line-height: 1.4;
+    font-weight: 400;
+  }}
+
+  /* Typography scale — use these classes/rules everywhere */
+  .overline {{
+    font-size: 7pt;
+    font-weight: 800;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+  }}
+  .body-sm {{ font-size: 7pt; line-height: 1.35; }}
+  .body    {{ font-size: 8pt; line-height: 1.4; }}
+  .subtitle {{ font-size: 10pt; font-weight: 700; line-height: 1.3; }}
+  .heading {{ font-size: 12pt; font-weight: 800; line-height: 1.2; }}
 
   .band {{ overflow: hidden; }}
 
@@ -72,17 +91,17 @@ FLYER_HTML = f"""<!DOCTYPE html>
   }}
   .top img {{ height: 13mm; }}
   .top-tagline {{
-    font-size: 11pt;
+    font-size: 12pt;
     font-weight: 800;
-    color: #1159A2;
-    line-height: 1.15;
+    color: #111;
+    line-height: 1.2;
     border-left: 0.8mm solid #1159A2;
     padding-left: 5mm;
   }}
 
-  /* ── Band 2: Contract hero (blue, 32mm) ──────────────────────────── */
+  /* ── Band 2: Contract hero (blue, 30mm) ──────────────────────────── */
   .contract {{
-    height: 32mm;
+    height: 30mm;
     background: #1159A2;
     color: #fff;
     padding: 4mm 10mm;
@@ -93,21 +112,22 @@ FLYER_HTML = f"""<!DOCTYPE html>
     gap: 2mm;
   }}
   .contract-label {{
-    font-size: 6.8pt;
+    font-size: 7pt;
     font-weight: 800;
     letter-spacing: 2.4px;
+    text-transform: uppercase;
     color: rgba(255,255,255,0.7);
   }}
   .contract-quote {{
-    font-size: 13pt;
+    font-size: 14pt;
     font-weight: 800;
     line-height: 1.2;
   }}
   .contract-payoff {{
     font-size: 10pt;
     font-weight: 700;
-    line-height: 1.2;
-    margin-top: 2mm;
+    line-height: 1.3;
+    margin-top: 1.5mm;
   }}
 
   /* ── Band 3: Pricing strip (white, 14mm) ─────────────────────────── */
@@ -126,7 +146,7 @@ FLYER_HTML = f"""<!DOCTYPE html>
     line-height: 1;
     letter-spacing: -0.5px;
   }}
-  .pricing-price .year {{ font-size: 9pt; margin-left: 0.5mm; font-weight: 400; }}
+  .pricing-price .year {{ font-size: 10pt; margin-left: 0.5mm; font-weight: 400; }}
   .pricing-divider {{
     width: 0.6mm;
     height: 9mm;
@@ -137,7 +157,7 @@ FLYER_HTML = f"""<!DOCTYPE html>
     font-size: 10pt;
     font-weight: 700;
     color: #111;
-    line-height: 1.2;
+    line-height: 1.3;
   }}
   .pricing-offer em {{ font-style: italic; font-weight: 800; }}
 
@@ -154,13 +174,14 @@ FLYER_HTML = f"""<!DOCTYPE html>
     border-bottom: 0.3mm solid #e5e5e5;
   }}
   .what h2 {{
-    font-size: 11pt;
+    font-size: 12pt;
     font-weight: 800;
     color: #111;
     margin-bottom: 1.5mm;
+    line-height: 1.2;
   }}
   .what p {{
-    font-size: 7.4pt;
+    font-size: 8pt;
     line-height: 1.4;
     color: #333;
     max-width: 125mm;
@@ -178,29 +199,30 @@ FLYER_HTML = f"""<!DOCTYPE html>
     flex-direction: column;
   }}
   .proof-label {{
-    font-size: 6.5pt;
+    font-size: 7pt;
     font-weight: 800;
     letter-spacing: 2.4px;
+    text-transform: uppercase;
     color: rgba(255,255,255,0.7);
     margin-bottom: 1mm;
   }}
   .proof-sub {{
     font-size: 7pt;
-    color: rgba(255,255,255,0.8);
+    line-height: 1.35;
+    color: rgba(255,255,255,0.85);
     margin-bottom: 2.5mm;
   }}
   .proof-hero {{
-    font-size: 26pt;
+    font-size: 28pt;
     font-weight: 800;
     line-height: 1;
-    margin-bottom: 0.5mm;
+    margin-bottom: 0.8mm;
   }}
   .proof-hero-text {{
-    font-size: 8.5pt;
+    font-size: 10pt;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.3;
     margin-bottom: 3mm;
-    opacity: 0.95;
   }}
   .proof-pills {{
     display: flex;
@@ -214,12 +236,12 @@ FLYER_HTML = f"""<!DOCTYPE html>
     padding: 2mm 1.5mm 2.2mm;
     text-align: center;
   }}
-  .pill-num {{ font-size: 12.5pt; font-weight: 800; line-height: 1; }}
+  .pill-num {{ font-size: 13pt; font-weight: 800; line-height: 1; }}
   .pill-lbl {{
-    font-size: 5.6pt;
-    color: rgba(255,255,255,0.88);
+    font-size: 6pt;
+    color: rgba(255,255,255,0.9);
     margin-top: 0.8mm;
-    line-height: 1.2;
+    line-height: 1.25;
   }}
 
   /* ── Band 6: Features (white, 52mm) ──────────────────────────────── */
@@ -231,11 +253,12 @@ FLYER_HTML = f"""<!DOCTYPE html>
     flex-direction: column;
   }}
   .features h2 {{
-    font-size: 10pt;
+    font-size: 12pt;
     font-weight: 800;
     color: #111;
     text-align: center;
     margin-bottom: 2.5mm;
+    line-height: 1.2;
     flex: 0 0 auto;
   }}
   .feat-grid {{
@@ -264,15 +287,15 @@ FLYER_HTML = f"""<!DOCTYPE html>
   .feat-icon svg {{ width: 6.5mm; height: 6.5mm; }}
   .feat-body {{ flex: 1; min-width: 0; }}
   .feat h4 {{
-    font-size: 7.2pt;
+    font-size: 8pt;
     font-weight: 800;
     color: #111;
-    margin-bottom: 0.4mm;
-    line-height: 1.1;
+    margin-bottom: 0.6mm;
+    line-height: 1.15;
   }}
   .feat p {{
-    font-size: 5.8pt;
-    line-height: 1.25;
+    font-size: 7pt;
+    line-height: 1.35;
     color: #333;
   }}
 
@@ -289,16 +312,16 @@ FLYER_HTML = f"""<!DOCTYPE html>
   }}
   .cta-text {{ flex: 1; }}
   .cta-text h3 {{
-    font-size: 11pt;
+    font-size: 12pt;
     font-weight: 800;
     margin-bottom: 1mm;
-    line-height: 1.1;
+    line-height: 1.2;
   }}
-  .cta-text .url {{ font-size: 9pt; font-weight: 700; line-height: 1.2; }}
+  .cta-text .url {{ font-size: 10pt; font-weight: 700; line-height: 1.3; }}
   .cta-text .email {{
-    font-size: 7.4pt;
-    color: rgba(255,255,255,0.85);
-    margin-top: 0.6mm;
+    font-size: 8pt;
+    color: rgba(255,255,255,0.9);
+    margin-top: 0.8mm;
   }}
   .cta-qr {{
     flex: 0 0 auto;
@@ -307,11 +330,11 @@ FLYER_HTML = f"""<!DOCTYPE html>
     gap: 2.5mm;
   }}
   .cta-qr-label {{
-    font-size: 7pt;
+    font-size: 8pt;
     font-weight: 700;
     color: #fff;
     text-align: right;
-    line-height: 1.15;
+    line-height: 1.25;
     max-width: 22mm;
   }}
   .cta-qr img {{
@@ -324,17 +347,17 @@ FLYER_HTML = f"""<!DOCTYPE html>
     flex-shrink: 0;
   }}
 
-  /* ── Band 8: Footer (white, 10mm) ────────────────────────────────── */
+  /* ── Band 8: Footer (white, 12mm) ────────────────────────────────── */
   .footer {{
-    height: 10mm;
+    height: 12mm;
     background: #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 6mm;
   }}
-  .footer .ff {{ max-height: 7.5mm; }}
-  .footer .sgp {{ max-height: 7.5mm; }}
+  .footer .ff {{ max-height: 9.5mm; }}
+  .footer .sgp {{ max-height: 8mm; }}
 </style>
 </head>
 <body>
