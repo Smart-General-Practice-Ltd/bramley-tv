@@ -10,8 +10,8 @@ Height budget (mm):
   contract  24
   pricing   14
   what      28
-  proof     44
-  features  50
+  proof     42
+  features  52
   cta       14
   footer    22
   ----------
@@ -161,9 +161,9 @@ FLYER_HTML = f"""<!DOCTYPE html>
   }}
   .what p + p {{ margin-top: 1.5mm; }}
 
-  /* ── Band 5: Case study (blue, 44mm) ─────────────────────────────── */
+  /* ── Band 5: Case study (blue, 42mm) ─────────────────────────────── */
   .proof {{
-    height: 44mm;
+    height: 42mm;
     background: #1159A2;
     color: #fff;
     padding: 5mm 7mm 5mm;
@@ -222,11 +222,11 @@ FLYER_HTML = f"""<!DOCTYPE html>
     line-height: 1.2;
   }}
 
-  /* ── Band 6: Features (white, 50mm) — 2x3 grid, no heading ──────── */
+  /* ── Band 6: Features (white, 52mm) — 2x3 grid, no heading ──────── */
   .features {{
-    height: 50mm;
+    height: 52mm;
     background: #fff;
-    padding: 3mm 7mm 3mm;
+    padding: 6mm 7mm 3mm;
     display: flex;
     flex-direction: column;
   }}
@@ -239,10 +239,9 @@ FLYER_HTML = f"""<!DOCTYPE html>
     min-height: 0;
   }}
   .feat {{
-    background: #f4f7fb;
-    border-left: 0.8mm solid #1159A2;
+    background: #f7fafd;
     border-radius: 1.5mm;
-    padding: 1.8mm 2.4mm;
+    padding: 1.8mm 2.4mm 1.8mm 2mm;
     display: flex;
     gap: 2mm;
     align-items: center;
@@ -280,9 +279,9 @@ FLYER_HTML = f"""<!DOCTYPE html>
     gap: 5mm;
   }}
   .cta-text {{ flex: 1; }}
-  .cta-text .url {{ font-size: 12pt; font-weight: 800; line-height: 1.2; }}
+  .cta-text .url {{ font-size: 10pt; font-weight: 800; line-height: 1.2; }}
   .cta-text .email {{
-    font-size: 9pt;
+    font-size: 7.5pt;
     color: rgba(255,255,255,0.9);
     margin-top: 0.6mm;
     line-height: 1.2;
@@ -320,8 +319,8 @@ FLYER_HTML = f"""<!DOCTYPE html>
     justify-content: space-between;
     padding: 0 8mm;
   }}
-  .footer .ff {{ max-height: 18mm; }}
-  .footer .sgp {{ max-height: 14mm; }}
+  .footer .ff {{ max-height: 14mm; }}
+  .footer .sgp {{ max-height: 10mm; }}
 </style>
 </head>
 <body>
