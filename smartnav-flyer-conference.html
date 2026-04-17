@@ -48,20 +48,15 @@
     color: rgba(255,255,255,0.7);
   }
   .contract-quote {
-    font-size: 12pt;
+    font-size: 13pt;
     font-weight: 800;
     line-height: 1.2;
   }
-  .contract-attrib {
-    font-size: 6.8pt;
-    font-style: italic;
-    color: rgba(255,255,255,0.7);
-  }
   .contract-payoff {
-    font-size: 9.5pt;
+    font-size: 10pt;
     font-weight: 700;
     line-height: 1.2;
-    margin-top: 1mm;
+    margin-top: 2mm;
   }
 
   /* ── Band 3: Pricing strip (white, 14mm) ─────────────────────────── */
@@ -76,7 +71,7 @@
   .pricing-price {
     font-size: 22pt;
     font-weight: 500;
-    color: #1159A2;
+    color: #111;
     line-height: 1;
     letter-spacing: -0.5px;
   }
@@ -84,13 +79,13 @@
   .pricing-divider {
     width: 0.6mm;
     height: 9mm;
-    background: #1159A2;
-    opacity: 0.35;
+    background: #111;
+    opacity: 0.3;
   }
   .pricing-offer {
     font-size: 10pt;
     font-weight: 700;
-    color: #1159A2;
+    color: #111;
     line-height: 1.2;
   }
   .pricing-offer em { font-style: italic; font-weight: 800; }
@@ -110,7 +105,7 @@
   .what h2 {
     font-size: 11pt;
     font-weight: 800;
-    color: #1159A2;
+    color: #111;
     margin-bottom: 1.5mm;
   }
   .what p {
@@ -176,9 +171,9 @@
     line-height: 1.2;
   }
 
-  /* ── Band 6: Features (white, 54mm) ──────────────────────────────── */
+  /* ── Band 6: Features (white, 52mm) ──────────────────────────────── */
   .features {
-    height: 54mm;
+    height: 52mm;
     background: #fff;
     padding: 3mm 6mm 3mm;
     display: flex;
@@ -187,7 +182,7 @@
   .features h2 {
     font-size: 10pt;
     font-weight: 800;
-    color: #1159A2;
+    color: #111;
     text-align: center;
     margin-bottom: 2.5mm;
     flex: 0 0 auto;
@@ -220,7 +215,7 @@
   .feat h4 {
     font-size: 7.2pt;
     font-weight: 800;
-    color: #1159A2;
+    color: #111;
     margin-bottom: 0.4mm;
     line-height: 1.1;
   }
@@ -235,24 +230,11 @@
     height: 18mm;
     background: #1159A2;
     color: #fff;
-    padding: 3mm 6mm;
+    padding: 2.5mm 6mm;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 5mm;
-  }
-  .cta-qr { flex: 0 0 auto; text-align: center; }
-  .cta-qr img {
-    width: 15mm;
-    height: 15mm;
-    background: #fff;
-    padding: 0.5mm;
-    border-radius: 0.8mm;
-    display: block;
-  }
-  .cta-qr-label {
-    font-size: 5.4pt;
-    color: rgba(255,255,255,0.8);
-    margin-top: 0.6mm;
   }
   .cta-text { flex: 1; }
   .cta-text h3 {
@@ -265,35 +247,64 @@
   .cta-text .email {
     font-size: 7.4pt;
     color: rgba(255,255,255,0.85);
-    margin-top: 0.8mm;
+    margin-top: 0.6mm;
+  }
+  .cta-qr {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 2.5mm;
+  }
+  .cta-qr-label {
+    font-size: 7pt;
+    font-weight: 700;
+    color: #fff;
+    text-align: right;
+    line-height: 1.15;
+    max-width: 22mm;
+  }
+  .cta-qr img {
+    width: 13mm;
+    height: 13mm;
+    background: #fff;
+    padding: 0.5mm;
+    border-radius: 0.8mm;
+    display: block;
+    flex-shrink: 0;
   }
 
-  /* ── Band 8: Footer (white, 8mm) ─────────────────────────────────── */
+  /* ── Band 8: Footer (white, 10mm) ────────────────────────────────── */
   .footer {
-    height: 8mm;
+    height: 10mm;
     background: #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 6mm;
   }
-  .footer .ff { max-height: 5.5mm; }
-  .sgp-logo { display: flex; align-items: center; gap: 1.3mm; }
+  .footer .ff { max-height: 7.2mm; }
+  .sgp-logo { display: flex; align-items: center; gap: 1.6mm; }
   .sgp-circle {
-    width: 5mm;
-    height: 5mm;
+    width: 6.5mm;
+    height: 6.5mm;
     border-radius: 50%;
     background: #1159A2;
     color: #fff;
-    font-size: 4pt;
+    font-size: 5pt;
     font-weight: 800;
     display: flex;
     align-items: center;
     justify-content: center;
+    letter-spacing: 0.2px;
   }
-  .sgp-text { font-size: 8pt; color: #1159A2; line-height: 1; }
+  .sgp-text {
+    font-size: 9.5pt;
+    color: #111;
+    font-weight: 400;
+    line-height: 1;
+  }
   .sgp-tm {
-    font-size: 3.5pt;
+    font-size: 4pt;
     vertical-align: super;
     margin-left: 0.3mm;
     font-weight: 600;
@@ -312,7 +323,6 @@
 <div class="band contract">
   <div class="contract-label">BUILT AROUND THE 2026/27 GP CONTRACT</div>
   <div class="contract-quote">&ldquo;Clinically urgent requests must be dealt with on the same day.&rdquo;</div>
-  <div class="contract-attrib">NHS England, GP Contract 2026/27</div>
   <div class="contract-payoff">SMARTnavigation is how EMIS practices deliver it.</div>
 </div>
 
@@ -440,14 +450,14 @@
 
 <!-- Band 7: CTA -->
 <div class="band cta">
-  <div class="cta-qr">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAApQAAAKUCAIAAAA1rT9rAAANxElEQVR4nO3XwW3svBlAUTmYBqzuLEDNWYDKUw1ZZJdN3m8i5rvDc/YDfqKoueDH59f3BgB0/Gv2AADAPyPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQ85q18HOfs5bmD+3HNeX9Ftct8g3+jlnnmd8x63/DzRsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYl5b0H5cs0fIeO5z9gi84fud9Q2OPO9q/xurPe9q/5Nu3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQ89oW89znVrMf11Yza+ZZ6xbPVVHx/Ra/3+J53oP7PMLNGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBiXrMH4D099zl7hIz9uLaa1d5v8R3x3ty8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASDmNXsA3tN+XD/+7XOf1v2FdUfMWnfEyD7D38bNGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBixBsAYsQbAGLEGwBiXtti9uOaPQL/w2rvaOR5n/ucsu6IkZlnKe7ziOLMq3HzBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoCY1xb03OfsEfg/vqP9uKz7l1ttn4v/OcWZ+XNu3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQ85q18H5cs5bmjc06VyPrPve51cx63tX+N1Z7Xv6cmzcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxHx8fn1PWfi5zx//dj+uKeuOKM48YrXnLVrtHY087yyz/idH+G//HW7eABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABDz2oKe+5yy7n5cS81c5B299/OOzFx83hGrPe8e/PZHuHkDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQMzH59f3lIWf+/zxb/fjmrLuambts3V/Z90RIzMXFffZzO99nt28ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASDm4/Pre8rCz31uK9mPa6sZeUfF5x3hPP+O4j6P7JVv8Hc8wX128waAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAmI/Pr+9tJc99/vi3+3Ette6I1WZezWrvaNb3O8J/zntz8waAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAmI/Pr++t5rnPrWY/rinPO2vd1RTf72qK+1yceUTxP2eftM9u3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQ89qC9uP68W+f+7Quf5XiuRpRPJOzZl7tbPDn3LwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIObj8+t7W8lzn1PW3Y9ryrr8juK5GpnZef5zzsbveIIzj3DzBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoCY16yFn/ucsu5+XLmZR9jn35nZuu+teCZnzTyyrjP559y8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASDmNWvh/bh+/NvnPqf8dpaRmUf2uTjzrLMxa+ZZ73fEas+72syr/T/P4uYNADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADEfn1/fUxZ+7vPHv92Pa8q6qxnZ5xGz3tGs513NrG9/tTO52sz7Yt+vmzcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxLxmLbwf11YzMvNzn1PWHTFr5uLZKBp5v0WzzvOsfS7OzJ9z8waAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAmI/Pr++t5rnPH/92P64p646YNfPIurN4R++9LrzT/9UIN28AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiPn4/PqePQNv6LnPH/92P64p6/I776ho1nmexXf0979fN28AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiHnNWvi5z1lL84f249pWmnnkTBbXHeH7/R3FszFite9ohJs3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMSINwDEiDcAxIg3AMS8tqD9uGaPkPHc57aSWc87su5q53nkeWft86xztdrZmOUJfr9u3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQI94AECPeABAj3gAQ89oW89znVrMf17bSzLPeUXHm1faq+C0U/3NWOxtP8B25eQNAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAjHgDQIx4A0CMeANAzGv2ALyn5z5//Nv9uKasO2Jk5llm7fOsvZp1NkYUv4Xit78Hv183bwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIEW8AiBFvAIgRbwCIec0eAP7bc59Lrbsf15R1i/s8a69WUzyT+8DMxTPp5g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMa9tMftxzR5hCSP7/NznVjPreWed5+LMq72jWWbt1bPYO3LzBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoAY8QaAGPEGgBjxBoCY1xb03OfsEXjDd7Qf11LPOzLzrL3yjuA/3LwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIEa8ASBGvAEgRrwBIObj8+t79gwAwD/g5g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQAx4g0AMeINADHiDQBby78BhlYrJJGGRPoAAAAASUVORK5CYII=" alt="Scan to book a demo">
-    <div class="cta-qr-label">Scan to book a demo</div>
-  </div>
   <div class="cta-text">
     <h3>Book a demo today</h3>
     <div class="url">smartnavigation.co.uk</div>
     <div class="email">enquiries@smartgeneralpractice.com</div>
+  </div>
+  <div class="cta-qr">
+    <div class="cta-qr-label">Scan to<br>book a demo</div>
+    <img src="data:image/png;base64,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" alt="Scan to book a demo">
   </div>
 </div>
 

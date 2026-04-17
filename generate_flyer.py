@@ -13,9 +13,9 @@ Height budget (mm):
   pricing   14
   what      18
   proof     46
-  features  54
+  features  52
   cta       18
-  footer     8
+  footer    10
   ----------
   total    210
 """
@@ -98,20 +98,15 @@ FLYER_HTML = f"""<!DOCTYPE html>
     color: rgba(255,255,255,0.7);
   }}
   .contract-quote {{
-    font-size: 12pt;
+    font-size: 13pt;
     font-weight: 800;
     line-height: 1.2;
   }}
-  .contract-attrib {{
-    font-size: 6.8pt;
-    font-style: italic;
-    color: rgba(255,255,255,0.7);
-  }}
   .contract-payoff {{
-    font-size: 9.5pt;
+    font-size: 10pt;
     font-weight: 700;
     line-height: 1.2;
-    margin-top: 1mm;
+    margin-top: 2mm;
   }}
 
   /* ── Band 3: Pricing strip (white, 14mm) ─────────────────────────── */
@@ -126,7 +121,7 @@ FLYER_HTML = f"""<!DOCTYPE html>
   .pricing-price {{
     font-size: 22pt;
     font-weight: 500;
-    color: #1159A2;
+    color: #111;
     line-height: 1;
     letter-spacing: -0.5px;
   }}
@@ -134,13 +129,13 @@ FLYER_HTML = f"""<!DOCTYPE html>
   .pricing-divider {{
     width: 0.6mm;
     height: 9mm;
-    background: #1159A2;
-    opacity: 0.35;
+    background: #111;
+    opacity: 0.3;
   }}
   .pricing-offer {{
     font-size: 10pt;
     font-weight: 700;
-    color: #1159A2;
+    color: #111;
     line-height: 1.2;
   }}
   .pricing-offer em {{ font-style: italic; font-weight: 800; }}
@@ -160,7 +155,7 @@ FLYER_HTML = f"""<!DOCTYPE html>
   .what h2 {{
     font-size: 11pt;
     font-weight: 800;
-    color: #1159A2;
+    color: #111;
     margin-bottom: 1.5mm;
   }}
   .what p {{
@@ -226,9 +221,9 @@ FLYER_HTML = f"""<!DOCTYPE html>
     line-height: 1.2;
   }}
 
-  /* ── Band 6: Features (white, 54mm) ──────────────────────────────── */
+  /* ── Band 6: Features (white, 52mm) ──────────────────────────────── */
   .features {{
-    height: 54mm;
+    height: 52mm;
     background: #fff;
     padding: 3mm 6mm 3mm;
     display: flex;
@@ -237,7 +232,7 @@ FLYER_HTML = f"""<!DOCTYPE html>
   .features h2 {{
     font-size: 10pt;
     font-weight: 800;
-    color: #1159A2;
+    color: #111;
     text-align: center;
     margin-bottom: 2.5mm;
     flex: 0 0 auto;
@@ -270,7 +265,7 @@ FLYER_HTML = f"""<!DOCTYPE html>
   .feat h4 {{
     font-size: 7.2pt;
     font-weight: 800;
-    color: #1159A2;
+    color: #111;
     margin-bottom: 0.4mm;
     line-height: 1.1;
   }}
@@ -285,24 +280,11 @@ FLYER_HTML = f"""<!DOCTYPE html>
     height: 18mm;
     background: #1159A2;
     color: #fff;
-    padding: 3mm 6mm;
+    padding: 2.5mm 6mm;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 5mm;
-  }}
-  .cta-qr {{ flex: 0 0 auto; text-align: center; }}
-  .cta-qr img {{
-    width: 15mm;
-    height: 15mm;
-    background: #fff;
-    padding: 0.5mm;
-    border-radius: 0.8mm;
-    display: block;
-  }}
-  .cta-qr-label {{
-    font-size: 5.4pt;
-    color: rgba(255,255,255,0.8);
-    margin-top: 0.6mm;
   }}
   .cta-text {{ flex: 1; }}
   .cta-text h3 {{
@@ -315,35 +297,64 @@ FLYER_HTML = f"""<!DOCTYPE html>
   .cta-text .email {{
     font-size: 7.4pt;
     color: rgba(255,255,255,0.85);
-    margin-top: 0.8mm;
+    margin-top: 0.6mm;
+  }}
+  .cta-qr {{
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 2.5mm;
+  }}
+  .cta-qr-label {{
+    font-size: 7pt;
+    font-weight: 700;
+    color: #fff;
+    text-align: right;
+    line-height: 1.15;
+    max-width: 22mm;
+  }}
+  .cta-qr img {{
+    width: 13mm;
+    height: 13mm;
+    background: #fff;
+    padding: 0.5mm;
+    border-radius: 0.8mm;
+    display: block;
+    flex-shrink: 0;
   }}
 
-  /* ── Band 8: Footer (white, 8mm) ─────────────────────────────────── */
+  /* ── Band 8: Footer (white, 10mm) ────────────────────────────────── */
   .footer {{
-    height: 8mm;
+    height: 10mm;
     background: #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 6mm;
   }}
-  .footer .ff {{ max-height: 5.5mm; }}
-  .sgp-logo {{ display: flex; align-items: center; gap: 1.3mm; }}
+  .footer .ff {{ max-height: 7.2mm; }}
+  .sgp-logo {{ display: flex; align-items: center; gap: 1.6mm; }}
   .sgp-circle {{
-    width: 5mm;
-    height: 5mm;
+    width: 6.5mm;
+    height: 6.5mm;
     border-radius: 50%;
     background: #1159A2;
     color: #fff;
-    font-size: 4pt;
+    font-size: 5pt;
     font-weight: 800;
     display: flex;
     align-items: center;
     justify-content: center;
+    letter-spacing: 0.2px;
   }}
-  .sgp-text {{ font-size: 8pt; color: #1159A2; line-height: 1; }}
+  .sgp-text {{
+    font-size: 9.5pt;
+    color: #111;
+    font-weight: 400;
+    line-height: 1;
+  }}
   .sgp-tm {{
-    font-size: 3.5pt;
+    font-size: 4pt;
     vertical-align: super;
     margin-left: 0.3mm;
     font-weight: 600;
@@ -362,7 +373,6 @@ FLYER_HTML = f"""<!DOCTYPE html>
 <div class="band contract">
   <div class="contract-label">BUILT AROUND THE 2026/27 GP CONTRACT</div>
   <div class="contract-quote">&ldquo;Clinically urgent requests must be dealt with on the same day.&rdquo;</div>
-  <div class="contract-attrib">NHS England, GP Contract 2026/27</div>
   <div class="contract-payoff">SMARTnavigation is how EMIS practices deliver it.</div>
 </div>
 
@@ -490,14 +500,14 @@ FLYER_HTML = f"""<!DOCTYPE html>
 
 <!-- Band 7: CTA -->
 <div class="band cta">
-  <div class="cta-qr">
-    <img src="{QR_WHITE}" alt="Scan to book a demo">
-    <div class="cta-qr-label">Scan to book a demo</div>
-  </div>
   <div class="cta-text">
     <h3>Book a demo today</h3>
     <div class="url">smartnavigation.co.uk</div>
     <div class="email">enquiries@smartgeneralpractice.com</div>
+  </div>
+  <div class="cta-qr">
+    <div class="cta-qr-label">Scan to<br>book a demo</div>
+    <img src="{QR_WHITE}" alt="Scan to book a demo">
   </div>
 </div>
 
