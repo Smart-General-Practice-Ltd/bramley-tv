@@ -6,12 +6,12 @@ Cleaner, less busy version: cut "What is it?", cut the top tagline,
 cut 2 features. Leaves more air, bigger logos, cleaner hierarchy.
 
 Height budget (mm):
-  top       16
-  contract  30
+  top       14
+  contract  24
   pricing   14
-  what      30
-  proof     42
-  features  42
+  what      28
+  proof     44
+  features  50
   cta       14
   footer    22
   ----------
@@ -73,23 +73,23 @@ FLYER_HTML = f"""<!DOCTYPE html>
 
   .band {{ overflow: hidden; }}
 
-  /* ── Band 1: Top (white, 16mm) ───────────────────────────────────── */
+  /* ── Band 1: Top (white, 14mm) ───────────────────────────────────── */
   .top {{
-    height: 16mm;
+    height: 14mm;
     background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 8mm;
   }}
-  .top img {{ height: 12mm; }}
+  .top img {{ height: 10mm; }}
 
-  /* ── Band 2: Contract hero (blue, 30mm) ──────────────────────────── */
+  /* ── Band 2: Contract hero (blue, 24mm) ──────────────────────────── */
   .contract {{
-    height: 30mm;
+    height: 24mm;
     background: #1159A2;
     color: #fff;
-    padding: 3.5mm 10mm;
+    padding: 3mm 10mm;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -107,11 +107,6 @@ FLYER_HTML = f"""<!DOCTYPE html>
     font-size: 13pt;
     font-weight: 800;
     line-height: 1.2;
-  }}
-  .contract-payoff {{
-    font-size: 10pt;
-    font-weight: 700;
-    line-height: 1.3;
   }}
 
   /* ── Band 3: Pricing (white, 14mm) ───────────────────────────────── */
@@ -145,9 +140,9 @@ FLYER_HTML = f"""<!DOCTYPE html>
   }}
   .pricing-offer em {{ font-style: italic; font-weight: 800; }}
 
-  /* ── Band 4: What is it (white, 30mm) ────────────────────────────── */
+  /* ── Band 4: What — paragraphs only (white, 28mm) ───────────────── */
   .what {{
-    height: 30mm;
+    height: 28mm;
     background: #fff;
     padding: 2mm 10mm;
     text-align: center;
@@ -157,25 +152,18 @@ FLYER_HTML = f"""<!DOCTYPE html>
     border-top: 0.3mm solid #e5e5e5;
     border-bottom: 0.3mm solid #e5e5e5;
   }}
-  .what h2 {{
-    font-size: 11pt;
-    font-weight: 800;
-    color: #111;
-    margin-bottom: 1.5mm;
-    line-height: 1.2;
-  }}
   .what p {{
-    font-size: 6.8pt;
+    font-size: 7pt;
     line-height: 1.35;
     color: #333;
     max-width: 128mm;
     margin: 0 auto;
   }}
-  .what p + p {{ margin-top: 1.3mm; }}
+  .what p + p {{ margin-top: 1.5mm; }}
 
-  /* ── Band 5: Case study (blue, 42mm) ─────────────────────────────── */
+  /* ── Band 5: Case study (blue, 44mm) ─────────────────────────────── */
   .proof {{
-    height: 42mm;
+    height: 44mm;
     background: #1159A2;
     color: #fff;
     padding: 5mm 7mm 5mm;
@@ -218,38 +206,34 @@ FLYER_HTML = f"""<!DOCTYPE html>
     flex: 1;
     background: rgba(255,255,255,0.16);
     border-radius: 2.5mm;
-    padding: 1.8mm 1.3mm 2mm;
+    padding: 2mm 1.3mm;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 13mm;
   }}
   .pill-num {{ font-size: 12pt; font-weight: 800; line-height: 1; }}
   .pill-lbl {{
     font-size: 5.8pt;
     color: rgba(255,255,255,0.9);
-    margin-top: 0.7mm;
+    margin-top: 1mm;
     line-height: 1.2;
   }}
 
-  /* ── Band 6: Features (white, 42mm) — 2x2 grid ───────────────────── */
+  /* ── Band 6: Features (white, 50mm) — 2x3 grid, no heading ──────── */
   .features {{
-    height: 42mm;
+    height: 50mm;
     background: #fff;
     padding: 3mm 7mm 3mm;
     display: flex;
     flex-direction: column;
   }}
-  .features h2 {{
-    font-size: 11pt;
-    font-weight: 800;
-    color: #111;
-    text-align: center;
-    margin-bottom: 2.5mm;
-    line-height: 1.2;
-    flex: 0 0 auto;
-  }}
   .feat-grid {{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
     gap: 1.8mm 2.5mm;
     flex: 1;
     min-height: 0;
@@ -258,29 +242,29 @@ FLYER_HTML = f"""<!DOCTYPE html>
     background: #f4f7fb;
     border-left: 0.8mm solid #1159A2;
     border-radius: 1.5mm;
-    padding: 2mm 2.5mm;
+    padding: 1.8mm 2.4mm;
     display: flex;
     gap: 2mm;
     align-items: center;
     overflow: hidden;
   }}
   .feat-icon {{
-    width: 8mm;
-    height: 8mm;
+    width: 7mm;
+    height: 7mm;
     flex-shrink: 0;
   }}
-  .feat-icon svg {{ width: 8mm; height: 8mm; }}
+  .feat-icon svg {{ width: 7mm; height: 7mm; }}
   .feat-body {{ flex: 1; min-width: 0; }}
   .feat h4 {{
-    font-size: 8.5pt;
+    font-size: 8pt;
     font-weight: 800;
     color: #111;
-    margin-bottom: 0.6mm;
+    margin-bottom: 0.4mm;
     line-height: 1.15;
   }}
   .feat p {{
-    font-size: 6.8pt;
-    line-height: 1.3;
+    font-size: 6.5pt;
+    line-height: 1.25;
     color: #333;
   }}
 
@@ -351,7 +335,6 @@ FLYER_HTML = f"""<!DOCTYPE html>
 <div class="band contract">
   <div class="contract-label">Built around the 2026/27 GP Contract</div>
   <div class="contract-quote">&ldquo;Clinically urgent requests must be dealt with on the same day.&rdquo;</div>
-  <div class="contract-payoff">SMARTnavigation is how EMIS practices deliver it.</div>
 </div>
 
 <!-- Band 3: Pricing -->
@@ -361,9 +344,8 @@ FLYER_HTML = f"""<!DOCTYPE html>
   <div class="pricing-offer">3 months <em>free</em> &ndash; Conference Offer</div>
 </div>
 
-<!-- Band 4: What is it -->
+<!-- Band 4: What (paragraphs only) -->
 <div class="band what">
-  <h2>What is it?</h2>
   <p>For years, practices have relied on a duty doctor to handle same day demand &mdash; a model that&rsquo;s no longer sustainable. Receptionists are the first point of contact but are left making clinical decisions without enough support. SMARTnavigation fixes this.</p>
   <p>SMARTnavigation guides patients through GP-designed, condition-specific pathways and supports automatic write-back into the clinical record. This reduces admin, improves triage accuracy, and helps practices manage demand more safely and efficiently.</p>
 </div>
@@ -382,9 +364,8 @@ FLYER_HTML = f"""<!DOCTYPE html>
   </div>
 </div>
 
-<!-- Band 5: Features (2x2) -->
+<!-- Band 6: Features (2x3) -->
 <div class="band features">
-  <h2>How it works</h2>
   <div class="feat-grid">
     <div class="feat">
       <div class="feat-icon">
@@ -440,6 +421,38 @@ FLYER_HTML = f"""<!DOCTYPE html>
       <div class="feat-body">
         <h4>Pharmacy First</h4>
         <p>Filters patients into bookable pharmacist slots to prevent looping.</p>
+      </div>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon">
+        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 16 A13 13 0 0 1 31 11" fill="none" stroke="#1159A2" stroke-width="2.4" stroke-linecap="round"/>
+          <polygon points="33,13 29,5 24,11" fill="#1159A2"/>
+          <path d="M32 24 A13 13 0 0 1 9 29" fill="none" stroke="#1159A2" stroke-width="2.4" stroke-linecap="round"/>
+          <polygon points="7,27 11,35 16,29" fill="#1159A2"/>
+          <circle cx="20" cy="20" r="6" fill="#1159A2"/>
+          <polygon points="18,16.7 24,20 18,23.3" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="feat-body">
+        <h4>EMIS Write-Back</h4>
+        <p>Automatic write-back into EMIS &mdash; no PDFs, no manual steps.</p>
+      </div>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon">
+        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <rect x="17" y="5" width="6" height="16" rx="3" fill="#1159A2"/>
+          <path d="M11 19 a9 9 0 0 0 18 0" fill="none" stroke="#1159A2" stroke-width="2.4" stroke-linecap="round"/>
+          <line x1="20" y1="28" x2="20" y2="33" stroke="#1159A2" stroke-width="2.4" stroke-linecap="round"/>
+          <line x1="14" y1="35" x2="26" y2="35" stroke="#1159A2" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="feat-body">
+        <h4>Ambient Voice Technology</h4>
+        <p>Leeds practice trial: ambient voice answering calls on SMARTnav scripts.</p>
       </div>
     </div>
   </div>
